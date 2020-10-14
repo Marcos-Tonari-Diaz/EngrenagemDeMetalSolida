@@ -181,11 +181,10 @@ Controller::Controller(std::shared_ptr<Model> aBox, std::shared_ptr<Viewer> aScr
 void Controller::eventPolling(){
 	// Polling de eventos
 	SDL_PumpEvents(); // atualiza estado do teclado
-	//reset
-	if (aScreen->state[SDL_SCANCODE_RIGHT]) aBox->outsideForce = 0;
 	// forca externa
 	if (aScreen->state[SDL_SCANCODE_UP]) aBox->outsideForce -= 1;
-	if (aScreen->state[SDL_SCANCODE_DOWN]) aBox->outsideForce += 1;
+	else if (aScreen->state[SDL_SCANCODE_DOWN]) aBox->outsideForce += 1;
+	else aBox->outsideForce = 0;
 }
 
 void Controller::simulate(){
