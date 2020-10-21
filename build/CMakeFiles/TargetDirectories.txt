@@ -1,0 +1,4 @@
+/home/marcos/Documents/6SEM/EA872/EngrenagemDeMetalSolida/build/CMakeFiles/rebuild_cache.dir
+/home/marcos/Documents/6SEM/EA872/EngrenagemDeMetalSolida/build/CMakeFiles/edit_cache.dir
+/home/marcos/Documents/6SEM/EA872/EngrenagemDeMetalSolida/build/CMakeFiles/EngrenagemDeMetalSolida.dir
+/home/marcos/Documents/6SEM/EA872/EngrenagemDeMetalSolida/build/CMakeFiles/doc.dir
