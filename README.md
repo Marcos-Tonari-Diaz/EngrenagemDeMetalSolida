@@ -10,7 +10,8 @@
 #### Controller
 * Detecção
 * Big_Controller
-* FX
+* Sound FX
+* Visual FX
 #### Viewer
 * Viewer
 #### Dirigido por Marcos e Walker Kojima
