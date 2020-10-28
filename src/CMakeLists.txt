@@ -5,10 +5,10 @@ cmake_minimum_required(VERSION 3.3)
 project(EngrenagemDeMetalSolida)
 
 #
-add_executable(EngrenagemDeMetalSolida main.cpp)
+add_executable(EngrenagemDeMetalSolida main.cpp viewer.cpp map.cpp controller.cpp)
 
 # Especificar onde estao os header files
-include_directories(include)
+include_directories(.)
 
 # Bibliotecas locais (estaticas)
 #add_library(src/main.cpp)

@@ -6,7 +6,7 @@ width = int(sys.argv[3]);
 
 map = [[0 for i in range(width)] for j in range(width)]
 
-out = open(fname+".txt", "w")
+out = open(fname+".map", "w")
 for i in map:
     out.write("\n")
     for j in i:
