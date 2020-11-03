@@ -1,3 +1,6 @@
+#ifndef VIEWER_H
+#define VIEWER_H
+
 #include <memory>
 #include <iostream>
 #include <map>
@@ -12,16 +15,14 @@ class Viewer{
 		// Texture Dictionary
 		std::map<std::string, SDL_Texture*> textDict;
 		// Size of tile sides (tiles are squares)
-		int tileSize;
-
-		// Controlador:
-		bool rodando = true;
-
+		SDL_Rect tileRect;
+		// Size of player Texture
+		SDL_Rect playerRect;
 		// Variaveis para verificar eventos
 		SDL_Event evento; // eventos discretos
 
-		const int SCREEN_WIDTH = 400;
-		const int SCREEN_HEIGHT = 400;
+		const int SCREEN_WIDTH = 200;
+		const int SCREEN_HEIGHT = 200;
 
 		const Uint8* state = SDL_GetKeyboardState(nullptr); // estado do teclado
 
@@ -30,4 +31,7 @@ class Viewer{
 		~Viewer();
 		void render();
 		void renderMap(std::map<std::pair<int, int>, std::string> textMap);
+		void renderPlayer(int x, int y);
 };
+
+#endif

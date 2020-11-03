@@ -35,13 +35,15 @@ Viewer::Viewer(){
   }
   catch(int i){std::cout << "SDL ERROR" <<std::endl;}
   
-  // Carregando texturas
+  // Load the Texture Dictionary
   // Map Tileset (name) -> (texture)
-  textDict.insert(std::make_pair("wall", IMG_LoadTexture(renderer, "../assets/maps/test/test0.png")));
-  textDict.insert(std::make_pair("corridor", IMG_LoadTexture(renderer, "../assets/maps/test/test0.png")));
-  // update tile size
-  SDL_QueryTexture(textDict["wall"], nullptr, nullptr, &tileSize, nullptr);
+  textDict.insert(std::make_pair("wall", IMG_LoadTexture(renderer, "../assets/test/test0.png")));
+  textDict.insert(std::make_pair("corridor", IMG_LoadTexture(renderer, "../assets/test/test1.png")));
+  textDict.insert(std::make_pair("player", IMG_LoadTexture(renderer, "../assets/test/testPlayer.png")));
 
+  // update tile size
+  SDL_QueryTexture(textDict["wall"], nullptr, nullptr, &tileRect.w, &tileRect.h);
+  SDL_QueryTexture(textDict["player"], nullptr, nullptr, &playerRect.w, &playerRect.h);
 }
 
 void Viewer::render(){
@@ -54,11 +56,6 @@ void Viewer::render(){
 void Viewer::renderMap(std::map<std::pair<int, int>, std::string> textMap){
 	SDL_RenderClear(renderer);
 
-	SDL_Rect tileRect;
-		
-	tileRect.w = tileSize;
-	tileRect.h = tileSize;
-
 	// iterates the map
 	int x;
 	int y;
@@ -67,12 +64,13 @@ void Viewer::renderMap(std::map<std::pair<int, int>, std::string> textMap){
 		// code coordinates
 		x = std::get<0>(it->first);
 		y = std::get<1>(it->first);
-		tileRect.x = x*tileSize;
-		tileRect.y = y*tileSize;
+		tileRect.x = x*tileRect.w;
+		tileRect.y = y*tileRect.w;
 		// render texture inside tileRect
 		SDL_RenderCopy(renderer, textDict[it->second], nullptr, &tileRect);
+  		//std::cout <<  it->second<< std::endl;
 	}
-	SDL_RenderPresent(renderer);
+	//SDL_RenderPresent(renderer);
 }
 
 Viewer::~Viewer(){
@@ -83,4 +81,11 @@ Viewer::~Viewer(){
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
 	SDL_Quit();
+}
+
+void Viewer::renderPlayer(int x, int y){
+	playerRect.x = x;			
+	playerRect.y = y;			
+	SDL_RenderCopy(renderer, textDict["player"], nullptr, &playerRect);
+	SDL_RenderPresent(renderer);
 }

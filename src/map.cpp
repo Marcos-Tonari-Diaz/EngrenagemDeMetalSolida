@@ -18,9 +18,10 @@ Map::Map(std::string mapFile){
 	//parses the map, flling the texture map
 	for (int i=0; i < mapArray.size(); i++){
 		for (int j=0; j < mapArray[i].size(); j++){
-			textMap.insert(std::make_pair(std::make_pair(i,j), textTable[mapArray[i][j]]));
+			textMap.insert(std::make_pair(std::make_pair(j,i), textTable[mapArray[i][j]-'0']));
 		}	
 	}
+	
 }
 
 std::map<std::pair<int, int>, std::string> Map::get_textMap(){ return textMap;}

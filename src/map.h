@@ -1,3 +1,6 @@
+#ifndef MAP_H
+#define MAP_H
+
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -16,10 +19,10 @@
 
 class Map{
 	private:
-		uint16_t mapWidth;
-		uint16_t mapLength;
+		int mapWidth;
+		int mapLength;
 		/* size of 1 side of tile (always a square)*/
-		uint16_t tileSize;
+		int tileSize;
 		/* Loaded Code Map*/
 		std::vector<std::string> mapArray;
 		/* Code to Texture (c)-> texture*/
@@ -36,3 +39,5 @@ class Map{
 		Map(std::string mapFile);
 		std::map<std::pair<int, int>, std::string> get_textMap();
 };
+
+#endif
