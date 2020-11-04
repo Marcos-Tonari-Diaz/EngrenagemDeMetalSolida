@@ -49,28 +49,24 @@ Viewer::Viewer(){
 void Viewer::render(){
 	// Desenhar a cena
 	SDL_RenderClear(renderer);
-	SDL_RenderPresent(renderer);
-	return;
-}
-
-void Viewer::renderMap(std::map<std::pair<int, int>, std::string> textMap){
-	SDL_RenderClear(renderer);
-
-	// iterates the map
-	int x;
-	int y;
+	// map
 	std::map<std::pair<int, int>, std::string>::iterator it;
 	for (it = textMap.begin(); it!=textMap.end(); ++it){
 		// code coordinates
-		x = std::get<0>(it->first);
-		y = std::get<1>(it->first);
-		tileRect.x = x*tileRect.w;
-		tileRect.y = y*tileRect.w;
+		tileRect.x = std::get<0>(it->first)*tileRect.w;
+		tileRect.y = std::get<1>(it->first)*tileRect.w;
 		// render texture inside tileRect
 		SDL_RenderCopy(renderer, textDict[it->second], nullptr, &tileRect);
   		//std::cout <<  it->second<< std::endl;
 	}
-	//SDL_RenderPresent(renderer);
+	// player
+	SDL_RenderCopy(renderer, textDict["player"], nullptr, &playerRect);
+	SDL_RenderPresent(renderer);
+	return;
+}
+
+void Viewer::updateMap(std::map<std::pair<int, int>, std::string> textMap){
+	this->textMap = textMap;
 }
 
 Viewer::~Viewer(){
@@ -83,9 +79,7 @@ Viewer::~Viewer(){
 	SDL_Quit();
 }
 
-void Viewer::renderPlayer(int x, int y){
+void Viewer::updatePlayer(int x, int y){
 	playerRect.x = x;			
 	playerRect.y = y;			
-	SDL_RenderCopy(renderer, textDict["player"], nullptr, &playerRect);
-	SDL_RenderPresent(renderer);
 }

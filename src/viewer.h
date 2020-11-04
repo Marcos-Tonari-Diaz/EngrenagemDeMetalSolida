@@ -14,6 +14,8 @@ class Viewer{
 
 		// Texture Dictionary
 		std::map<std::string, SDL_Texture*> textDict;
+		// Stores Texture Map
+		std::map<std::pair<int, int>, std::string> textMap;
 		// Size of tile sides (tiles are squares)
 		SDL_Rect tileRect;
 		// Size of player Texture
@@ -30,8 +32,8 @@ class Viewer{
 		Viewer();
 		~Viewer();
 		void render();
-		void renderMap(std::map<std::pair<int, int>, std::string> textMap);
-		void renderPlayer(int x, int y);
+		void updateMap(std::map<std::pair<int, int>, std::string> textMap);
+		void updatePlayer(int x, int y);
 };
 
 #endif
