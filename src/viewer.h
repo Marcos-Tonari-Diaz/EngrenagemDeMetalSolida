@@ -6,6 +6,7 @@
 #include <map>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+#include "player.h"
 
 class Viewer{
 	public:
@@ -18,8 +19,6 @@ class Viewer{
 		std::map<std::pair<int, int>, std::string> textMap;
 		// Size of tile sides (tiles are squares)
 		SDL_Rect tileRect;
-		// Size of player Texture
-		SDL_Rect playerRect;
 		// Variaveis para verificar eventos
 		SDL_Event evento; // eventos discretos
 
@@ -31,9 +30,8 @@ class Viewer{
 		//metodos
 		Viewer();
 		~Viewer();
-		void render();
+		void render(Player& player);
 		void updateMap(std::map<std::pair<int, int>, std::string> textMap);
-		void updatePlayer(int x, int y);
 };
 
 #endif
