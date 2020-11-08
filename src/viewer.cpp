@@ -35,14 +35,23 @@ Viewer::Viewer(){
   }
   catch(int i){std::cout << "SDL ERROR" <<std::endl;}
   
-  // Load the Texture Dictionary
-  // Map Tileset (name) -> (texture)
-  textDict.insert(std::make_pair("wall", IMG_LoadTexture(renderer, "../assets/test/test0.png")));
-  textDict.insert(std::make_pair("corridor", IMG_LoadTexture(renderer, "../assets/test/test1.png")));
-  textDict.insert(std::make_pair("player", IMG_LoadTexture(renderer, "../assets/test/testPlayer.png")));
-
-  // update tile size (tile size is also used for collision bounding boxes)
-  SDL_QueryTexture(textDict["wall"], nullptr, nullptr, &tileRect.w, &tileRect.h);
+  // Load TileSheet
+  bgTiles = IMG_LoadTexture(renderer, "../assets/72x72/72x72_tiles.png");
+  corridorRect.x = 0;
+  corridorRect.y = 0;
+  corridorRect.w = tileSize;
+  corridorRect.h = tileSize;
+  wallRect.x = 1*tileSize;
+  wallRect.y = 9*tileSize;
+  wallRect.w = tileSize;
+  wallRect.h = tileSize;
+  tileRect.w = tileSize;
+  tileRect.h = tileSize;
+  // Populate the Texture Dictionary
+  // Map Tileset (name) -> (tilesheet, src_rect)
+  textDict.insert(std::make_pair("corridor", std::make_pair(bgTiles, &corridorRect)));
+  textDict.insert(std::make_pair("wall", std::make_pair(bgTiles, &wallRect)));
+  textDict.insert(std::make_pair("player", std::make_pair(IMG_LoadTexture(renderer, "../assets/test/testPlayer.png"), nullptr)));
 }
 
 void Viewer::render(Player& player){
@@ -55,12 +64,12 @@ void Viewer::render(Player& player){
 		tileRect.x = std::get<0>(it->first)*tileRect.w;
 		tileRect.y = std::get<1>(it->first)*tileRect.w;
 		// render texture inside tileRect
-		SDL_RenderCopy(renderer, textDict[it->second], nullptr, &tileRect);
+		SDL_RenderCopy(renderer, std::get<0>(textDict[it->second]), std::get<1>(textDict[it->second]), &tileRect);
   		//std::cout <<  it->second<< std::endl;
 	}
 	// Player
-  	SDL_QueryTexture(textDict["player"], nullptr, nullptr, &(player.getRect()->w), &(player.getRect()->h));
-	SDL_RenderCopy(renderer, textDict["player"], nullptr, (player.getRect()));
+  	SDL_QueryTexture(std::get<0>(textDict["player"]), nullptr, nullptr, &(player.getRect()->w), &(player.getRect()->h));
+	SDL_RenderCopy(renderer, std::get<0>(textDict["player"]), std::get<1>(textDict["player"]), (player.getRect()));
 	SDL_RenderPresent(renderer);
 	return;
 }
@@ -70,9 +79,9 @@ void Viewer::updateMap(std::map<std::pair<int, int>, std::string> textMap){
 }
 
 Viewer::~Viewer(){
-	std::map<std::string, SDL_Texture*>::iterator it;
+	std::map<std::string, std::pair<SDL_Texture*, SDL_Rect*>>::iterator it;
 	for (it = textDict.begin(); it!=textDict.end(); ++it){
-		SDL_DestroyTexture(textDict[it->first]);
+		SDL_DestroyTexture(std::get<0>(textDict[it->first]));
 	}
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);

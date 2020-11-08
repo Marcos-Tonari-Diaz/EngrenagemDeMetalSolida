@@ -5,7 +5,7 @@ Controller::Controller() : viewer(new Viewer), map(new Map("../assets/maps/test.
   	state = SDL_GetKeyboardState(nullptr); 
 	collisioncontroller->set_state(state);
 	collisioncontroller->set_map(map);
-	// defines size of collision bounding boxeyys
+	// defines size of collision bounding boxes
 	collisioncontroller->set_boundBoxWidth(viewer->tileRect.w);
 	collisioncontroller->set_boundBoxHeight(viewer->tileRect.h);
 	collisioncontroller->makeCollisionMap();

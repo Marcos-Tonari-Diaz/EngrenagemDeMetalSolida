@@ -16,7 +16,7 @@ class collisionController{
 		int boundBoxHeight = 0;
 		int** collisionMap = NULL;
 		/*how many steps an element can move inside a tile*/
-		int subdivision = 10;
+		int subdivision = 36;
 		std::shared_ptr<Map> map;
 	public:
 		~collisionController();

@@ -39,15 +39,14 @@ void collisionController::move(Element& obj){
 
 	// if all corners are in free tiles, update element's position
 	// obs: collisionMap is (y,x) (height, width)
-	//if (x_mov >= 0 && y_mov >= 0 && x_mov_lmt < map->getWidth() && y_mov_lmt < map->getHeight()){
-		if(
-		  ((collisionMap[(y_mov+1)/boundBoxWidth][(x_mov+1)/boundBoxHeight]==1)
-		&& (collisionMap[(y_mov_lmt-1)/boundBoxWidth][(x_mov+1)/boundBoxHeight]==1)	
-		&& (collisionMap[(y_mov_lmt-1)/boundBoxWidth][(x_mov_lmt-1)/boundBoxHeight]==1)	
-		&& (collisionMap[(y_mov+1)/boundBoxWidth][(x_mov_lmt-1)/boundBoxHeight]==1))
-		){
-			obj.setPosition(x_mov, y_mov);	
-		}
+	if(
+	  ((collisionMap[(y_mov+1)/boundBoxWidth][(x_mov+1)/boundBoxHeight]==1)
+	&& (collisionMap[(y_mov_lmt-1)/boundBoxWidth][(x_mov+1)/boundBoxHeight]==1)	
+	&& (collisionMap[(y_mov_lmt-1)/boundBoxWidth][(x_mov_lmt-1)/boundBoxHeight]==1)	
+	&& (collisionMap[(y_mov+1)/boundBoxWidth][(x_mov_lmt-1)/boundBoxHeight]==1))
+	){
+		obj.setPosition(x_mov, y_mov);	
+	}
 	//}
 	// tests for element collision
 }

@@ -31,7 +31,7 @@ class Map{
 		/*! \brief Constructor
 		*
 		* Loads the bytemap and saves it into mapArray
-		* \param bytemap file (.map)
+		* \param map file (.map)
 		*
 		* */
 		Map(std::string mapFile);
