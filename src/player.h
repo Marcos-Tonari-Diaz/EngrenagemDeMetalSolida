@@ -2,19 +2,11 @@
 #define PLAYER_H
 
 #include <string>
+#include "element.h"
 
-typedef struct {
-	int x=20;
-	int y=20;
-} Position;
-
-class Player {
-	private:
-		/*position in (x,y) coordinates*/
-		Position pos; 		
+class Player : public Element {
 	public:
-		Player();
-		Position& get_position();
+		Player(int x, int y);
 };
 
 #endif

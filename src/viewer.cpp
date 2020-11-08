@@ -41,15 +41,14 @@ Viewer::Viewer(){
   textDict.insert(std::make_pair("corridor", IMG_LoadTexture(renderer, "../assets/test/test1.png")));
   textDict.insert(std::make_pair("player", IMG_LoadTexture(renderer, "../assets/test/testPlayer.png")));
 
-  // update tile size
+  // update tile size (tile size is also used for collision bounding boxes)
   SDL_QueryTexture(textDict["wall"], nullptr, nullptr, &tileRect.w, &tileRect.h);
-  SDL_QueryTexture(textDict["player"], nullptr, nullptr, &playerRect.w, &playerRect.h);
 }
 
-void Viewer::render(){
+void Viewer::render(Player& player){
 	// Desenhar a cena
 	SDL_RenderClear(renderer);
-	// map
+	// Map
 	std::map<std::pair<int, int>, std::string>::iterator it;
 	for (it = textMap.begin(); it!=textMap.end(); ++it){
 		// code coordinates
@@ -59,8 +58,9 @@ void Viewer::render(){
 		SDL_RenderCopy(renderer, textDict[it->second], nullptr, &tileRect);
   		//std::cout <<  it->second<< std::endl;
 	}
-	// player
-	SDL_RenderCopy(renderer, textDict["player"], nullptr, &playerRect);
+	// Player
+  	SDL_QueryTexture(textDict["player"], nullptr, nullptr, &(player.getRect()->w), &(player.getRect()->h));
+	SDL_RenderCopy(renderer, textDict["player"], nullptr, (player.getRect()));
 	SDL_RenderPresent(renderer);
 	return;
 }
@@ -77,9 +77,4 @@ Viewer::~Viewer(){
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
 	SDL_Quit();
-}
-
-void Viewer::updatePlayer(int x, int y){
-	playerRect.x = x;			
-	playerRect.y = y;			
 }

@@ -5,7 +5,7 @@ cmake_minimum_required(VERSION 3.3)
 project(EngrenagemDeMetalSolida)
 
 #
-add_executable(EngrenagemDeMetalSolida main.cpp viewer.cpp map.cpp controller.cpp element.cpp player.cpp collisionController.cpp)
+add_executable(EngrenagemDeMetalSolida main.cpp viewer.cpp map.cpp controller.cpp element.cpp player.cpp)
 
 # Especificar onde estao os header files
 include_directories(.)

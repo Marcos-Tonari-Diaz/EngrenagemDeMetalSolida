@@ -19,14 +19,12 @@
 
 class Map{
 	private:
-		int mapWidth;
-		int mapLength;
+		/* map width */
+		int width;
+		/* map height */
+		int height;
 		/* size of 1 side of tile (always a square)*/
 		int tileSize;
-		/* Loaded Code Map*/
-		std::vector<std::string> mapArray;
-		/* Code to Texture (c)-> texture*/
-		std::map<int, std::string> textTable;
 		/* Texture Coordinates (x,y)-> textureFile*/
 		std::map<std::pair<int, int>, std::string> textMap;
 	public:
@@ -38,6 +36,8 @@ class Map{
 		* */
 		Map(std::string mapFile);
 		std::map<std::pair<int, int>, std::string> get_textMap();
+		int getWidth();
+		int getHeight();
 };
 
 #endif

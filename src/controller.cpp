@@ -1,26 +1,29 @@
 #include "controller.h"
 
-Controller::Controller() : viewer(new Viewer), map(new Map("../assets/maps/test.map")), player(new Player) {
-	
+Controller::Controller() : viewer(new Viewer), map(new Map("../assets/maps/test.map")), player(new Player(0,0)), collisioncontroller(new collisionController()){
+	// configure keyboars state
+  	state = SDL_GetKeyboardState(nullptr); 
+	collisioncontroller->set_state(state);
+	collisioncontroller->set_map(map);
+	// defines size of collision bounding boxeyys
+	collisioncontroller->set_boundBoxWidth(viewer->tileRect.w);
+	collisioncontroller->set_boundBoxHeight(viewer->tileRect.h);
+	collisioncontroller->makeCollisionMap();
+	// pass tilesize to player
+	player->setTileSize(viewer->tileRect.w, viewer->tileRect.h);
 }
 
 /* main game loop*/
 void Controller::gameLoop(){
 	// render Map
 	viewer->updateMap(map->get_textMap());	
-	// Players move in 1/4 tile size steps
-	step = viewer->tileRect.w/4;
 	while(rodando){
-	//	collisioncontroller->playerEvents();
 		// Event Polling
 		SDL_PumpEvents(); // Updates Keyboard State
-		// updates player position
-		if (state[SDL_SCANCODE_LEFT]) player->get_position().x -= step;
-		if (state[SDL_SCANCODE_RIGHT]) player->get_position().x += step;
-		if (state[SDL_SCANCODE_UP]) player->get_position().y -= step;
-		if (state[SDL_SCANCODE_DOWN]) player->get_position().y += step;
-		viewer->updatePlayer(player->get_position().x, player->get_position().y);
-		viewer->render();
+		collisioncontroller->move(*player);
+		std::cout << player->getX() << ", " << player->getY() << std::endl;
+		//std::cout << player->getX() << ", " << player->getY() << std::endl;
+		viewer->render(*player);
 
 		while (SDL_PollEvent(&evento)) {
 			if (evento.type == SDL_QUIT) {
