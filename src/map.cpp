@@ -25,8 +25,8 @@ Map::Map(std::string mapFile){
   	textTable.insert(std::make_pair(1, "corridor"));
 
 	//parses the map, flling the texture map
-	for (int i=0; i < mapArray.size(); i++){
-		for (int j=0; j < mapArray[i].size(); j++){
+	for (int i=0; i < height; i++){
+		for (int j=0; j < width; j++){
 			// map has SDL style coordinates (x,y)
 			textMap.insert(std::make_pair(std::make_pair(j,i), textTable[mapArray[i][j]-'0']));
 		}
