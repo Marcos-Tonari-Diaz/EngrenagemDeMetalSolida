@@ -5,7 +5,7 @@
 #include "camera.h"
 #include "player.h"
 
-void Camera_controller::visao(Camera camera, int n, int m) {
+void Camera_controller::visao(Camera& camera, int n, int m) {
 	int aux;
 	int y = camera.getY();
 	int x = camera.getX();
@@ -171,7 +171,7 @@ void Camera_controller::visao(Camera camera, int n, int m) {
 	return NULL;
 }
 
-void Camera_controller::deteccao(int** Mapa, Camera camera, Player jogador, int n, int m) {
+void Camera_controller::deteccao(int** Mapa, Camera& camera, Player& jogador, int n, int m) {
 	int x_visao = camera.getX();
 	int y_visao = camera.getY();
 	int x_jog = jogador.getX();
