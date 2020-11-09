@@ -1,6 +1,6 @@
 #include "element.h"
 
-Element::Element(int x, int y, std::string textureKey){
+Element::Element(int x, int y){
     textRect.x = x;
     textRect.y = y;
 }

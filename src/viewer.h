@@ -27,9 +27,10 @@ class Viewer{
 		SDL_Rect tileRect;
 		// Variaveis para verificar eventos
 		SDL_Event evento; // eventos discretos
+		int tileSize = 72;
 
-		const int SCREEN_WIDTH = 10*72;
-		const int SCREEN_HEIGHT = 10*72;
+		const int SCREEN_WIDTH = 10*tileSize;
+		const int SCREEN_HEIGHT = 10*tileSize;
 
 		const Uint8* state = SDL_GetKeyboardState(nullptr); // estado do teclado
 
@@ -37,7 +38,7 @@ class Viewer{
 		Viewer();
 		~Viewer();
 		void render(Player& player);
-		void updateMap(std::map<std::pair<int, int>, std::string> textMap);
+		void updateMap(std::map<std::pair<int, int>, std::string>& textMap);
 };
 
 #endif

@@ -12,12 +12,13 @@ class Element{
 	/* size of bounding boz size = textRect wodth*/
 	int boxSize;
     public:
+        Element() = default;
         Element(int x, int y);
         int getX();
         int getY();
-	itn getBoxSize();
+	int getBoxSize();
         void setPosition(int x, int y);
-	void setTileSize(int w, int h);
+	void setTextSize(int w, int h);
 	SDL_Rect* getRect();
 };
 

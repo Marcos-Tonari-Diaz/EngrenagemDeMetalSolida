@@ -13,6 +13,7 @@ class collisionController{
 	private:
   		const Uint8* state = NULL;
 		int boundBoxSize = 0;
+		int tileSize = 0;
 		int** collisionMap = NULL;
 		std::shared_ptr<Map> map;
 	public:
@@ -22,7 +23,8 @@ class collisionController{
 		void move(Element& obj);
 		void set_state(const Uint8* state);
 		void set_map(std::shared_ptr<Map> map);
-		void collisionController::set_boundBoxSize(int size);
+		void set_boundBoxSize(int size);
+		void set_tileSize(int size);
 };
 
 #endif

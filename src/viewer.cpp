@@ -37,6 +37,8 @@ Viewer::Viewer(){
   
   // Load TileSheet
   bgTiles = IMG_LoadTexture(renderer, "../assets/72x72/72x72_tiles.png");
+
+  // Set clipping rectangles
   corridorRect.x = 0;
   corridorRect.y = 0;
   corridorRect.w = tileSize;
@@ -45,8 +47,11 @@ Viewer::Viewer(){
   wallRect.y = 9*tileSize;
   wallRect.w = tileSize;
   wallRect.h = tileSize;
+
+  // Set target rectablge
   tileRect.w = tileSize;
   tileRect.h = tileSize;
+
   // Populate the Texture Dictionary
   // Map Tileset (name) -> (tilesheet, src_rect)
   textDict.insert(std::make_pair("corridor", std::make_pair(bgTiles, &corridorRect)));

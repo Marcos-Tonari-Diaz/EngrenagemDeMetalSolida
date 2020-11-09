@@ -50,15 +50,17 @@ Map::Map(std::string mapFile){
 			// map has SDL style coordinates (x,y)
 			textMap.insert(std::make_pair(std::make_pair(j,i), textTable[mapArray[i][j]-'0']));
 			// creates a new porta
+			/*
 			if (textTable[mapArray[i][j]-'0']=="porta")
 				portaVec.push_back(std::shared_ptr<Porta> (new Porta(j*tileSize,i*tileSize)));
+			*/
 		}
 	}
 }
 
-std::map<std::pair<int, int>, std::string> Map::get_textMap(){ return textMap;}
+std::map<std::pair<int, int>, std::string>& Map::get_textMap(){ return textMap;}
 int Map::getWidth(){return width;}
 int Map::getHeight(){return height;}
 void Map::setTileSize(int size){tileSize = size;}
-void setPortaVec(std::vector<std::shared_ptr<Porta>> portaVec){this.portaVec = portaVec;}
-void setCameraVec(std::vector<std::shared_ptr<Camera>> cameraVec){this.cameraVec = cameraVec;}
+//void setPortaVec(std::vector<std::shared_ptr<Porta>> portaVec){this.portaVec = portaVec;}
+//void setCameraVec(std::vector<std::shared_ptr<Camera>> cameraVec){this.cameraVec = cameraVec;}

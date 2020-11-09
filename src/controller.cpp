@@ -1,41 +1,27 @@
 #include "controller.h"
 
-<<<<<<< HEAD
 Controller::Controller() : viewer(new Viewer), 
-map(new Map("../assets/maps/test.map")), 
-player(new Player(0,0)), 
+map(new Map("../assets/maps/map10x10.map")), 
+player(new Player(0, 0)), 
 collisioncontroller(new collisionController()
 ){
 	tileSize = viewer->tileRect.w;
-	boxSize = tilesize/subdivision;
+	boxSize = tileSize/subdivisions;
 	// pass tilesize 
-	map->setTileSize(tilesize);
-	map->setPortaVec(portaVec);
-	map->setCameraVec(cameraVec);
+	map->setTileSize(tileSize);
+	//map->setPortaVec(portaVec);
+	//map->setCameraVec(cameraVec);
 	collisioncontroller->set_boundBoxSize(boxSize);
+	collisioncontroller->set_tileSize(tileSize);
 
 	// the player texture can be at most 2*boxSize tall
-	player->setTextSize(boxSize, 2*boxSize);
-||||||| merged common ancestors
-Controller::Controller() : viewer(new Viewer), map(new Map("../assets/maps/test.map")), player(new Player(0,0)), collisioncontroller(new collisionController()){
-=======
-Controller::Controller() : viewer(new Viewer), map(new Map("../assets/maps/test.map")), player(new Player(0,0)), collisioncontroller(new collisionController()){
-	tileSize = viewer->tileRect.w;
-	player->setTileSize(tilesize);
->>>>>>> textureClips
+	player->setTextSize(boxSize, boxSize);
+
 	// configure keyboars state
   	state = SDL_GetKeyboardState(nullptr); 
 	collisioncontroller->set_state(state);
 	collisioncontroller->set_map(map);
 	collisioncontroller->makeCollisionMap();
-<<<<<<< HEAD
-||||||| merged common ancestors
-	// pass tilesize to player
-	player->setTileSize(viewer->tileRect.w, viewer->tileRect.h);
-=======
-	// pass tilesize to player
-	player->setTileSize(tilesize, tilesize);
->>>>>>> textureClips
 }
 
 /* main game loop*/
@@ -65,8 +51,8 @@ void Controller::gameLoop(){
 		flag = checagem(player, portaVec, cameraVec);
 		if(strcmp(flag, "fim") == 0) {
 			// TEM QUE FAZER O JOGO VOLTAR PARA A TELA PRINCIPAL.... NAO SEI FAZER :c
-		*/
 		}
+		*/
 		// Rendering
 		viewer->render(*player);
 

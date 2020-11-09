@@ -22,29 +22,29 @@ void collisionController::move(Element& obj){
 	int offsetX = 0;
 	int offsetY = 0;
 	if (state[SDL_SCANCODE_LEFT]) offsetX--; 
-	if (state[SDL_SCANCODE_RIGHT]) offsetX++;
-	if (state[SDL_SCANCODE_UP]) offsetY--; 
-	if (state[SDL_SCANCODE_DOWN]) offsetY++;
+	else if (state[SDL_SCANCODE_RIGHT]) offsetX++;
+	else if (state[SDL_SCANCODE_UP]) offsetY--; 
+	else if (state[SDL_SCANCODE_DOWN]) offsetY++;
 
 	// tests for map collision
 	// updated coordinate: element coordinates are pixel coordinates (getX, getY)
-	int x_mov = obj.getX()+offsetX*(boundBoxSize);
-	int y_mov = obj.getY()+offsetY*(boundBoxSize);
+	int x_mov = obj.getX()+offsetX*(boundBoxSize)/10;
+	int y_mov = obj.getY()+offsetY*(boundBoxSize)/10;
 	if ((x_mov < 0) || (y_mov < 0) ) return;
 	// bounding box other corner (limit corner)
 	int x_mov_lmt = x_mov + boundBoxSize;
 	int y_mov_lmt = y_mov + boundBoxSize;
-	if ((x_mov_lmt> (map->getWidth()*boundBoxSize)) || (y_mov_lmt>(map->getHeight()*boundBoxSize))) return;
+	if ((x_mov_lmt> (map->getWidth()*tileSize)) || (y_mov_lmt>(map->getHeight()*tileSize))) return;
 	std::cout << x_mov << ", " << y_mov << ", "<< x_mov_lmt << ", " << y_mov_lmt << std::endl;
 
 	// if all corners are in free tiles, update element's position
 	// obs: collisionMap is (y,x) (height, width)
 	//if (x_mov >= 0 && y_mov >= 0 && x_mov_lmt < map->getWidth() && y_mov_lmt < map->getHeight()){
 		if(
-		  ((collisionMap[(y_mov+1)/boundBoxSize][(x_mov+1)/boundBoxSize]==1)
-		&& (collisionMap[(y_mov_lmt-1)/boundBoxSize][(x_mov+1)/boundBoxSize]==1)	
-		&& (collisionMap[(y_mov_lmt-1)/boundBoxSize][(x_mov_lmt-1)/boundBoxSize]==1)	
-		&& (collisionMap[(y_mov+1)/boundBoxSize][(x_mov_lmt-1)/boundBoxSize]==1))
+		  ((collisionMap[(y_mov+1)/tileSize][(x_mov+1)/tileSize]==1)
+		&& (collisionMap[(y_mov_lmt-1)/tileSize][(x_mov+1)/tileSize]==1)	
+		&& (collisionMap[(y_mov_lmt-1)/tileSize][(x_mov_lmt-1)/tileSize]==1)	
+		&& (collisionMap[(y_mov+1)/tileSize][(x_mov_lmt-1)/tileSize]==1))
 		){
 			obj.setPosition(x_mov, y_mov);	
 		}
@@ -63,5 +63,6 @@ collisionController::~collisionController(){
 }
 
 void collisionController::set_boundBoxSize(int size){boundBoxSize = size;};
+void collisionController::set_tileSize(int size){tileSize = size;};
 void collisionController::set_state(const Uint8* state){this->state = state;}
 void collisionController::set_map(std::shared_ptr<Map> map){this->map = map;}
