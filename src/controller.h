@@ -1,9 +1,14 @@
 #include <memory>
+#include <vector>
 #include "viewer.h"
 #include "map.h"
 #include "element.h"
 #include "player.h"
 #include "collisionController.h"
+#include "camera_controller.h"
+#include "camera.h"
+#include "porta.h"
+#include "porta_controller.h"
 #include <SDL2/SDL.h>
 
 class Controller {
@@ -12,6 +17,12 @@ class Controller {
 		std::shared_ptr<Map> map;
 		std::shared_ptr<Player> player;
 		std::shared_ptr<collisionController> collisioncontroller;
+
+		std::shared_ptr<Camera_controller> cameracontroller;
+		std::shared_ptr<Porta_controller> portacontroller;
+
+		std::vector<std::shared_ptr<Camera>> cameraVec;
+		std::vector<std::shared_ptr<Porta>> portaVec;
 
   		const Uint8* state = NULL;
 		bool rodando = true;

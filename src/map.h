@@ -9,6 +9,8 @@
 #include <map>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+#include "camera.h"
+#include "porta.h"
 
 /*! \brief Map Class
 *
@@ -27,6 +29,10 @@ class Map{
 		int tileSize;
 		/* Texture Coordinates (x,y)-> textureFile*/
 		std::map<std::pair<int, int>, std::string> textMap;
+		/* Reference to camera vector */
+		std::vector<std::shared_ptr<Camera>>& cameraVec;
+		/* Reference to porta vector */
+		std::vector<std::shared_ptr<Porta>>& portaVec;
 	public:
 		/*! \brief Constructor
 		*
@@ -38,6 +44,9 @@ class Map{
 		std::map<std::pair<int, int>, std::string> get_textMap();
 		int getWidth();
 		int getHeight();
+		void setTileSize(int size);
+		void setPortaVec(std::vector<std::shared_ptr<Porta>> portaVec);
+		void setCameraVec(std::vector<std::shared_ptr<Camera>> cameraVec);
 };
 
 #endif

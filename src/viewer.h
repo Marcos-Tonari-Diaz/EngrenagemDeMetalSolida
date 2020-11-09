@@ -18,6 +18,7 @@ class Viewer{
 		// Stores Texture Map
 		std::map<std::pair<int, int>, std::string> textMap;
 		// Size of tile sides (tiles are squares)
+		// OBS: tileRec.w is global tilesize
 		SDL_Rect tileRect;
 		// Variaveis para verificar eventos
 		SDL_Event evento; // eventos discretos
