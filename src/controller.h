@@ -21,14 +21,23 @@ class Controller {
 		std::shared_ptr<Camera_controller> cameracontroller;
 		std::shared_ptr<Porta_controller> portacontroller;
 
+		/* stores all cameras */
 		std::vector<std::shared_ptr<Camera>> cameraVec;
+		/* stores all portas */
 		std::vector<std::shared_ptr<Porta>> portaVec;
 
   		const Uint8* state = NULL;
 		bool rodando = true;
   		SDL_Event evento; // eventos discretos
-		int step;
+
+		// sizes	
+		int tileSize;
+		/* tile subdivision */
+		int subdivisions = 4;
+		/* bounding box size = tilesize/subdivisions */
+		int boxSize;
 	public:
 		Controller();
+		/* main game loop */
 		void gameLoop();
 };

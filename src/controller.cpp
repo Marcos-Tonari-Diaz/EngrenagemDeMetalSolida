@@ -5,20 +5,20 @@ map(new Map("../assets/maps/test.map")),
 player(new Player(0,0)), 
 collisioncontroller(new collisionController()
 ){
-	// name convenience
-	int tilesize = viewer->tileRect.w;
+	tileSize = viewer->tileRect.w;
+	boxSize = tilesize/subdivision;
 	// pass tilesize 
 	map->setTileSize(tilesize);
 	map->setPortaVec(portaVec);
 	map->setCameraVec(cameraVec);
-	collisioncontroller->set_boundBoxWidth(tilesize);
-	collisioncontroller->set_boundBoxHeight(tilesize);
-	player->setTileSize(viewer->tileRect.w, viewer->tileRect.h);
+	collisioncontroller->set_boundBoxSize(boxSize);
+
+	// the player texture can be at most 2*boxSize tall
+	player->setTextSize(boxSize, 2*boxSize);
 	// configure keyboars state
   	state = SDL_GetKeyboardState(nullptr); 
 	collisioncontroller->set_state(state);
 	collisioncontroller->set_map(map);
-	// defines size of collision bounding boxeyys
 	collisioncontroller->makeCollisionMap();
 }
 
@@ -35,6 +35,7 @@ void Controller::gameLoop(){
 		collisioncontroller->move(*player);
 		//std::cout << player->getX() << ", " << player->getY() << std::endl;
 
+		/*
 		// Door Control
 		for (int i = 0; i < portaVec.size(); i++){
 			portacontroller->abre_fecha(portaVec[i], player, map, state);
@@ -47,7 +48,8 @@ void Controller::gameLoop(){
 		// Events Control
 		flag = checagem(player, portaVec, cameraVec);
 		if(strcmp(flag, "fim") == 0) {
-			/* TEM QUE FAZER O JOGO VOLTAR PARA A TELA PRINCIPAL.... NAO SEI FAZER :c */
+			// TEM QUE FAZER O JOGO VOLTAR PARA A TELA PRINCIPAL.... NAO SEI FAZER :c
+		*/
 		}
 		// Rendering
 		viewer->render(*player);

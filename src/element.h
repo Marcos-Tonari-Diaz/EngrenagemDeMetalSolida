@@ -7,22 +7,17 @@
 
 class Element{
     protected:
-        int x = 0;
-        int y = 0;
-        std::string textureKey = "";
-	SDL_Rect rect;
-	int tileHeight = 0;
-	int tileWidth = 0;
+	/* rectangle yo copy texture into */
+	SDL_Rect textRect;
+	/* size of bounding boz size = textRect wodth*/
+	int boxSize;
     public:
-        Element() = default;
-        Element(int x, int y, std::string textureKey);
+        Element(int x, int y);
         int getX();
         int getY();
-	int getTileHeight();
-	int getTileWidth();
+	itn getBoxSize();
         void setPosition(int x, int y);
 	void setTileSize(int w, int h);
-        std::string getTextureKey();
 	SDL_Rect* getRect();
 };
 

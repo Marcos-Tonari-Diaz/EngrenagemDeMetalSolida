@@ -45,8 +45,8 @@ Viewer::Viewer(){
   SDL_QueryTexture(textDict["wall"], nullptr, nullptr, &tileRect.w, &tileRect.h);
 }
 
+/* Draws the scene */
 void Viewer::render(Player& player){
-	// Desenhar a cena
 	SDL_RenderClear(renderer);
 	// Map
 	std::map<std::pair<int, int>, std::string>::iterator it;
@@ -56,11 +56,10 @@ void Viewer::render(Player& player){
 		tileRect.y = std::get<1>(it->first)*tileRect.w;
 		// render texture inside tileRect
 		SDL_RenderCopy(renderer, textDict[it->second], nullptr, &tileRect);
-  		//std::cout <<  it->second<< std::endl;
 	}
 	// Player
-  	SDL_QueryTexture(textDict["player"], nullptr, nullptr, &(player.getRect()->w), &(player.getRect()->h));
-	SDL_RenderCopy(renderer, textDict["player"], nullptr, (player.getRect()));
+  	//SDL_QueryTexture(textDict["player"], nullptr, nullptr, &(player.getRect()->w), &(player.getRect()->h));
+	SDL_RenderCopy(renderer, textDict["player"], nullptr, player.getRect());
 	SDL_RenderPresent(renderer);
 	return;
 }

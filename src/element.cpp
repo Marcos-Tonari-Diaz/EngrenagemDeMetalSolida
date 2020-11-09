@@ -1,28 +1,23 @@
 #include "element.h"
 
 Element::Element(int x, int y, std::string textureKey){
-    this->x = x;
-    this->y = y;
-    this->textureKey = textureKey;
+    textRect.x = x;
+    textRect.y = y;
 }
 
 void Element::setPosition(int x, int y){
-	this->x = x; 
-	this->y = y;
-	rect.x = x;
-	rect.y = y;
+    textRect.x = x;
+    textRect.y = y;
 }
 
-void Element::setTileSize(int w, int h){
-	tileHeight = h;
-	tileWidth = w;
+void Element::setTextSize(int w, int h){
+    textRect.w = w;
+    textRect.h = h;
+    boxSize = w;
 }
 
-int Element::getX(){return x;}
-int Element::getY(){return y;}
-int Element::getTileHeight(){return tileHeight;}
-int Element::getTileWidth(){return tileWidth;}
+int Element::getX(){return textRect.x;}
+int Element::getY(){return textRect.y;}
+int Element::getBoxSize(){return boxSize;}
 
-SDL_Rect* Element::getRect(){return &rect;}
-
-std::string Element::getTextureKey(){return textureKey;}
+SDL_Rect* Element::getRect(){return &textRect;}

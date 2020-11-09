@@ -6,7 +6,7 @@
 
 class Player : public Element {
 	public:
-		Player(int x, int y);
+		int state=0;
 };
 
 #endif
