@@ -74,7 +74,7 @@ void Viewer::render(Player& player){
 	return;
 }
 
-void Viewer::updateMap(std::map<std::pair<int, int>, std::string> textMap){
+void Viewer::updateMap(std::map<std::pair<int, int>, std::string>& textMap){
 	this->textMap = textMap;
 }
 

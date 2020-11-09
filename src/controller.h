@@ -16,7 +16,13 @@ class Controller {
   		const Uint8* state = NULL;
 		bool rodando = true;
   		SDL_Event evento; // eventos discretos
-		int step;
+
+		// sizes
+		int tileSize;
+		// tile subdivision (bounding box size)
+		int subdivision = 4;
+		// bounding box size
+		int boxSize = 0;
 	public:
 		Controller();
 		void gameLoop();

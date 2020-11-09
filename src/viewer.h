@@ -18,7 +18,6 @@ class Viewer{
 		// Tile Source Retangles
 		SDL_Rect wallRect; 
 		SDL_Rect corridorRect; 
-		int tileSize = 72;
 		// Texture Dictionary
 		std::map<std::string, std::pair<SDL_Texture*, SDL_Rect*>> textDict;
 		// Stores Texture Map

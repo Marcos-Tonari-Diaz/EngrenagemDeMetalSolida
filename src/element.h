@@ -7,12 +7,8 @@
 
 class Element{
     protected:
-        int x = 0;
-        int y = 0;
-        std::string textureKey = "";
+	// position and size of element texture
 	SDL_Rect rect;
-	int tileHeight = 0;
-	int tileWidth = 0;
     public:
         Element() = default;
         Element(int x, int y, std::string textureKey);
@@ -22,7 +18,6 @@ class Element{
 	int getTileWidth();
         void setPosition(int x, int y);
 	void setTileSize(int w, int h);
-        std::string getTextureKey();
 	SDL_Rect* getRect();
 };
 
