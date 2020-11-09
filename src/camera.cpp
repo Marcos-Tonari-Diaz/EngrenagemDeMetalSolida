@@ -1,12 +1,12 @@
 #include "camera.h"
 
-Camera::Camera(int direcao, int alcance, int x, int y, int n, int m) {
-	this->Visao = new int*[m];
-	for (int j = 0; j < n; ++j)
-    		Visao[j] = new int[n];
+Camera::Camera(int direcao, int alcance, int x, int y) {
 	this->direcao = direcao;
 	this->alcance = alcance;
-	this->deteccao = 0;
+	this->avistado = 0;
+	this->detectado = 0;
+	this->x_vis = x;
+	this->y_vis = y;
 	this->x = x;
 	this->y = y;
 }
@@ -15,26 +15,38 @@ int Camera::get_direcao() {
 	return (this->direcao);
 }
 
+int Camera::get_x_vis() {
+	return (this->x_vis);
+}
+
+int Camera::get_y_vis() {
+	return (this->y_vis);
+}
+
 int Camera::get_alcance() {
 	return (this->alcance);
 }
 
-int** Camera::get_visao() {
-	return (this->Visao);
-}
-s
-int Camera::get_deteccao() {
-	return (this->deteccao);
+int Camera::get_detectado() {
+	return (this->detectado);
 }
 
-void Camera::set_deteccao(int deteccao) {
-	this->deteccao = deteccao;
+int Camera::get_avistado() {
+	return (this->avistado);
 }
 
-void Camera::set_visao(int** V, int n, int m) {
-	for(int i = 0; i < n; i++) {
-		for(int j = 0; j < m; j++) {
-			this->Visao[j][i] = V[j][i];
-		}
-	}
+void Camera::set_avistado(int avistado) {
+	this->avistado = avistado;
+}
+
+void Camera::set_detectado(int detectado) {
+	this->detectado = detectado;
+}
+
+void Camera::set_x_vis(int x_vis) {
+	this->x_vis = x_vis;
+}
+
+void Camera::set_y_vis(int y_vis) {
+	this->y_vis = y_vis;
 }

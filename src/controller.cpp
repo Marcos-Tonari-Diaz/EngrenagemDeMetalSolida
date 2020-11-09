@@ -24,6 +24,7 @@ collisioncontroller(new collisionController()
 
 /* main game loop*/
 void Controller::gameLoop(){
+	char* flag;
 	// render Map
 	viewer->updateMap(map->get_textMap());	
 	while(rodando){
@@ -35,10 +36,19 @@ void Controller::gameLoop(){
 		//std::cout << player->getX() << ", " << player->getY() << std::endl;
 
 		// Door Control
-		for (auto p: portaVec){
-			portacontroller->abre_fecha(p, );
+		for (int i = 0; i < portaVec.size(); i++){
+			portacontroller->abre_fecha(portaVec[i], player, map, state);
 		}
-
+		// Camera Control
+		for (int i = 0; i < cameraVec.size(); i++){
+			cameracontroller->visao(map, cameraVec[i], player);
+			cameracontroller->deteccao(map, cameraVec[i], player);
+		}
+		// Events Control
+		flag = checagem(player, portaVec, cameraVec);
+		if(strcmp(flag, "fim") == 0) {
+			/* TEM QUE FAZER O JOGO VOLTAR PARA A TELA PRINCIPAL.... NAO SEI FAZER :c */
+		}
 		// Rendering
 		viewer->render(*player);
 

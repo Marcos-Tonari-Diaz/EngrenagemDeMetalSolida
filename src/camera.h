@@ -3,18 +3,24 @@
 
 class Camera : public Element {
 	private:
-		int** Visao;
 		int direcao;
 		int alcance;
-		int deteccao;
+		int detectado;
+		int avistado;
+		int x_vis;
+		int y_vis;
 	public:
 		Camera(int direcao, int alcance, int x, int y, int n, int m);
 		int get_direcao();
 		int get_alcance();
-		int** get_visao();
-		int get_detec();
-		void set_detec(int deteccao);
-		void set_visao(int** V, int n, int m);
+		int get_detectado();
+		int get_avistado();
+		int get_x_vis();
+		int get_y_vis();
+		void set_avistado(int avistado);
+		void set_x_vis();
+		void set_y_vis();
+		void set_detectado(int detectado);
 };
 
 #endif

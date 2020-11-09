@@ -10,7 +10,7 @@ void Eventos::reset(Player& jogador, std::vector<Porta>& portas, std::vector<Cam
 	int tam_cam = cameras.size();
 	int tam_por = portas.size();
 	for(int i = 0; i < tam_com; i++) {
-		cameras[i].set_detec(0);
+		cameras[i].set_detectado(0);
 	}
 	for(int i = 0; i < tam_por; i++) {
 		portas[i].set_flag(0);
@@ -24,14 +24,14 @@ char* Eventos::checagem(Player& jogador, std::vector<Porta>& portas, std::vector
 	int tam_cam = cameras.size();
 	for(int i = 0; i < tam_cam; i++) {
 		if(cameras[i].get_detec() == 1) {
-			reset(jogador, portas, cameras, x_inicial, y_inicial);
+			reset(jogador, portas, cameras);
 			return "detectado";
 		}
 	}
 	delta_x = fabs(x_final - (jogador.get_pos().x));
 	delta_y = fabs(y_final - (jogador.get_pos().y));
 	if(delta_x <= 3 && delta_y <= 3) {
-		reset(jogador, portas, cameras, x_inicial, y_inicial);
+		reset(jogador, portas, cameras);
 		return "fim";
 	}
 	return "segue";

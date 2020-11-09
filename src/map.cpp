@@ -23,8 +23,26 @@ Map::Map(std::string mapFile){
   	textTable.insert(std::make_pair(0, "wall"));
 	// corridor
   	textTable.insert(std::make_pair(1, "corridor"));
-	// porta 
-  	textTable.insert(std::make_pair(2, "porta"));
+	// porta fechada 
+  	textTable.insert(std::make_pair(2, "porta_fechada"));
+  	// porta aberta
+  	textTable.insert(std::make_pair(3, "porta_aberta"));
+  	// camera cima
+  	textTable.insert(std::make_pair(4, "camera_cima"));
+  	// camera baixo
+  	textTable.insert(std::make_pair(5, "camera_baixo"));
+  	// camera direita
+  	textTable.insert(std::make_pair(6, "camera_direita"));
+  	// camera esquerda
+  	textTable.insert(std::make_pair(7, "camera_esquerda"));
+  	// camera cima direita
+  	textTable.insert(std::make_pair(8, "camera_cima_direita"));
+  	// camera cima esquerda
+  	textTable.insert(std::make_pair(9, "camera_cima_esquerda"));
+  	// camera baixo direita
+  	textTable.insert(std::make_pair(10, "camera_baixo_direita"));
+  	// camera baixo esquerda
+  	textTable.insert(std::make_pair(11, "camera_baixo_esquerda"));
 
 	//parses the map, flling the texture map
 	for (int i=0; i < height; i++){
