@@ -1,5 +1,6 @@
 #include "controller.h"
 
+<<<<<<< HEAD
 Controller::Controller() : viewer(new Viewer), 
 map(new Map("../assets/maps/test.map")), 
 player(new Player(0,0)), 
@@ -15,11 +16,26 @@ collisioncontroller(new collisionController()
 
 	// the player texture can be at most 2*boxSize tall
 	player->setTextSize(boxSize, 2*boxSize);
+||||||| merged common ancestors
+Controller::Controller() : viewer(new Viewer), map(new Map("../assets/maps/test.map")), player(new Player(0,0)), collisioncontroller(new collisionController()){
+=======
+Controller::Controller() : viewer(new Viewer), map(new Map("../assets/maps/test.map")), player(new Player(0,0)), collisioncontroller(new collisionController()){
+	tileSize = viewer->tileRect.w;
+	player->setTileSize(tilesize);
+>>>>>>> textureClips
 	// configure keyboars state
   	state = SDL_GetKeyboardState(nullptr); 
 	collisioncontroller->set_state(state);
 	collisioncontroller->set_map(map);
 	collisioncontroller->makeCollisionMap();
+<<<<<<< HEAD
+||||||| merged common ancestors
+	// pass tilesize to player
+	player->setTileSize(viewer->tileRect.w, viewer->tileRect.h);
+=======
+	// pass tilesize to player
+	player->setTileSize(tilesize, tilesize);
+>>>>>>> textureClips
 }
 
 /* main game loop*/

@@ -43,7 +43,7 @@ class Viewer{
 		// Variaveis para verificar eventos
 		SDL_Event evento; // eventos discretos
 
-		const int SCREEN_WIDTH = 200;
+		const int SCREEN_WIDTH = 400;
 		const int SCREEN_HEIGHT = 400;
 
 		const Uint8* state = SDL_GetKeyboardState(nullptr); // estado do teclado

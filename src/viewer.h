@@ -13,8 +13,13 @@ class Viewer{
 		SDL_Window* window;
 		SDL_Renderer* renderer;
 
+		// TileSheets
+		SDL_Texture* bgTiles;
+		// Tile Source Retangles
+		SDL_Rect wallRect; 
+		SDL_Rect corridorRect; 
 		// Texture Dictionary
-		std::map<std::string, SDL_Texture*> textDict;
+		std::map<std::string, std::pair<SDL_Texture*, SDL_Rect*>> textDict;
 		// Stores Texture Map
 		std::map<std::pair<int, int>, std::string> textMap;
 		// Size of tile sides (tiles are squares)
@@ -23,8 +28,8 @@ class Viewer{
 		// Variaveis para verificar eventos
 		SDL_Event evento; // eventos discretos
 
-		const int SCREEN_WIDTH = 400;
-		const int SCREEN_HEIGHT = 400;
+		const int SCREEN_WIDTH = 10*72;
+		const int SCREEN_HEIGHT = 10*72;
 
 		const Uint8* state = SDL_GetKeyboardState(nullptr); // estado do teclado
 
