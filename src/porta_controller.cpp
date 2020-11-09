@@ -5,7 +5,7 @@
 #include "porta.h"
 #include "player.h"
 
-void Porta_controller::abre_fecha(Porta porta, Player jogador, int** Mapa_menor, int** Mapa_maior, Uint8* state, int n, int m) {
+void Porta_controller::abre_fecha(Porta& porta, Player& jogador, int** Mapa_menor, int** Mapa_maior, Uint8* state, int n, int m) {
 	int** P = new int*[m];
 	for (int i = 0; i < n; ++i)
     		P[i] = new int[n];

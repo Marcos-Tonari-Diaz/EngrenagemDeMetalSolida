@@ -11,8 +11,8 @@ class Eventos {
 		int x_inicial = 0;
 		int y_inicial = 0;
 	public:
-		char* checagem(Player jogador, std::vector<Porta> portas, std::vector<Camera> cameras);
-		void reset(Player jogador, std::vector<Porta> portas, std::vector<Camera> cameras);
+		char* checagem(Player& jogador, std::vector<Porta>& portas, std::vector<Camera>& cameras);
+		void reset(Player& jogador, std::vector<Porta>& portas, std::vector<Camera>& cameras);
 };
 
 #endif
