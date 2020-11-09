@@ -5,9 +5,14 @@
 #include "camera.h"
 
 class Eventos {
+	private:
+		int x_final = 300;
+		int y_final = 300;
+		int x_inicial = 0;
+		int y_inicial = 0;
 	public:
-		char* checagem(Player jogador, std::vector<Porta> portas, std::vector<Camera> cameras, int x_final, int y_final, int x_inicial, int y_inicial);
-		void reset(Player jogador, std::vector<Porta> portas, std::vector<Camera> cameras, int x_inicial, int y_inicial);
+		char* checagem(Player jogador, std::vector<Porta> portas, std::vector<Camera> cameras);
+		void reset(Player jogador, std::vector<Porta> portas, std::vector<Camera> cameras);
 };
 
 #endif

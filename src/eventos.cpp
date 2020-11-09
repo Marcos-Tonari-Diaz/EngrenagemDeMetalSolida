@@ -6,7 +6,7 @@
 #include "porta.h"
 #include "camera.h"
 
-void Eventos::reset(Player jogador, std::vector<Porta> portas, std::vector<Camera> cameras, int x_inicial, int y_inicial) {
+void Eventos::reset(Player& jogador, std::vector<Porta>& portas, std::vector<Camera>& cameras) {
 	int tam_cam = cameras.size();
 	int tam_por = portas.size();
 	for(int i = 0; i < tam_com; i++) {
@@ -15,11 +15,11 @@ void Eventos::reset(Player jogador, std::vector<Porta> portas, std::vector<Camer
 	for(int i = 0; i < tam_por; i++) {
 		portas[i].set_flag(0);
 	}
-	jogador.get_pos().x = x_inicial;
-	jogador.get_pos().y = y_inicial;
+	jogador.setX() = x_inicial;
+	jogador.setY() = y_inicial;
 }
 
-char* Eventos::checagem(Player jogador, std::vector<Porta> portas, std::vector<Camera> cameras, int x_final, int y_final, int x_inicial, int y_inicial) {
+char* Eventos::checagem(Player& jogador, std::vector<Porta>& portas, std::vector<Camera>& cameras) {
 	int delta_x; int delta_y;
 	int tam_cam = cameras.size();
 	for(int i = 0; i < tam_cam; i++) {
@@ -32,7 +32,7 @@ char* Eventos::checagem(Player jogador, std::vector<Porta> portas, std::vector<C
 	delta_y = fabs(y_final - (jogador.get_pos().y));
 	if(delta_x <= 3 && delta_y <= 3) {
 		reset(jogador, portas, cameras, x_inicial, y_inicial);
-		return "fim de jogo";
+		return "fim";
 	}
-	return "nada acontece feijoada";
+	return "segue";
 }

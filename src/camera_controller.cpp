@@ -5,10 +5,10 @@
 #include "camera.h"
 #include "player.h"
 
-int** Camera_controller::visao(Camera camera, int n, int m) {
+void Camera_controller::visao(Camera camera, int n, int m) {
 	int aux;
-	int y = camera.get_y();
-	int x = camera.get_x();
+	int y = camera.getY();
+	int x = camera.getX();
 	int direcao = camera.get_direcao();
 	int alcance = camera.get_alcance();
 	
@@ -18,7 +18,7 @@ int** Camera_controller::visao(Camera camera, int n, int m) {
 	
 	switch (direcao) {
 		case 0:	// cima
-			x = (x*4) + 1; y = (y*4)
+			x += tile_size/2;
 			V[y][x] = 1;
 			for (int i = y + 1; i < alcance + y + 1; i++) {
 				if(i >= m) break;
@@ -39,10 +39,11 @@ int** Camera_controller::visao(Camera camera, int n, int m) {
 					else break;
 				}
 			}
-		return V;
+		camera.set_visao(V, n, m);
+		return;
 
 		case 1:	// baixo
-			x = (x*4) + 1; y = (y*4) - 3;
+			x += tile_size/2; y += tile_size;
 			V[y][x] = 1;
 			for (int i = y - 1; i > y - alcance - 1; i--) {
 				if(i < 0) break;
@@ -63,10 +64,11 @@ int** Camera_controller::visao(Camera camera, int n, int m) {
 					else break;
 				}
 			}
-		return V;
+		camera.set_visao(V, n, m);
+		return;
 
 		case 2:	// direita
-			x = (x*4) + 3; y = (y*4) - 1;
+			x += tile_size; y += tile_size/2;
 			V[y][x] = 1;
 			for (int i = x + 1; i < alcance + x + 1; i++) {
 				if(i >= n) break;
@@ -87,10 +89,11 @@ int** Camera_controller::visao(Camera camera, int n, int m) {
 					else break;
 				}
 			}
-		return V;
+		camera.set_visao(V, n, m);
+		return;
 
 		case 3:	// esquerda
-			x = (X*4); y = (y*4) - 1;
+			y += tile_size/2;
 			V[y][x] = 1;
 			for (int i = x - 1; i > x - alcance - 1; i--) {
 				if(i < 0) break;
@@ -111,10 +114,11 @@ int** Camera_controller::visao(Camera camera, int n, int m) {
 					else break;
 				}
 			}
-		return V;
+		camera.set_visao(V, n, m);
+		return;
 
 		case 4:	// cima direita
-			x = (x*4) + 3; y = (y*4);
+			x += tile_size;
 			for (int i = 0; i <= alcance; i++) {
 				if((x + i) >= n || (y + i) >= m) break;
 				V[y+i][x+i] = 1;
@@ -123,10 +127,11 @@ int** Camera_controller::visao(Camera camera, int n, int m) {
 					if(x + j + i < n) V[y+i][x+j+i] = 1;
 				}
 			}
-		return V;
+		camera.set_visao(V, n, m);
+		return;
 
 		case 5:	// baixo direita
-			x = (x*4) + 3; y = (y*4) - 3;
+			x += tile_size; y += tile_size;
 			for (int i = 0; i <= alcance; i++) {
 				if((x - i) < 0 || (y + i) >= m) break;
 				V[y-i][x+i] = 1;
@@ -135,10 +140,10 @@ int** Camera_controller::visao(Camera camera, int n, int m) {
 					if(x + j + i < m) V[y-i][x+j+i] = 1;
 				}
 			}
-		return V;
+		camera.set_visao(V, n, m);
+		return;
 
 		case 6:	// cima esquerda
-			x = (x*4); y = (y*4);
 			for (int i = 0; i <= alcance; i++) {
 				if((x + i) >= n || (y - i) < 0) break;
 				V[y+i][x-i] = 1;
@@ -147,10 +152,11 @@ int** Camera_controller::visao(Camera camera, int n, int m) {
 					if(x - j - i >= 0) V[y+i][x-j-i] = 1;
 				}
 			}
-		return V;
+		camera.set_visao(V, n, m);
+		return;
 
 		case 7:	// baixo esquerda
-			x = (x*4); y = (y*4) - 3;
+			y += tile_size;
 			for (int i = 0; i <= alcance; i++) {
 				if((x - i) < 0 || (y - i) < 0) break;
 				V[y-i][x-i] = 1;
@@ -159,20 +165,24 @@ int** Camera_controller::visao(Camera camera, int n, int m) {
 					if(x - j - i >= 0) V[y-i][x-j-i] = 1;
 				}
 			}
-		return V;
+		camera.set_visao(V, n, m);
+		return;
 	}
 	return NULL;
 }
 
 void Camera_controller::deteccao(int** Mapa, Camera camera, Player jogador, int n, int m) {
-	int x_visao = camera.get_x();
-	int y_visao = camera.get_y();
-	int x_jog = (jogador.get_position()).x;
-	int y_jog = (jogador.get_position()).y;
+	int x_visao = camera.getX();
+	int y_visao = camera.getY();
+	int x_jog = jogador.getX();
+	int y_jog = jogador.getY();
 	
-	if((camera.get_visao())[x_jog][y_jog] != 1) return 0;
-	
-	int delta_x = x_jog - x_visao;
+	if((camera.get_visao())[x_jog][y_jog] != 1) {
+		camera.set_detec(0);
+		return;
+	}
+
+	int delta_x = x_jog - x_visao;	// arrumar a escala das coordenadas da camera
 	int delta_y = y_jog - y_visao;
 	int delta = delta_y/delta_x;
 

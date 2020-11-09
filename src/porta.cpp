@@ -6,14 +6,6 @@ Porta::Porta(int x, int y) {
 	this->flag = 0;
 }
 
-int Porta::get_x() {
-	return (this->x);
-}
-
-int Porta::get_y() {
-	return (this->y);
-}
-
 int Porta::get_flag() {
 	return (this->flag);
 }

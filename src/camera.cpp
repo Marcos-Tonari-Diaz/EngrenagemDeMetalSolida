@@ -22,15 +22,7 @@ int Camera::get_alcance() {
 int** Camera::get_visao() {
 	return (this->Visao);
 }
-
-int Camera::get_x() {
-	return (this->x);
-}
-
-int Camera::get_y() {
-	return (this->y);
-}
-
+s
 int Camera::get_deteccao() {
 	return (this->deteccao);
 }
