@@ -3,8 +3,10 @@
 Controller::Controller() : viewer(new Viewer), 
 map(new Map("../assets/maps/map10x10.map")), 
 player(new Player(0, 0)), 
-collisioncontroller(new collisionController()
-){
+collisioncontroller(new collisionController()),
+portacontroller(new Porta_controller()),
+cameracontroller(new Camera_controller())
+{
 	// pass tilesize 
 	tileSize = viewer->tileRect.w;
 	boxSize = tileSize/subdivisions;
@@ -12,6 +14,8 @@ collisioncontroller(new collisionController()
 	collisioncontroller->set_boundBoxSize(boxSize);
 	collisioncontroller->set_tileSize(tileSize);
 	player->setTextSize(boxSize, boxSize*(41/24));
+	//portacontroller->setTileSize(tileSize);
+	//portacontroller->setBoundBoxSize(boxSize);
 
 	// configure keyboars state
   	state = SDL_GetKeyboardState(nullptr); 
@@ -35,13 +39,12 @@ void Controller::gameLoop(){
 
 		// Collision Control
 		collisioncontroller->move(*player);
-		//std::cout << player->getX() << ", " << player->getY() << std::endl;
 
 		// Door Control
+		/*
 		for (int i = 0; i < portaVec.size(); i++){
 			portacontroller->abre_fecha(*(portaVec[i]), *player, *map, state);
 		}
-		/*
 		// Camera Control
 		for (int i = 0; i < cameraVec.size(); i++){
 			cameracontroller->visao(map, cameraVec[i], player);

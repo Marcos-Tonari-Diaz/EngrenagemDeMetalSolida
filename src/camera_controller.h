@@ -13,6 +13,7 @@ class Camera_controller {
 	private:
 		int tile_size = 20;
 	public:
+		Camera_controller() = default;
 		void visao(Map& mapa, Camera& camera, Player& jogador);
 		void deteccao(Map& mapa, Camera& camera, Player& jogador);
 };

@@ -1,5 +1,6 @@
 #include <memory>
 #include <vector>
+#include <SDL2/SDL.h>
 #include "viewer.h"
 #include "map.h"
 #include "element.h"
@@ -9,7 +10,6 @@
 #include "camera.h"
 #include "porta.h"
 #include "porta_controller.h"
-#include <SDL2/SDL.h>
 
 class Controller {
 	private:
