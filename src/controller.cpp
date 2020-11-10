@@ -26,7 +26,7 @@ collisioncontroller(new collisionController()
 
 /* main game loop*/
 void Controller::gameLoop(){
-	char* flag;
+	int flag;
 	// render Map
 	viewer->updateMap(map->get_textMap());	
 	while(rodando){
@@ -49,7 +49,7 @@ void Controller::gameLoop(){
 		}
 		// Events Control
 		flag = checagem(player, portaVec, cameraVec);
-		if(strcmp(flag, "fim") == 0) {
+		if(flag == 0) {
 			// TEM QUE FAZER O JOGO VOLTAR PARA A TELA PRINCIPAL.... NAO SEI FAZER :c
 		}
 		*/

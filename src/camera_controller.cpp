@@ -49,42 +49,45 @@ void Camera_controller::visao(Map& mapa, Camera& camera, Player& jogador) {
 							V[i][aux-1] = 1;
 						}
 					}
-					if(V[i-1][aux+1] == 1) {
-						if(aux + 1 < n) {
-							if(i == y_jog && aux+1 == x_jog) {
-								camera.set_avistado(1);
-								goto aqui;
+					if(aux + 1 < n) {
+						if(V[i-1][aux+1] == 1) {
+							if(aux + 1 < n) {
+								if(i == y_jog && aux+1 == x_jog) {
+									camera.set_avistado(1);
+									goto aqui;
+								}
+								V[i][aux+1] = 1;
 							}
-							V[i][aux+1] = 1;
-						}
-						if(aux + 2 < n) {
-							if(i == y_jog && aux+2 == x_jog) {
-								camera.set_avistado(1);
-								goto aqui;
+							if(aux + 2 < n) {
+								if(i == y_jog && aux+2 == x_jog) {
+									camera.set_avistado(1);
+									goto aqui;
+								}
+								V[i][aux+2] = 1;
 							}
-							V[i][aux+2] = 1;
-						}
-						if(aux - 1 >= 0) {
-							if(i == y_jog && aux-1 == x_jog) {
-								camera.set_avistado(1);
-								goto aqui;
+							if(aux - 1 >= 0) {
+								if(i == y_jog && aux-1 == x_jog) {
+									camera.set_avistado(1);
+									goto aqui;
+								}
+								V[i][aux-1] = 1;
 							}
-							V[i][aux-1] = 1;
-						}
-						if(aux - 2 >= 0) {
-							if(i == y_jog && aux-2 == x_jog) {
-								camera.set_avistado(1);
-								goto aqui;
+							if(aux - 2 >= 0) {
+								if(i == y_jog && aux-2 == x_jog) {
+									camera.set_avistado(1);
+									goto aqui;
+								}
+								V[i][aux-2] = 1;
 							}
-							V[i][aux-2] = 1;
+							aux++;
 						}
-						aux++;
 					}
 					else break;
 				}
 			}
 		camera.set_avistado(0);
 		goto aqui;
+		
 
 		case 1:	// baixo
 			x += tile_size/2; y += tile_size;
@@ -120,36 +123,38 @@ void Camera_controller::visao(Map& mapa, Camera& camera, Player& jogador) {
 							V[i][aux-1] = 1;
 						}
 					}
-					if(V[i+1][aux+1] == 1) {
-						if(aux + 1 < n) {
-							if(i == y_jog && aux+1 == x_jog) {
-								camera.set_avistado(1);
-								goto aqui;
+					if(aux + 1 < n) {
+						if(V[i+1][aux+1] == 1) {
+							if(aux + 1 < n) {
+								if(i == y_jog && aux+1 == x_jog) {
+									camera.set_avistado(1);
+									goto aqui;
+								}
+								V[i][aux+1] = 1;
 							}
-							V[i][aux+1] = 1;
-						}
-						if(aux + 2 < n) {
-							if(i == y_jog && aux+2 == x_jog) {
-								camera.set_avistado(1);
-								goto aqui;
+							if(aux + 2 < n) {
+								if(i == y_jog && aux+2 == x_jog) {
+									camera.set_avistado(1);
+									goto aqui;
+								}
+								V[i][aux+2] = 1;
 							}
-							V[i][aux+2] = 1;
-						}
-						if(aux - 1 >= 0) {
-							if(i == y_jog && aux-1 == x_jog) {
-								camera.set_avistado(1);
-								goto aqui;
+							if(aux - 1 >= 0) {
+								if(i == y_jog && aux-1 == x_jog) {
+									camera.set_avistado(1);
+									goto aqui;
+								}
+								V[i][aux-1] = 1;
 							}
-							V[i][aux-1] = 1;
-						}
-						if(aux - 2 >= 0) {
-							if(i == y_jog && aux-2 == x_jog) {
-								camera.set_avistado(1);
-								goto aqui;
+							if(aux - 2 >= 0) {
+								if(i == y_jog && aux-2 == x_jog) {
+									camera.set_avistado(1);
+									goto aqui;
+								}
+								V[i][aux-2] = 1;
 							}
-							V[i][aux-2] = 1;
+							aux++;
 						}
-						aux++;
 					}
 					else break;
 				}
@@ -191,36 +196,38 @@ void Camera_controller::visao(Map& mapa, Camera& camera, Player& jogador) {
 							V[aux-1][i] = 1;
 						}
 					}
-					if(V[aux+1][i-1] == 1) {
-						if(aux + 1 < m) {
-							if(aux+1 == y_jog && i == x_jog) {
-								camera.set_avistado(1);
-								goto aqui;
+					if(aux + 1 < m) {
+						if(V[aux+1][i-1] == 1) {
+							if(aux + 1 < m) {
+								if(aux+1 == y_jog && i == x_jog) {
+									camera.set_avistado(1);
+									goto aqui;
+								}
+								V[aux+1][i] = 1;
 							}
-							V[aux+1][i] = 1;
-						}
-						if(aux + 2 < m) {
-							if(aux+2 == y_jog && i == x_jog) {
-								camera.set_avistado(1);
-								goto aqui;
+							if(aux + 2 < m) {
+								if(aux+2 == y_jog && i == x_jog) {
+									camera.set_avistado(1);
+									goto aqui;
+								}
+								V[aux+2][i] = 1;
 							}
-							V[aux+2][i] = 1;
-						}
-						if(aux - 1 >= 0) {
-							if(aux-1 == y_jog && i == x_jog) {
-								camera.set_avistado(1);
-								goto aqui;
+							if(aux - 1 >= 0) {
+								if(aux-1 == y_jog && i == x_jog) {
+									camera.set_avistado(1);
+									goto aqui;
+								}
+								V[aux-1][i] = 1;
 							}
-							V[aux-1][i] = 1;
-						}
-						if(aux - 2 >= 0) {
-							if(aux-2 == y_jog && i == x_jog) {
-								camera.set_avistado(1);
-								goto aqui;
+							if(aux - 2 >= 0) {
+								if(aux-2 == y_jog && i == x_jog) {
+									camera.set_avistado(1);
+									goto aqui;
+								}
+								V[aux-2][i] = 1;
 							}
-							V[aux-2][i] = 1;
+							aux++;
 						}
-						aux++;
 					}
 					else break;
 				}
@@ -261,36 +268,38 @@ void Camera_controller::visao(Map& mapa, Camera& camera, Player& jogador) {
 							V[aux-1][i] = 1;
 						}
 					}
-					if(V[aux+1][i+1] == 1) {
-						if(aux + 1 < m) {
-							if(aux+1 == y_jog && i == x_jog) {
-								camera.set_avistado(1);
-								goto aqui;
+					if(aux + 1 < m) {
+						if(V[aux+1][i+1] == 1) {
+							if(aux + 1 < m) {
+								if(aux+1 == y_jog && i == x_jog) {
+									camera.set_avistado(1);
+									goto aqui;
+								}
+								V[aux+1][i] = 1;
 							}
-							V[aux+1][i] = 1;
-						}
-						if(aux + 2 < m) {
-							if(aux+2 == y_jog && i == x_jog) {
-								camera.set_avistado(1);
-								goto aqui;
+							if(aux + 2 < m) {
+								if(aux+2 == y_jog && i == x_jog) {
+									camera.set_avistado(1);
+									goto aqui;
+								}
+								V[aux+2][i] = 1;
 							}
-							V[aux+2][i] = 1;
-						}
-						if(aux - 1 >= 0) {
-							if(aux-1 == y_jog && i == x_jog) {
-								camera.set_avistado(1);
-								goto aqui;
+							if(aux - 1 >= 0) {
+								if(aux-1 == y_jog && i == x_jog) {
+									camera.set_avistado(1);
+									goto aqui;
+								}
+								V[aux-1][i] = 1;
 							}
-							V[aux-1][i] = 1;
-						}
-						if(aux - 2 >= 0) {
-							if(aux-2 == y_jog && i == x_jog) {
-								camera.set_avistado(1);
-								goto aqui;
+							if(aux - 2 >= 0) {
+								if(aux-2 == y_jog && i == x_jog) {
+									camera.set_avistado(1);
+									goto aqui;
+								}
+								V[aux-2][i] = 1;
 							}
-							V[aux-2][i] = 1;
+							aux++;
 						}
-						aux++;
 					}
 					else break;
 				}
@@ -417,7 +426,7 @@ void Camera_controller::visao(Map& mapa, Camera& camera, Player& jogador) {
 		camera.set_avistado(0);
 		goto aqui;
 	}
-	aqui;
+	aqui:
 	for (int i = 0; i < n; i++)
     		delete V[i];
     	delete V;

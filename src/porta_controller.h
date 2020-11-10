@@ -2,6 +2,7 @@
 #define PORTA_CONTROLLER_H
 #include "player.h"
 #include "porta.h"
+#include "map.h"
 
 class Porta_controller {
 	private:

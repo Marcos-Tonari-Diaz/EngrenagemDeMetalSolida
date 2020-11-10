@@ -1,8 +1,8 @@
 #include "porta.h"
+#include "element.h"
 
 Porta::Porta(int x, int y) {
-	this->x = x;
-	this->y = y;
+	this->setPosition(x, y);
 	this->flag = 0;
 }
 
