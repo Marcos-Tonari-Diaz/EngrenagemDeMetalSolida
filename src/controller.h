@@ -10,10 +10,12 @@
 #include "camera.h"
 #include "porta.h"
 #include "porta_controller.h"
+#include "eventos.h"
 
 class Controller {
 	private:
 		std::shared_ptr<Viewer> viewer;
+		std::shared_ptr<Eventos> event;
 		std::shared_ptr<Map> map;
 		std::shared_ptr<Player> player;
 		std::shared_ptr<collisionController> collisioncontroller;

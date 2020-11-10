@@ -11,8 +11,8 @@ class Eventos {
 		int x_inicial = 0;
 		int y_inicial = 0;
 	public:
-		int checagem(Player& jogador, std::vector<Porta>& portas, std::vector<Camera>& cameras);
-		void reset(Player& jogador, std::vector<Porta>& portas, std::vector<Camera>& cameras);
+		int checagem(Player& jogador, std::vector<std::shared_ptr<Porta>>& portas, std::vector<std::shared_ptr<Camera>>& cameras);
+		void reset(Player& jogador, std::vector<std::shared_ptr<Porta>>& portas, std::vector<std::shared_ptr<Camera>>& cameras);
 };
 
 #endif

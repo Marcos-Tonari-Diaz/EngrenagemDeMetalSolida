@@ -20,8 +20,12 @@ void Porta_controller::abre_fecha(Porta& porta, Player& jogador, Map& mapa, cons
 		}
 	}
 	
-	if(P[jogador.getX()][jogador.getY()] != 1
-	) return;
+	if(P[jogador.getX()][jogador.getY()] != 1) {
+		for (int i = 0; i < n; i++)
+			delete P[i];
+		delete P;
+		return;
+	}
 	
 	for (int i = 0; i < n; i++)
 		delete P[i];

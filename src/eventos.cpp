@@ -7,23 +7,23 @@
 #include "porta.h"
 #include "camera.h"
 
-void Eventos::reset(Player& jogador, std::vector<Porta>& portas, std::vector<Camera>& cameras) {
+void Eventos::reset(Player& jogador, std::vector<std::shared_ptr<Porta>>& portas, std::vector<std::shared_ptr<Camera>>& cameras) {
 	int tam_cam = cameras.size();
 	int tam_por = portas.size();
 	for(int i = 0; i < tam_cam; i++) {
-		cameras[i].set_detectado(0);
+		(*cameras[i]).set_detectado(0);
 	}
 	for(int i = 0; i < tam_por; i++) {
-		portas[i].set_flag(0);
+		(*portas[i]).set_flag(0);
 	}
 	jogador.setPosition(x_inicial, y_inicial);
 }
 
-int Eventos::checagem(Player& jogador, std::vector<Porta>& portas, std::vector<Camera>& cameras) {
+int Eventos::checagem(Player& jogador, std::vector<std::shared_ptr<Porta>>& portas, std::vector<std::shared_ptr<Camera>>& cameras) {
 	int delta_x; int delta_y;
 	int tam_cam = cameras.size();
 	for(int i = 0; i < tam_cam; i++) {
-		if(cameras[i].get_detectado() == 1) {
+		if((*cameras[i]).get_detectado() == 1) {
 			reset(jogador, portas, cameras);
 			return 2;
 		}

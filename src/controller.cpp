@@ -70,21 +70,21 @@ void Controller::gameLoop(){
 
 		//std::cout <<portaVec.size()<<std::endl;
 		// Door Control
-		/*
+
 		for (int i = 0; i < portaVec.size(); i++){
 			portacontroller->abre_fecha(*(portaVec[i]), *player, *map, state);
 		}
 		// Camera Control
 		for (int i = 0; i < cameraVec.size(); i++){
-			cameracontroller->visao(map, cameraVec[i], player);
-			cameracontroller->deteccao(map, cameraVec[i], player);
+			cameracontroller->visao(*map, (*cameraVec[i]), *player);
+			cameracontroller->deteccao(*map, (*cameraVec[i]), *player);
 		}
 		// Events Control
-		flag = checagem(player, portaVec, cameraVec);
+		flag = event->checagem(*player, portaVec, cameraVec);
 		if(flag == 0) {
 			// TEM QUE FAZER O JOGO VOLTAR PARA A TELA PRINCIPAL.... NAO SEI FAZER :c
 		}
-		*/
+
 		// Rendering
 		viewer->render(*player);
 
