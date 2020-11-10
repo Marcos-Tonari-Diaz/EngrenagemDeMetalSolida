@@ -1,9 +1,13 @@
 #include "collisionController.h"
 
 void collisionController::makeCollisionMap(){
+	// protection
+	if (map->getHeight()==0 && map->getWidth()==0) return;
+	// allocate collisionmap
 	collisionMap = new int*[map->getHeight()];
 	for (int i=0; i < map->getHeight(); i++){
 		collisionMap[i] = new int[map->getWidth()];
+	// populate collisionmap
 	}
 	for (int i=0; i < map->getHeight(); i++){
 		for(int j=0; j < map->getWidth(); j++){
@@ -82,4 +86,8 @@ collisionController::~collisionController(){
 void collisionController::set_boundBoxSize(int size){boundBoxSize = size;};
 void collisionController::set_tileSize(int size){tileSize = size;};
 void collisionController::set_state(const Uint8* state){this->state = state;}
-void collisionController::set_map(std::shared_ptr<Map> map){this->map = map;}
+
+void collisionController::set_map(std::shared_ptr<Map> map){
+	this->map = map;
+	makeCollisionMap();
+}

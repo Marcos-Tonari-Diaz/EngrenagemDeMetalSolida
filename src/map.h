@@ -29,24 +29,19 @@ class Map{
 		int tileSize;
 		/* Texture Coordinates (x,y)-> textureFile*/
 		std::map<std::pair<int, int>, std::string> textMap;
-		/* Reference to camera vector */
-		std::vector<std::shared_ptr<Camera>> cameraVec;
-		/* Reference to porta vector */
-		std::vector<std::shared_ptr<Porta>> portaVec;
+
 	public:
-		/*! \brief Constructor
+		/*! \brief loads the map 
 		*
 		* Loads the bytemap and saves it into mapArray
 		* \param map file (.map)
 		*
 		* */
-		Map(std::string mapFile);
+		void loadMap(std::string mapFile);
 		std::map<std::pair<int, int>, std::string>& get_textMap();
 		int getWidth();
 		int getHeight();
 		void setTileSize(int size);
-		void setPortaVec(std::vector<std::shared_ptr<Porta>>& portaVec);
-		void setCameraVec(std::vector<std::shared_ptr<Camera>>& cameraVec);
 };
 
 #endif

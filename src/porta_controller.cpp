@@ -21,15 +21,14 @@ void Porta_controller::abre_fecha(Porta& porta, Player& jogador, Map& mapa, cons
 	}
 	
 	if(P[jogador.getX()][jogador.getY()] != 1
-	//|| P[jogador.getX()+boundBoxSize][jogador.getY()+boundBoxSize] != 1		
 	) return;
 	
-	std::cout << " na cruz " <<std::endl;
 	for (int i = 0; i < n; i++)
 		delete P[i];
 	delete P;
 	
 	if (state[SDL_SCANCODE_E]) {
+		std::cout << " press e" <<std::endl;
 		if(porta.get_flag() == 0) {
 			porta.set_flag(1);
 			mapa.get_textMap()[std::make_pair(porta.getX()/tile_size, porta.getY()/tile_size)] = "porta_aberta";
