@@ -5,16 +5,12 @@ map(new Map("../assets/maps/map10x10.map")),
 player(new Player(0, 0)), 
 collisioncontroller(new collisionController()
 ){
+	// pass tilesize 
 	tileSize = viewer->tileRect.w;
 	boxSize = tileSize/subdivisions;
-	// pass tilesize 
 	map->setTileSize(tileSize);
-	//map->setPortaVec(portaVec);
-	//map->setCameraVec(cameraVec);
 	collisioncontroller->set_boundBoxSize(boxSize);
 	collisioncontroller->set_tileSize(tileSize);
-
-	// the player texture can be at most 2*boxSize tall
 	player->setTextSize(boxSize, boxSize*(41/24));
 
 	// configure keyboars state
@@ -22,6 +18,10 @@ collisioncontroller(new collisionController()
 	collisioncontroller->set_state(state);
 	collisioncontroller->set_map(map);
 	collisioncontroller->makeCollisionMap();
+
+	// set element vectors
+	map->setPortaVec(portaVec);
+	map->setCameraVec(cameraVec);
 }
 
 /* main game loop*/
@@ -37,11 +37,11 @@ void Controller::gameLoop(){
 		collisioncontroller->move(*player);
 		//std::cout << player->getX() << ", " << player->getY() << std::endl;
 
-		/*
 		// Door Control
 		for (int i = 0; i < portaVec.size(); i++){
-			portacontroller->abre_fecha(portaVec[i], player, map, state);
+			portacontroller->abre_fecha(*(portaVec[i]), *player, *map, state);
 		}
+		/*
 		// Camera Control
 		for (int i = 0; i < cameraVec.size(); i++){
 			cameracontroller->visao(map, cameraVec[i], player);

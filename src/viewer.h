@@ -16,14 +16,33 @@ class Viewer{
 
 		// TileSheets
 		SDL_Texture* bgTiles;
-		// Tile Source Retangles
+		SDL_Texture* doorTiles;
+		SDL_Texture* testTile;
+		SDL_Texture* playerSheet;
+
+		// Player Animation Sprites Rectangles
+		std::vector<SDL_Rect*> playerSprites;
+
+		// Tile Source Rectangles
 		SDL_Rect wallRect; 
 		SDL_Rect corridorRect; 
+		SDL_Rect portaFechadaRect; 
+		SDL_Rect portaAbertaRect; 
+		SDL_Rect cameraCimaRect; 
+		SDL_Rect cameraCimaDirRect; 
+		SDL_Rect cameraCimaEsqRect; 
+		SDL_Rect cameraBaixoRect; 
+		SDL_Rect cameraBaixoDirRect; 
+		SDL_Rect cameraBaixoEsqRect; 
+		SDL_Rect cameraEsqRect; 
+		SDL_Rect cameraDirRect; 
+
 		// Texture Dictionary
 		std::map<std::string, std::pair<SDL_Texture*, SDL_Rect*>> textDict;
-		// Stores Texture Map
-		std::map<std::pair<int, int>, std::string> textMap;
-		std::vector<SDL_Rect*> playerSprites;
+
+		// Reference to Texture Map
+		std::map<std::pair<int, int>, std::string> textMap ;
+
 
 		// Size of tile sides (tiles are squares)
 		// OBS: tileRec.w is global tilesize

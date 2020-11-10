@@ -6,7 +6,7 @@ class Porta : public Element{
 	private:
 		int flag;
 	public:
-		Porta(int x, int y);
+		Porta(int x, int y, int flag);
 		int get_flag();
 		void set_flag(int flag);
 };

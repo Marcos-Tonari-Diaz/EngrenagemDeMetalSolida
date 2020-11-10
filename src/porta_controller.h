@@ -8,7 +8,7 @@ class Porta_controller {
 	private:
 		int tile_size = 20;
 	public:
-		void abre_fecha(Porta& porta, Player& jogador, Map& mapa, Uint8* state);
+		void abre_fecha(Porta& porta, Player& jogador, Map& mapa, const Uint8* state);
 };
 
 #endif

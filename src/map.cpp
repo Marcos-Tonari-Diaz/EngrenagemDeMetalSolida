@@ -49,11 +49,31 @@ Map::Map(std::string mapFile){
 		for (int j=0; j < width; j++){
 			// map has SDL style coordinates (x,y)
 			textMap.insert(std::make_pair(std::make_pair(j,i), textTable[mapArray[i][j]-'0']));
-			// creates a new porta
-			/*
-			if (textTable[mapArray[i][j]-'0']=="porta")
-				portaVec.push_back(std::shared_ptr<Porta> (new Porta(j*tileSize,i*tileSize)));
-			*/
+
+			// allocattes a new porta
+			if (textTable[mapArray[i][j]-'0']=="porta_fechada")
+				portaVec.push_back(std::shared_ptr<Porta> (new Porta(j*tileSize,i*tileSize, 0)));
+			if (textTable[mapArray[i][j]-'0']=="porta_aberta")
+				portaVec.push_back(std::shared_ptr<Porta> (new Porta(j*tileSize,i*tileSize, 1)));
+
+			// allocattes a new camera
+			int alcance = 1;
+			if (textTable[mapArray[i][j]-'0']=="camera_cima")
+				cameraVec.push_back(std::shared_ptr<Camera> (new Camera(0, alcance, j*tileSize,i*tileSize)));
+			if (textTable[mapArray[i][j]-'0']=="camera_baixo")
+				cameraVec.push_back(std::shared_ptr<Camera> (new Camera(1, alcance, j*tileSize,i*tileSize)));
+			if (textTable[mapArray[i][j]-'0']=="camera_direita")
+				cameraVec.push_back(std::shared_ptr<Camera> (new Camera(2, alcance, j*tileSize,i*tileSize)));
+			if (textTable[mapArray[i][j]-'0']=="camera_esquerda")
+				cameraVec.push_back(std::shared_ptr<Camera> (new Camera(3, alcance, j*tileSize,i*tileSize)));
+			if (textTable[mapArray[i][j]-'0']=="camera_cima_direita")
+				cameraVec.push_back(std::shared_ptr<Camera> (new Camera(4, alcance, j*tileSize,i*tileSize)));
+			if (textTable[mapArray[i][j]-'0']=="camera_cima_esquerda")
+				cameraVec.push_back(std::shared_ptr<Camera> (new Camera(5, alcance, j*tileSize,i*tileSize)));
+			if (textTable[mapArray[i][j]-'0']=="camera_baixo_direita")
+				cameraVec.push_back(std::shared_ptr<Camera> (new Camera(6, alcance, j*tileSize,i*tileSize)));
+			if (textTable[mapArray[i][j]-'0']=="camera_baixo_esquerda")
+				cameraVec.push_back(std::shared_ptr<Camera> (new Camera(7, alcance, j*tileSize,i*tileSize)));
 		}
 	}
 }
@@ -62,5 +82,5 @@ std::map<std::pair<int, int>, std::string>& Map::get_textMap(){ return textMap;}
 int Map::getWidth(){return width;}
 int Map::getHeight(){return height;}
 void Map::setTileSize(int size){tileSize = size;}
-//void setPortaVec(std::vector<std::shared_ptr<Porta>> portaVec){this.portaVec = portaVec;}
-//void setCameraVec(std::vector<std::shared_ptr<Camera>> cameraVec){this.cameraVec = cameraVec;}
+void Map::setPortaVec(std::vector<std::shared_ptr<Porta>>& portaVec){this->portaVec = portaVec;}
+void Map::setCameraVec(std::vector<std::shared_ptr<Camera>>& cameraVec){this->cameraVec = cameraVec;}

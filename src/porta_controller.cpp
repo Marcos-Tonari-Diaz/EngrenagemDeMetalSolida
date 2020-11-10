@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <iostream>
 #include <memory>
 #include <iostream>
 #include "porta_controller.h"
@@ -6,7 +7,7 @@
 #include "player.h"
 #include "map.h"
 
-void Porta_controller::abre_fecha(Porta& porta, Player& jogador, Map& mapa, Uint8* state) {
+void Porta_controller::abre_fecha(Porta& porta, Player& jogador, Map& mapa, const Uint8* state) {
 	int m = mapa.getHeight()*tile_size;
 	int n = mapa.getWidth()*tile_size;
 	
@@ -37,6 +38,7 @@ void Porta_controller::abre_fecha(Porta& porta, Player& jogador, Map& mapa, Uint
 			porta.set_flag(1);
 			mapa.get_textMap()[std::make_pair(porta.getX()/tile_size, porta.getY()/tile_size)] = "porta_aberta";
 			return;
+			std::cout << "press e" <<std::endl;
 		}
 		else if(porta.get_flag() == 1) {
 			porta.set_flag(0);
