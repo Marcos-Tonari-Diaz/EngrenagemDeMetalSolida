@@ -91,5 +91,4 @@ void Player::setFrame(std::string s){
 			frame = 4;	
 		counter=0;
 	}
-	std::cout << counter << std::endl;
 }
