@@ -15,7 +15,7 @@ collisioncontroller(new collisionController()
 	collisioncontroller->set_tileSize(tileSize);
 
 	// the player texture can be at most 2*boxSize tall
-	player->setTextSize(boxSize, boxSize);
+	player->setTextSize(boxSize, boxSize*(41/24));
 
 	// configure keyboars state
   	state = SDL_GetKeyboardState(nullptr); 

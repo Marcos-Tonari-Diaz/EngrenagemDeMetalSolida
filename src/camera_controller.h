@@ -2,6 +2,12 @@
 #define CAMERA_CONTROLLER_H
 #include "camera.h"
 #include "player.h"
+#include "map.h"
+#include <stdio.h>
+#include <memory>
+#include <iostream>
+#include "camera.h"
+#include "player.h"
 
 class Camera_controller {
 	private:

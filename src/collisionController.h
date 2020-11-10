@@ -6,7 +6,7 @@
 #include <memory>
 #include <map>
 #include <iostream>
-#include "element.h"
+#include "player.h"
 #include "map.h"
 
 class collisionController{
@@ -20,7 +20,7 @@ class collisionController{
 		~collisionController();
 		void makeCollisionMap();
 		int acessCollisionMap(int x, int y);
-		void move(Element& obj);
+		void move(Player& obj);
 		void set_state(const Uint8* state);
 		void set_map(std::shared_ptr<Map> map);
 		void set_boundBoxSize(int size);

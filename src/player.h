@@ -5,8 +5,10 @@
 
 class Player : public Element {
 	public:
-		int state=0;
+		int frame = 0;
 		Player(int x, int y);
+		int getFrame();	
+		void setFrame(std::string s);	
 };
 
 #endif

@@ -17,14 +17,29 @@ void collisionController::makeCollisionMap(){
 	}
 }
 
-void collisionController::move(Element& obj){
+void collisionController::move(Player& obj){
 	// polls offset
 	int offsetX = 0;
 	int offsetY = 0;
-	if (state[SDL_SCANCODE_LEFT]) offsetX--; 
-	else if (state[SDL_SCANCODE_RIGHT]) offsetX++;
-	else if (state[SDL_SCANCODE_UP]) offsetY--; 
-	else if (state[SDL_SCANCODE_DOWN]) offsetY++;
+	if (state[SDL_SCANCODE_LEFT]){
+		offsetX--; 
+		obj.setFrame("left");
+	}
+	else if (state[SDL_SCANCODE_RIGHT]){
+	       	offsetX++;
+		obj.setFrame("right");
+	}
+	else if (state[SDL_SCANCODE_UP]){
+	       	offsetY--; 
+		obj.setFrame("up");
+	}
+	else if (state[SDL_SCANCODE_DOWN]){
+	       	offsetY++;
+		obj.setFrame("down");
+	}
+	else 
+		obj.setFrame("iddle");
+
 
 	// tests for map collision
 	// updated coordinate: element coordinates are pixel coordinates (getX, getY)
@@ -35,7 +50,7 @@ void collisionController::move(Element& obj){
 	int x_mov_lmt = x_mov + boundBoxSize;
 	int y_mov_lmt = y_mov + boundBoxSize;
 	if ((x_mov_lmt> (map->getWidth()*tileSize)) || (y_mov_lmt>(map->getHeight()*tileSize))) return;
-	std::cout << x_mov << ", " << y_mov << ", "<< x_mov_lmt << ", " << y_mov_lmt << std::endl;
+	//std::cout << x_mov << ", " << y_mov << ", "<< x_mov_lmt << ", " << y_mov_lmt << std::endl;
 
 	// if all corners are in free tiles, update element's position
 	// obs: collisionMap is (y,x) (height, width)

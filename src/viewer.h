@@ -4,6 +4,7 @@
 #include <memory>
 #include <iostream>
 #include <map>
+#include <vector>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include "player.h"
@@ -22,6 +23,8 @@ class Viewer{
 		std::map<std::string, std::pair<SDL_Texture*, SDL_Rect*>> textDict;
 		// Stores Texture Map
 		std::map<std::pair<int, int>, std::string> textMap;
+		std::vector<SDL_Rect*> playerSprites;
+
 		// Size of tile sides (tiles are squares)
 		// OBS: tileRec.w is global tilesize
 		SDL_Rect tileRect;

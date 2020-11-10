@@ -33,7 +33,7 @@ class Controller {
 		// sizes	
 		int tileSize;
 		/* tile subdivision */
-		int subdivisions = 2;
+		int subdivisions = 1;
 		/* bounding box size = tilesize/subdivisions */
 		int boxSize;
 	public:

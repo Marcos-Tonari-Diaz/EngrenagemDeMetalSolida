@@ -56,7 +56,19 @@ Viewer::Viewer(){
   // Map Tileset (name) -> (tilesheet, src_rect)
   textDict.insert(std::make_pair("corridor", std::make_pair(bgTiles, &corridorRect)));
   textDict.insert(std::make_pair("wall", std::make_pair(bgTiles, &wallRect)));
-  textDict.insert(std::make_pair("player", std::make_pair(IMG_LoadTexture(renderer, "../assets/test/testPlayer.png"), nullptr)));
+  
+  // Populate Player Frame Rectangles
+  for (int i=0; i<12; i++){
+  	playerSprites.push_back(new SDL_Rect);
+	playerSprites.back()->w = 24;
+	playerSprites.back()->h = 42-10;
+	playerSprites.back()->x = i*24;
+	playerSprites.back()->y = 5;
+  }
+  // Load Player Texture
+  textDict.insert(std::make_pair("player", std::make_pair(IMG_LoadTexture(renderer, "../assets/mg2/snakeSprites.png"), nullptr)));
+  //textDict.insert(std::make_pair("player", std::make_pair(IMG_LoadTexture(renderer, "../assets/test/testPlayer.png"), nullptr)));
+	
 }
 
 /* Draws the scene */
@@ -73,8 +85,10 @@ void Viewer::render(Player& player){
   		//std::cout <<  it->second<< std::endl;
 	}
 	// Player
-  	//SDL_QueryTexture(std::get<0>(textDict["player"]), nullptr, nullptr, &(player.getRect()->w), &(player.getRect()->h));
-	SDL_RenderCopy(renderer, std::get<0>(textDict["player"]), std::get<1>(textDict["player"]), (player.getRect()));
+	// make sure the texture is rendered above the bounding box
+	SDL_RenderCopy(renderer, std::get<0>(textDict["player"]), playerSprites[player.getFrame()], (player.getRect()));
+	//SDL_RenderCopy(renderer, std::get<0>(textDict["player"]), nullptr, (player.getRect()));
+	//player.incrementFrame();
 	SDL_RenderPresent(renderer);
 	return;
 }

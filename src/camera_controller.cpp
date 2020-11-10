@@ -1,16 +1,11 @@
-#include <stdio.h>
-#include <memory>
-#include <iostream>
 #include "camera_controller.h"
-#include "camera.h"
-#include "player.h"
 
 void Camera_controller::visao(Map& mapa, Camera& camera, Player& jogador) {
 	int aux;
 	int y = camera.getY();
 	int x = camera.getX();
 	int x_jog = jogador.getX() + tile_size/2;
-	int Y_jog = jogador.getY() + tile_size/2;
+	int y_jog = jogador.getY() + tile_size/2;
 	int direcao = camera.get_direcao();
 	int alcance = camera.get_alcance();
 	int m = mapa.getHeight()*tile_size;
@@ -346,14 +341,14 @@ void Camera_controller::visao(Map& mapa, Camera& camera, Player& jogador) {
 				V[y-i][x+i] = 1;
 				for (int j = 1; j < (2*(alcance - i)) + 1; j++)  {
 					if(y - j - i >= 0) {
-						if(v-j-i == y_jog && x+i == x_jog) {
+						if(y-j-i == y_jog && x+i == x_jog) {
 							camera.set_avistado(1);
 							goto aqui;
 							}
 						V[y-j-i][x+i] = 1;
 					}
 					if(x + j + i < m) {
-						if(v-i == y_jog && x+j+i == x_jog) {
+						if(y-i == y_jog && x+j+i == x_jog) {
 							camera.set_avistado(1);
 							goto aqui;
 							}
@@ -451,7 +446,7 @@ void Camera_controller::deteccao(Map& mapa, Camera& camera, Player& jogador) {
 			for (int j = y_visao; j < y_visao + delta_y; j++) {
 				if((y_visao - j) - (delta*(x_visao - i)) <= 3) {
 					if(i < n && j < m) {
-						if((mapa.get_text_map()[std::make_pair(i,j)] != "corridor") && (mapa.get_text_map()[std::make_pair(i,j)] != "porta_aberta")) {
+						if((mapa.get_textMap()[std::make_pair(i,j)] != "corridor") && (mapa.get_textMap()[std::make_pair(i,j)] != "porta_aberta")) {
 							camera.set_detectado(0);
 							return;
 						}
@@ -466,7 +461,7 @@ void Camera_controller::deteccao(Map& mapa, Camera& camera, Player& jogador) {
 			for (int j = y_visao; j > y_visao + delta_y; j--) {
 				if((y_visao - j) - (delta*(x_visao - i)) <= 3) {
 					if(i < n && j > 0) {
-						if((mapa.get_text_map()[std::make_pair(i,j)] != "corridor") && (mapa.get_text_map()[std::make_pair(i,j)] != "porta_aberta")) {
+						if((mapa.get_textMap()[std::make_pair(i,j)] != "corridor") && (mapa.get_textMap()[std::make_pair(i,j)] != "porta_aberta")) {
 							camera.set_detectado(0);
 							return;
 						}
@@ -481,7 +476,7 @@ void Camera_controller::deteccao(Map& mapa, Camera& camera, Player& jogador) {
 			for (int j = y_visao; j < y_visao + delta_y; j++) {
 				if((y_visao - j) - (delta*(x_visao - i)) <= 3) {
 					if(i > 0 && j < m) {
-						if((mapa.get_text_map()[std::make_pair(i,j)] != "corridor") && (mapa.get_text_map()[std::make_pair(i,j)] != "porta_aberta")) {
+						if((mapa.get_textMap()[std::make_pair(i,j)] != "corridor") && (mapa.get_textMap()[std::make_pair(i,j)] != "porta_aberta")) {
 							camera.set_detectado(0);
 							return;
 						}
@@ -496,7 +491,7 @@ void Camera_controller::deteccao(Map& mapa, Camera& camera, Player& jogador) {
 			for (int j = y_visao; j > y_visao + delta_y; j--) {
 				if((y_visao - j) - (delta*(x_visao - i)) <= 3) {
 					if(i > 0 && j > 0) {
-						if((mapa.get_text_map()[std::make_pair(i,j)] != "corridor") && (mapa.get_text_map()[std::make_pair(i,j)] != "porta_aberta")) {
+						if((mapa.get_textMap()[std::make_pair(i,j)] != "corridor") && (mapa.get_textMap()[std::make_pair(i,j)] != "porta_aberta")) {
 							camera.set_detectado(0);
 							return;
 						}
