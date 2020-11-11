@@ -8,7 +8,7 @@
 #include "player.h"
 #include "map.h"
 
-class Camera_controller2 {
+class Camera_controller2{
 	private:
 		int tile_size = 72;
 		int boundBoxSize = 0;
