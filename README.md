@@ -12,7 +12,7 @@
 8. Aperte Espaço para jogar!
 9. Ler a documentacao (dentro de build: firefox html/index.html)
 
-OBS: tecla a abre portas
+OBS: tecla A abre portas
 
 ### Gerador de Mapas
 Na pasta assets/maps podemos criar novos mapas em codigo.
@@ -28,6 +28,6 @@ Legenda:
 * camera_baixo: 5
 * camera_direita: 6
 * camera_esquerda: 7
-* endEnd: e
+* endEnd: E
 
 #### Dirigido por Marcos e Walker Kojima
