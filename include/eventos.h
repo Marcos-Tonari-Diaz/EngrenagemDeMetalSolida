@@ -5,8 +5,6 @@
 #include <iostream>
 #include <vector>
 #include "player.h"
-#include "porta.h"
-#include "porta_controller.h"
 #include "camera.h"
 #include <math.h>
 
