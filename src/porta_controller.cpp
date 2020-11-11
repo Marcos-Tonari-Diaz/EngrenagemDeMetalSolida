@@ -1,7 +1,17 @@
 #include "porta_controller.h"
 
 void Porta_controller::abre_fecha(Porta& porta, Player& jogador, Map& mapa, const Uint8* state, int** collisionMap) {
-	if (state[SDL_SCANCODE_E]) {
+	if(porta.get_flag() == 0) {
+		mapa.get_textMap()[std::make_pair(porta.getX()/tile_size, porta.getY()/tile_size)] = "porta_fechada";
+		collisionMap[porta.getY()/tile_size][porta.getX()/tile_size] = 0;
+	}
+	if(porta.get_flag() == 1) {
+		mapa.get_textMap()[std::make_pair(porta.getX()/tile_size, porta.getY()/tile_size)] = "porta_aberta";
+		collisionMap[porta.getY()/tile_size][porta.getX()/tile_size] = 1;
+	}
+	// nullptr used for resetting
+	if (state == nullptr) return;
+	if (state[SDL_SCANCODE_A]){
 		int m = mapa.getHeight()*tile_size;
 		int n = mapa.getWidth()*tile_size;
 		

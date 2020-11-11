@@ -11,13 +11,13 @@ void collisionController::makeCollisionMap(){
 	}
 	for (int i=0; i < map->getHeight(); i++){
 		for(int j=0; j < map->getWidth(); j++){
-			if(map->get_textMap()[std::make_pair(j,i)]=="wall"
-			  || map->get_textMap()[std::make_pair(j,i)]=="porta_fechada"
+			if(map->get_textMap()[std::make_pair(j,i)]=="corridor"
+			  || map->get_textMap()[std::make_pair(j,i)]=="porta_aberta"
 			){
-				collisionMap[i][j] = 0;		
+				collisionMap[i][j] = 1;		
 			}
 			else{
-				collisionMap[i][j] = 1;
+				collisionMap[i][j] = 0;
 			}
 		}
 	}

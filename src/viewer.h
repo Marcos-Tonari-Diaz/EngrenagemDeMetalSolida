@@ -39,6 +39,7 @@ class Viewer{
 
 		// Texture Dictionary
 		std::map<std::string, std::pair<SDL_Texture*, SDL_Rect*>> textDict;
+		SDL_Texture* mainTitle;
 
 		// Reference to Texture Map
 		std::map<std::pair<int, int>, std::string> textMap;
@@ -59,6 +60,7 @@ class Viewer{
 		Viewer();
 		~Viewer();
 		void render(Player& player);
+		void renderMain();
 		void updateMap(std::map<std::pair<int, int>, std::string>& textMap);
 };
 

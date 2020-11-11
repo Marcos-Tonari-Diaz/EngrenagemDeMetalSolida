@@ -7,11 +7,12 @@
 #include "player.h"
 #include "collisionController.h"
 #include "camera_controller.h"
-#include "camera_controller2.h"
+//#include "camera_controller2.h"
 #include "camera.h"
 #include "porta.h"
 #include "porta_controller.h"
 #include "eventos.h"
+
 
 class Controller {
 	private:
@@ -21,7 +22,7 @@ class Controller {
 		std::shared_ptr<Player> player;
 		std::shared_ptr<collisionController> collisioncontroller;
 
-		std::shared_ptr<Camera_controller2> cameracontroller;
+		std::shared_ptr<Camera_controller> cameracontroller;
 		std::shared_ptr<Porta_controller> portacontroller;
 
 		/* stores all cameras */

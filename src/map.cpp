@@ -35,6 +35,7 @@ void Map::loadMap(std::string mapFile){
   	textTable.insert(std::make_pair(6, "camera_direita"));
   	// camera esquerda
   	textTable.insert(std::make_pair(7, "camera_esquerda"));
+	/*
   	// camera cima direita
   	textTable.insert(std::make_pair(8, "camera_cima_direita"));
   	// camera cima esquerda
@@ -43,7 +44,7 @@ void Map::loadMap(std::string mapFile){
   	textTable.insert(std::make_pair(10, "camera_baixo_direita"));
   	// camera baixo esquerda
   	textTable.insert(std::make_pair(11, "camera_baixo_esquerda"));
-
+	*/
 	//parses the map, flling the texture map
 	for (int i=0; i < height; i++){
 		for (int j=0; j < width; j++){

@@ -5,7 +5,8 @@ map(new Map()),
 player(new Player(0, 0)), 
 collisioncontroller(new collisionController()),
 portacontroller(new Porta_controller()),
-cameracontroller(new Camera_controller())
+cameracontroller(new Camera_controller()),
+event(new Eventos())
 {
 	// pass tilesize 
 	tileSize = viewer->tileRect.w;
@@ -16,6 +17,9 @@ cameracontroller(new Camera_controller())
 	player->setTextSize(boxSize, boxSize*(41/24));
 	portacontroller->setTileSize(tileSize);
 	portacontroller->setBoundBoxSize(boxSize);
+	cameracontroller->setTileSize(tileSize);
+	cameracontroller->setBoundBoxSize(boxSize);
+
 
 	// configure keyboard state
   	state = SDL_GetKeyboardState(nullptr); 
@@ -35,7 +39,7 @@ cameracontroller(new Camera_controller())
 				portaVec.push_back(std::shared_ptr<Porta> (new Porta(j*tileSize,i*tileSize, 1)));
 
 			// allocattes a new camera
-			int alcance = 1;
+			int alcance = tileSize*2;
 			if (map->get_textMap()[std::make_pair(j,i)]=="camera_cima")
 				cameraVec.push_back(std::shared_ptr<Camera> (new Camera(0, alcance, j*tileSize,i*tileSize)));
 			if (map->get_textMap()[std::make_pair(j,i)]=="camera_baixo")
@@ -44,6 +48,7 @@ cameracontroller(new Camera_controller())
 				cameraVec.push_back(std::shared_ptr<Camera> (new Camera(2, alcance, j*tileSize,i*tileSize)));
 			if (map->get_textMap()[std::make_pair(j,i)]=="camera_esquerda")
 				cameraVec.push_back(std::shared_ptr<Camera> (new Camera(3, alcance, j*tileSize,i*tileSize)));
+			/*
 			if (map->get_textMap()[std::make_pair(j,i)]=="camera_cima_direita")
 				cameraVec.push_back(std::shared_ptr<Camera> (new Camera(4, alcance, j*tileSize,i*tileSize)));
 			if (map->get_textMap()[std::make_pair(j,i)]=="camera_cima_esquerda")
@@ -52,6 +57,7 @@ cameracontroller(new Camera_controller())
 				cameraVec.push_back(std::shared_ptr<Camera> (new Camera(6, alcance, j*tileSize,i*tileSize)));
 			if (map->get_textMap()[std::make_pair(j,i)]=="camera_baixo_esquerda")
 				cameraVec.push_back(std::shared_ptr<Camera> (new Camera(7, alcance, j*tileSize,i*tileSize)));
+			*/
 		}
 	}
 	// register map in viewer
@@ -60,6 +66,7 @@ cameracontroller(new Camera_controller())
 
 /* main game loop*/
 void Controller::gameLoop(){
+	int flag = 0;
 	while(rodando){
 		// Event Polling
 		SDL_PumpEvents(); // Updates Keyboard State
@@ -75,8 +82,6 @@ void Controller::gameLoop(){
 			for (int i = 0; i < portaVec.size(); i++){
 				portacontroller->abre_fecha(*(portaVec[i]), *player, *map, state, collisioncontroller->getCollisionMap());
 			}
-			//portacontroller->abre_fecha(*(portaVec[0]), *player, *map, state);
-			//std::cout << map->get_textMap()[std::make_pair(1,4)] << std::endl;
 
 			// if "e" was pressed, start counting again
 			if (state[SDL_SCANCODE_E]){
@@ -89,25 +94,29 @@ void Controller::gameLoop(){
 		if (portaEventCounter==0){portaGo = 1;}
 
 		// Camera Control
-		/*
 		for (int i = 0; i < cameraVec.size(); i++){
 			cameracontroller->visao(*map, (*cameraVec[i]), *player);
 			cameracontroller->deteccao(*map, (*cameraVec[i]), *player);
-			if (cameraVec[i]->get_detectado()==1)
-				std::cout << "detectado!" << std::endl;
 		}
-		*/
-			cameracontroller->visao(*map, (*cameraVec[0]), *player);
-			cameracontroller->deteccao(*map, (*cameraVec[0]), *player);
-			if (cameraVec[0]->get_detectado()==1)
-				std::cout << "detectado!" << std::endl;
-		/*
+
 		// Events Control
-		flag = event->checagem(*player, portaVec, cameraVec);
-		if(flag == 0) {
-			// TEM QUE FAZER O JOGO VOLTAR PARA A TELA PRINCIPAL.... NAO SEI FAZER :c
+		for (int i = 0; i < cameraVec.size(); i++){
+			flag = event->checagem(*player, *(cameraVec[i]), tileSize, boxSize);
+			if(flag == 0) {
+				std::cout << "principal" << std::endl;
+				player->setPosition(0,0);
+				viewer->renderMain();
+				while (SDL_PollEvent(&evento)) {
+				while(1){ return }
+					viewer->renderMain();
+				}
+				break;
+			}
+			if(flag == 2) {
+				std::cout << "detectado!" << std::endl;
+			}
 		}
-		*/
+
 		// Rendering
 		viewer->updateMap(map->get_textMap());	
 		viewer->render(*player);
