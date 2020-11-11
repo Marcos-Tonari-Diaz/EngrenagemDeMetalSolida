@@ -1,6 +1,6 @@
 # Engrenagem de Metal Sólida: 
 ## Ação de Espionagem Tática
-### SNAKE!? Ajude o Snake a escapar para o heliporto! 
+### METAL GEAR!? Ajude o Snake a escapar para o heliporto! 
 #### Abra portas e desvie dos guardas no caminho
 
 ### Instruções
