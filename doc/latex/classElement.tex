@@ -1,0 +1,152 @@
+\hypertarget{classElement}{}\section{Element Class Reference}
+\label{classElement}\index{Element@{Element}}
+
+
+Classe base de Elementos.  
+
+
+
+
+{\ttfamily \#include $<$element.\+h$>$}
+
+
+
+Inheritance diagram for Element\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=349pt]{classElement__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Element\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=164pt]{classElement__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classElement_a084081001b0f14ae12d612c866df861c}{Element} ()=default
+\begin{DoxyCompactList}\small\item\em Construtor do Elemento default. \end{DoxyCompactList}\item 
+\hyperlink{classElement_ae385b104c66f092731777d70775b7f55}{Element} (int x, int y)
+\begin{DoxyCompactList}\small\item\em Construtor do Elemento Overloaded\+: define posição. \end{DoxyCompactList}\item 
+int \hyperlink{classElement_ab5e2530eac11f0281769e6689856ceb2}{getX} ()
+\item 
+int \hyperlink{classElement_aad10853bfba140e4ca5cab79d72f2d83}{getY} ()
+\item 
+int \hyperlink{classElement_a9bb602a1a56055ea4b360b1a5486ff24}{get\+Box\+Size} ()
+\item 
+void \hyperlink{classElement_a3f07a8ce2682d6bdd56db0ef3de858c0}{set\+Position} (int x, int y)
+\item 
+void \hyperlink{classElement_af3ad245bd04436524f8bd5c5835bf786}{set\+Text\+Size} (int w, int h)
+\item 
+S\+D\+L\+\_\+\+Rect $\ast$ \hyperlink{classElement_ac8e7a2a1670e95335b6924b873600ea3}{get\+Rect} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+S\+D\+L\+\_\+\+Rect \hyperlink{classElement_a79d353f4c8bb44fe60390d02571cac64}{text\+Rect}
+\item 
+int \hyperlink{classElement_a692cd0e79fb7323679a381556a58aaf8}{box\+Size}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Classe base de Elementos. 
+
+Classe base de Elementos. Outros elementos herdam dessa classe. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classElement_a084081001b0f14ae12d612c866df861c}\label{classElement_a084081001b0f14ae12d612c866df861c}} 
+\index{Element@{Element}!Element@{Element}}
+\index{Element@{Element}!Element@{Element}}
+\subsubsection{\texorpdfstring{Element()}{Element()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Element\+::\+Element (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Construtor do Elemento default. 
+
+\mbox{\Hypertarget{classElement_ae385b104c66f092731777d70775b7f55}\label{classElement_ae385b104c66f092731777d70775b7f55}} 
+\index{Element@{Element}!Element@{Element}}
+\index{Element@{Element}!Element@{Element}}
+\subsubsection{\texorpdfstring{Element()}{Element()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Element\+::\+Element (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})}
+
+
+
+Construtor do Elemento Overloaded\+: define posição. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & coordenada x \\
+\hline
+{\em y} & coordenada y \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classElement_a9bb602a1a56055ea4b360b1a5486ff24}\label{classElement_a9bb602a1a56055ea4b360b1a5486ff24}} 
+\index{Element@{Element}!get\+Box\+Size@{get\+Box\+Size}}
+\index{get\+Box\+Size@{get\+Box\+Size}!Element@{Element}}
+\subsubsection{\texorpdfstring{get\+Box\+Size()}{getBoxSize()}}
+{\footnotesize\ttfamily int Element\+::get\+Box\+Size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classElement_ac8e7a2a1670e95335b6924b873600ea3}\label{classElement_ac8e7a2a1670e95335b6924b873600ea3}} 
+\index{Element@{Element}!get\+Rect@{get\+Rect}}
+\index{get\+Rect@{get\+Rect}!Element@{Element}}
+\subsubsection{\texorpdfstring{get\+Rect()}{getRect()}}
+{\footnotesize\ttfamily S\+D\+L\+\_\+\+Rect $\ast$ Element\+::get\+Rect (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classElement_ab5e2530eac11f0281769e6689856ceb2}\label{classElement_ab5e2530eac11f0281769e6689856ceb2}} 
+\index{Element@{Element}!getX@{getX}}
+\index{getX@{getX}!Element@{Element}}
+\subsubsection{\texorpdfstring{get\+X()}{getX()}}
+{\footnotesize\ttfamily int Element\+::getX (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classElement_aad10853bfba140e4ca5cab79d72f2d83}\label{classElement_aad10853bfba140e4ca5cab79d72f2d83}} 
+\index{Element@{Element}!getY@{getY}}
+\index{getY@{getY}!Element@{Element}}
+\subsubsection{\texorpdfstring{get\+Y()}{getY()}}
+{\footnotesize\ttfamily int Element\+::getY (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classElement_a3f07a8ce2682d6bdd56db0ef3de858c0}\label{classElement_a3f07a8ce2682d6bdd56db0ef3de858c0}} 
+\index{Element@{Element}!set\+Position@{set\+Position}}
+\index{set\+Position@{set\+Position}!Element@{Element}}
+\subsubsection{\texorpdfstring{set\+Position()}{setPosition()}}
+{\footnotesize\ttfamily void Element\+::set\+Position (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classElement_af3ad245bd04436524f8bd5c5835bf786}\label{classElement_af3ad245bd04436524f8bd5c5835bf786}} 
+\index{Element@{Element}!set\+Text\+Size@{set\+Text\+Size}}
+\index{set\+Text\+Size@{set\+Text\+Size}!Element@{Element}}
+\subsubsection{\texorpdfstring{set\+Text\+Size()}{setTextSize()}}
+{\footnotesize\ttfamily void Element\+::set\+Text\+Size (\begin{DoxyParamCaption}\item[{int}]{w,  }\item[{int}]{h }\end{DoxyParamCaption})}
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classElement_a692cd0e79fb7323679a381556a58aaf8}\label{classElement_a692cd0e79fb7323679a381556a58aaf8}} 
+\index{Element@{Element}!box\+Size@{box\+Size}}
+\index{box\+Size@{box\+Size}!Element@{Element}}
+\subsubsection{\texorpdfstring{box\+Size}{boxSize}}
+{\footnotesize\ttfamily int Element\+::box\+Size\hspace{0.3cm}{\ttfamily [protected]}}
+
+Tamanho do bounding box do Jogador \mbox{\Hypertarget{classElement_a79d353f4c8bb44fe60390d02571cac64}\label{classElement_a79d353f4c8bb44fe60390d02571cac64}} 
+\index{Element@{Element}!text\+Rect@{text\+Rect}}
+\index{text\+Rect@{text\+Rect}!Element@{Element}}
+\subsubsection{\texorpdfstring{text\+Rect}{textRect}}
+{\footnotesize\ttfamily S\+D\+L\+\_\+\+Rect Element\+::text\+Rect\hspace{0.3cm}{\ttfamily [protected]}}
+
+Retangulo\+: posicao (x,y) e tamanho (w,h) 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\hyperlink{element_8h}{element.\+h}\item 
+src/\hyperlink{element_8cpp}{element.\+cpp}\end{DoxyCompactItemize}

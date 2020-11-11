@@ -1,0 +1,156 @@
+\hypertarget{classcollisionController}{}\section{collision\+Controller Class Reference}
+\label{classcollisionController}\index{collision\+Controller@{collision\+Controller}}
+
+
+Controle de Colisão.  
+
+
+
+
+{\ttfamily \#include $<$collision\+Controller.\+h$>$}
+
+
+
+Collaboration diagram for collision\+Controller\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=195pt]{classcollisionController__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classcollisionController_a602c73073a3f2f44a8dc65952113f5de}{$\sim$collision\+Controller} ()
+\item 
+void \hyperlink{classcollisionController_aac25970400c5d905dbf60e69da3720c5}{make\+Collision\+Map} ()
+\item 
+void \hyperlink{classcollisionController_ad08a8b7f1bc6f803a8875a89ac194bba}{move} (\hyperlink{classPlayer}{Player} \&obj)
+\item 
+void \hyperlink{classcollisionController_ab92231229dbb6786429137147b4d232b}{set\+\_\+state} (const Uint8 $\ast$\hyperlink{classcollisionController_a5957b53016d027965bf98cf391df28cb}{state})
+\item 
+void \hyperlink{classcollisionController_aee7db17044f602c0b8a553012540480b}{set\+\_\+map} (std\+::shared\+\_\+ptr$<$ \hyperlink{classMap}{Map} $>$ \hyperlink{classcollisionController_a9624b45dd5e3ba5317291f96e68dcf76}{map})
+\item 
+void \hyperlink{classcollisionController_a0b59127f63d5caeeb5fa3c573853c8e7}{set\+\_\+bound\+Box\+Size} (int size)
+\item 
+void \hyperlink{classcollisionController_a025770daba1c75e9479c2375a6543edf}{set\+\_\+tile\+Size} (int size)
+\item 
+int $\ast$$\ast$ \hyperlink{classcollisionController_adcba90a401d69ebeb270ae0b92b9c335}{get\+Collision\+Map} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const Uint8 $\ast$ \hyperlink{classcollisionController_a5957b53016d027965bf98cf391df28cb}{state} = N\+U\+LL
+\item 
+int \hyperlink{classcollisionController_a6624f68ec989fb6cce2a6b9f46c15dc3}{bound\+Box\+Size} = 0
+\item 
+int \hyperlink{classcollisionController_a9a844a9c3873ea03ec04dd382040167c}{tile\+Size} = 0
+\item 
+int $\ast$$\ast$ \hyperlink{classcollisionController_a71bbc836de2531fa217d46f37f501e71}{collision\+Map} = N\+U\+LL
+\item 
+std\+::shared\+\_\+ptr$<$ \hyperlink{classMap}{Map} $>$ \hyperlink{classcollisionController_a9624b45dd5e3ba5317291f96e68dcf76}{map}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Controle de Colisão. 
+
+Controla movimentos e colisão. Atualiza o sprite da animação do jogador. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classcollisionController_a602c73073a3f2f44a8dc65952113f5de}\label{classcollisionController_a602c73073a3f2f44a8dc65952113f5de}} 
+\index{collision\+Controller@{collision\+Controller}!````~collision\+Controller@{$\sim$collision\+Controller}}
+\index{````~collision\+Controller@{$\sim$collision\+Controller}!collision\+Controller@{collision\+Controller}}
+\subsubsection{\texorpdfstring{$\sim$collision\+Controller()}{~collisionController()}}
+{\footnotesize\ttfamily collision\+Controller\+::$\sim$collision\+Controller (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Desaloca mapa de colisão 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classcollisionController_adcba90a401d69ebeb270ae0b92b9c335}\label{classcollisionController_adcba90a401d69ebeb270ae0b92b9c335}} 
+\index{collision\+Controller@{collision\+Controller}!get\+Collision\+Map@{get\+Collision\+Map}}
+\index{get\+Collision\+Map@{get\+Collision\+Map}!collision\+Controller@{collision\+Controller}}
+\subsubsection{\texorpdfstring{get\+Collision\+Map()}{getCollisionMap()}}
+{\footnotesize\ttfamily int $\ast$$\ast$ collision\+Controller\+::get\+Collision\+Map (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classcollisionController_aac25970400c5d905dbf60e69da3720c5}\label{classcollisionController_aac25970400c5d905dbf60e69da3720c5}} 
+\index{collision\+Controller@{collision\+Controller}!make\+Collision\+Map@{make\+Collision\+Map}}
+\index{make\+Collision\+Map@{make\+Collision\+Map}!collision\+Controller@{collision\+Controller}}
+\subsubsection{\texorpdfstring{make\+Collision\+Map()}{makeCollisionMap()}}
+{\footnotesize\ttfamily void collision\+Controller\+::make\+Collision\+Map (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Gera mapa de colisão a partir do dicionário do mapa \mbox{\Hypertarget{classcollisionController_ad08a8b7f1bc6f803a8875a89ac194bba}\label{classcollisionController_ad08a8b7f1bc6f803a8875a89ac194bba}} 
+\index{collision\+Controller@{collision\+Controller}!move@{move}}
+\index{move@{move}!collision\+Controller@{collision\+Controller}}
+\subsubsection{\texorpdfstring{move()}{move()}}
+{\footnotesize\ttfamily void collision\+Controller\+::move (\begin{DoxyParamCaption}\item[{\hyperlink{classPlayer}{Player} \&}]{obj }\end{DoxyParamCaption})}
+
+Move o player controlando a colisão 
+\begin{DoxyParams}{Parameters}
+{\em obj} & \hyperlink{classPlayer}{Player} a ser movido \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcollisionController_a0b59127f63d5caeeb5fa3c573853c8e7}\label{classcollisionController_a0b59127f63d5caeeb5fa3c573853c8e7}} 
+\index{collision\+Controller@{collision\+Controller}!set\+\_\+bound\+Box\+Size@{set\+\_\+bound\+Box\+Size}}
+\index{set\+\_\+bound\+Box\+Size@{set\+\_\+bound\+Box\+Size}!collision\+Controller@{collision\+Controller}}
+\subsubsection{\texorpdfstring{set\+\_\+bound\+Box\+Size()}{set\_boundBoxSize()}}
+{\footnotesize\ttfamily void collision\+Controller\+::set\+\_\+bound\+Box\+Size (\begin{DoxyParamCaption}\item[{int}]{size }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classcollisionController_aee7db17044f602c0b8a553012540480b}\label{classcollisionController_aee7db17044f602c0b8a553012540480b}} 
+\index{collision\+Controller@{collision\+Controller}!set\+\_\+map@{set\+\_\+map}}
+\index{set\+\_\+map@{set\+\_\+map}!collision\+Controller@{collision\+Controller}}
+\subsubsection{\texorpdfstring{set\+\_\+map()}{set\_map()}}
+{\footnotesize\ttfamily void collision\+Controller\+::set\+\_\+map (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \hyperlink{classMap}{Map} $>$}]{map }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classcollisionController_ab92231229dbb6786429137147b4d232b}\label{classcollisionController_ab92231229dbb6786429137147b4d232b}} 
+\index{collision\+Controller@{collision\+Controller}!set\+\_\+state@{set\+\_\+state}}
+\index{set\+\_\+state@{set\+\_\+state}!collision\+Controller@{collision\+Controller}}
+\subsubsection{\texorpdfstring{set\+\_\+state()}{set\_state()}}
+{\footnotesize\ttfamily void collision\+Controller\+::set\+\_\+state (\begin{DoxyParamCaption}\item[{const Uint8 $\ast$}]{state }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classcollisionController_a025770daba1c75e9479c2375a6543edf}\label{classcollisionController_a025770daba1c75e9479c2375a6543edf}} 
+\index{collision\+Controller@{collision\+Controller}!set\+\_\+tile\+Size@{set\+\_\+tile\+Size}}
+\index{set\+\_\+tile\+Size@{set\+\_\+tile\+Size}!collision\+Controller@{collision\+Controller}}
+\subsubsection{\texorpdfstring{set\+\_\+tile\+Size()}{set\_tileSize()}}
+{\footnotesize\ttfamily void collision\+Controller\+::set\+\_\+tile\+Size (\begin{DoxyParamCaption}\item[{int}]{size }\end{DoxyParamCaption})}
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classcollisionController_a6624f68ec989fb6cce2a6b9f46c15dc3}\label{classcollisionController_a6624f68ec989fb6cce2a6b9f46c15dc3}} 
+\index{collision\+Controller@{collision\+Controller}!bound\+Box\+Size@{bound\+Box\+Size}}
+\index{bound\+Box\+Size@{bound\+Box\+Size}!collision\+Controller@{collision\+Controller}}
+\subsubsection{\texorpdfstring{bound\+Box\+Size}{boundBoxSize}}
+{\footnotesize\ttfamily int collision\+Controller\+::bound\+Box\+Size = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classcollisionController_a71bbc836de2531fa217d46f37f501e71}\label{classcollisionController_a71bbc836de2531fa217d46f37f501e71}} 
+\index{collision\+Controller@{collision\+Controller}!collision\+Map@{collision\+Map}}
+\index{collision\+Map@{collision\+Map}!collision\+Controller@{collision\+Controller}}
+\subsubsection{\texorpdfstring{collision\+Map}{collisionMap}}
+{\footnotesize\ttfamily int$\ast$$\ast$ collision\+Controller\+::collision\+Map = N\+U\+LL\hspace{0.3cm}{\ttfamily [private]}}
+
+Mapa de colisão \mbox{\Hypertarget{classcollisionController_a9624b45dd5e3ba5317291f96e68dcf76}\label{classcollisionController_a9624b45dd5e3ba5317291f96e68dcf76}} 
+\index{collision\+Controller@{collision\+Controller}!map@{map}}
+\index{map@{map}!collision\+Controller@{collision\+Controller}}
+\subsubsection{\texorpdfstring{map}{map}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$\hyperlink{classMap}{Map}$>$ collision\+Controller\+::map\hspace{0.3cm}{\ttfamily [private]}}
+
+Ponteiro para mapa \mbox{\Hypertarget{classcollisionController_a5957b53016d027965bf98cf391df28cb}\label{classcollisionController_a5957b53016d027965bf98cf391df28cb}} 
+\index{collision\+Controller@{collision\+Controller}!state@{state}}
+\index{state@{state}!collision\+Controller@{collision\+Controller}}
+\subsubsection{\texorpdfstring{state}{state}}
+{\footnotesize\ttfamily const Uint8$\ast$ collision\+Controller\+::state = N\+U\+LL\hspace{0.3cm}{\ttfamily [private]}}
+
+Estado do Teclado \mbox{\Hypertarget{classcollisionController_a9a844a9c3873ea03ec04dd382040167c}\label{classcollisionController_a9a844a9c3873ea03ec04dd382040167c}} 
+\index{collision\+Controller@{collision\+Controller}!tile\+Size@{tile\+Size}}
+\index{tile\+Size@{tile\+Size}!collision\+Controller@{collision\+Controller}}
+\subsubsection{\texorpdfstring{tile\+Size}{tileSize}}
+{\footnotesize\ttfamily int collision\+Controller\+::tile\+Size = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\hyperlink{collisionController_8h}{collision\+Controller.\+h}\item 
+src/\hyperlink{collisionController_8cpp}{collision\+Controller.\+cpp}\end{DoxyCompactItemize}

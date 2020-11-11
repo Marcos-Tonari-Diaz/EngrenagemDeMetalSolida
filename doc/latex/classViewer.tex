@@ -1,0 +1,338 @@
+\hypertarget{classViewer}{}\section{Viewer Class Reference}
+\label{classViewer}\index{Viewer@{Viewer}}
+
+
+{\ttfamily \#include $<$viewer.\+h$>$}
+
+
+
+Collaboration diagram for Viewer\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=193pt]{classViewer__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classViewer_aaedebacb31cba87de6e7d448ed8d6586}{Viewer} ()
+\begin{DoxyCompactList}\small\item\em Construtor do \hyperlink{classViewer}{Viewer} Configura e inicializa o renderizador. Monta o dicionário de texturas. \end{DoxyCompactList}\item 
+\hyperlink{classViewer_a324e5a6a1532fe5eac3f3b0e4792b2da}{$\sim$\+Viewer} ()
+\begin{DoxyCompactList}\small\item\em Destrutor do \hyperlink{classViewer}{Viewer} Destroi texturas e o Renderizador. \end{DoxyCompactList}\item 
+void \hyperlink{classViewer_a335d914ec8088b5917df9ec465f7a7aa}{render} (\hyperlink{classPlayer}{Player} \&player)
+\item 
+void \hyperlink{classViewer_a2f6616a8c04e79b4251c7d1aaf1d3aaa}{render\+Main} ()
+\item 
+void \hyperlink{classViewer_abf19deab378a650856e92ab4f4e42126}{render\+Exclamation} (\hyperlink{classCamera}{Camera} \&cam)
+\item 
+void \hyperlink{classViewer_ab9787f02682d9e2b699ab16cd20fe43a}{update\+Map} (std\+::map$<$ std\+::pair$<$ int, int $>$, std\+::string $>$ \&\hyperlink{classViewer_a34e0e3043d5155be7fbaef0b07b647f8}{text\+Map})
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+S\+D\+L\+\_\+\+Window $\ast$ \hyperlink{classViewer_a9f4bbe40df531d56d30098af395bfd42}{window}
+\item 
+S\+D\+L\+\_\+\+Renderer $\ast$ \hyperlink{classViewer_aa242869e70efed8cbd51e0345db286d5}{renderer}
+\item 
+S\+D\+L\+\_\+\+Texture $\ast$ \hyperlink{classViewer_a05710c1f079a9099419fd1882643a349}{bg\+Tiles}
+\item 
+S\+D\+L\+\_\+\+Texture $\ast$ \hyperlink{classViewer_a9c91a1e8d706ae06579922ba31088775}{door\+Tiles}
+\item 
+S\+D\+L\+\_\+\+Texture $\ast$ \hyperlink{classViewer_a68100cc46ca81331b8eb394de47ead87}{test\+Tile}
+\item 
+S\+D\+L\+\_\+\+Texture $\ast$ \hyperlink{classViewer_a9bb70fa5cb5dd60d328cee1f6b23c7de}{player\+Sheet}
+\item 
+S\+D\+L\+\_\+\+Texture $\ast$ \hyperlink{classViewer_a6885109c94a29d43259967707ab3910e}{heliport\+Text}
+\item 
+std\+::vector$<$ S\+D\+L\+\_\+\+Rect $\ast$ $>$ \hyperlink{classViewer_a29c1477b7847d678e5927ccfa5950969}{player\+Sprites}
+\item 
+S\+D\+L\+\_\+\+Rect \hyperlink{classViewer_a5475b38369314f06da131e7ca558dec0}{wall\+Rect}
+\item 
+S\+D\+L\+\_\+\+Rect \hyperlink{classViewer_abc5bc66b70995658bc7485a83a66555d}{corridor\+Rect}
+\item 
+S\+D\+L\+\_\+\+Rect \hyperlink{classViewer_a43249e2007827e3cd55529efd37c528d}{porta\+Fechada\+Rect}
+\item 
+S\+D\+L\+\_\+\+Rect \hyperlink{classViewer_a6c875f769828a91e54df3c5c379e74a1}{porta\+Aberta\+Rect}
+\item 
+S\+D\+L\+\_\+\+Rect \hyperlink{classViewer_a2564f386e8d491f4a3a52cd21037b0ab}{camera\+Cima\+Rect}
+\item 
+S\+D\+L\+\_\+\+Rect \hyperlink{classViewer_a8cd66938fa5418497e5f8bb877960409}{camera\+Cima\+Dir\+Rect}
+\item 
+S\+D\+L\+\_\+\+Rect \hyperlink{classViewer_af8303b86bd4da1c5d93042b9c9a091f5}{camera\+Cima\+Esq\+Rect}
+\item 
+S\+D\+L\+\_\+\+Rect \hyperlink{classViewer_a95a1339fd00bd739da9e6c2bd05e95ec}{camera\+Baixo\+Rect}
+\item 
+S\+D\+L\+\_\+\+Rect \hyperlink{classViewer_aaad98d13a259888e00ed2d58ca4645a2}{camera\+Baixo\+Dir\+Rect}
+\item 
+S\+D\+L\+\_\+\+Rect \hyperlink{classViewer_a036f0479074b0bf9c1e74ce55d262a6b}{camera\+Baixo\+Esq\+Rect}
+\item 
+S\+D\+L\+\_\+\+Rect \hyperlink{classViewer_a03275a5d07e4096525ec9e3168268dd6}{camera\+Esq\+Rect}
+\item 
+S\+D\+L\+\_\+\+Rect \hyperlink{classViewer_a802293c85d676e0ceca2637312e9ca61}{camera\+Dir\+Rect}
+\item 
+std\+::map$<$ std\+::string, std\+::pair$<$ S\+D\+L\+\_\+\+Texture $\ast$, S\+D\+L\+\_\+\+Rect $\ast$ $>$ $>$ \hyperlink{classViewer_a336123429ce452088ba9833f8f80cfff}{text\+Dict}
+\item 
+S\+D\+L\+\_\+\+Texture $\ast$ \hyperlink{classViewer_a1bad0e9a1333a329d968d289938265a5}{main\+Title}
+\item 
+S\+D\+L\+\_\+\+Texture $\ast$ \hyperlink{classViewer_a9b3c83a12e44f5761001b4dd5369cf4f}{exclamation\+Text}
+\item 
+std\+::map$<$ std\+::pair$<$ int, int $>$, std\+::string $>$ \hyperlink{classViewer_a34e0e3043d5155be7fbaef0b07b647f8}{text\+Map}
+\item 
+S\+D\+L\+\_\+\+Rect \hyperlink{classViewer_a7e38c4e4399e4e4f4d9a1a148843d7f5}{tile\+Rect}
+\item 
+S\+D\+L\+\_\+\+Event \hyperlink{classViewer_a15a2d333c70e4d16bd85368bdbffaec7}{evento}
+\item 
+int \hyperlink{classViewer_a1c2c61744bd1f39a6c99671105eee03d}{tile\+Size} = 72
+\item 
+const int \hyperlink{classViewer_a57814822429ca824ac0c3d355df4ec78}{S\+C\+R\+E\+E\+N\+\_\+\+W\+I\+D\+TH} = 10$\ast$\hyperlink{classViewer_a1c2c61744bd1f39a6c99671105eee03d}{tile\+Size}
+\item 
+const int \hyperlink{classViewer_a20f47b2f2d1558fff5feb4dfe075f9fc}{S\+C\+R\+E\+E\+N\+\_\+\+H\+E\+I\+G\+HT} = 10$\ast$\hyperlink{classViewer_a1c2c61744bd1f39a6c99671105eee03d}{tile\+Size}
+\item 
+const Uint8 $\ast$ \hyperlink{classViewer_a2c820741a53119711fa1f43b812aa33b}{state} = S\+D\+L\+\_\+\+Get\+Keyboard\+State(nullptr)
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classViewer_aaedebacb31cba87de6e7d448ed8d6586}\label{classViewer_aaedebacb31cba87de6e7d448ed8d6586}} 
+\index{Viewer@{Viewer}!Viewer@{Viewer}}
+\index{Viewer@{Viewer}!Viewer@{Viewer}}
+\subsubsection{\texorpdfstring{Viewer()}{Viewer()}}
+{\footnotesize\ttfamily Viewer\+::\+Viewer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Construtor do \hyperlink{classViewer}{Viewer} Configura e inicializa o renderizador. Monta o dicionário de texturas. 
+
+\mbox{\Hypertarget{classViewer_a324e5a6a1532fe5eac3f3b0e4792b2da}\label{classViewer_a324e5a6a1532fe5eac3f3b0e4792b2da}} 
+\index{Viewer@{Viewer}!````~Viewer@{$\sim$\+Viewer}}
+\index{````~Viewer@{$\sim$\+Viewer}!Viewer@{Viewer}}
+\subsubsection{\texorpdfstring{$\sim$\+Viewer()}{~Viewer()}}
+{\footnotesize\ttfamily Viewer\+::$\sim$\+Viewer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Destrutor do \hyperlink{classViewer}{Viewer} Destroi texturas e o Renderizador. 
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classViewer_a335d914ec8088b5917df9ec465f7a7aa}\label{classViewer_a335d914ec8088b5917df9ec465f7a7aa}} 
+\index{Viewer@{Viewer}!render@{render}}
+\index{render@{render}!Viewer@{Viewer}}
+\subsubsection{\texorpdfstring{render()}{render()}}
+{\footnotesize\ttfamily void Viewer\+::render (\begin{DoxyParamCaption}\item[{\hyperlink{classPlayer}{Player} \&}]{player }\end{DoxyParamCaption})}
+
+Renderiza a cena 
+\begin{DoxyParams}{Parameters}
+{\em player} & Jogador a ser renderizado \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classViewer_abf19deab378a650856e92ab4f4e42126}\label{classViewer_abf19deab378a650856e92ab4f4e42126}} 
+\index{Viewer@{Viewer}!render\+Exclamation@{render\+Exclamation}}
+\index{render\+Exclamation@{render\+Exclamation}!Viewer@{Viewer}}
+\subsubsection{\texorpdfstring{render\+Exclamation()}{renderExclamation()}}
+{\footnotesize\ttfamily void Viewer\+::render\+Exclamation (\begin{DoxyParamCaption}\item[{\hyperlink{classCamera}{Camera} \&}]{cam }\end{DoxyParamCaption})}
+
+Renderiza o sinal de deteccao \mbox{\Hypertarget{classViewer_a2f6616a8c04e79b4251c7d1aaf1d3aaa}\label{classViewer_a2f6616a8c04e79b4251c7d1aaf1d3aaa}} 
+\index{Viewer@{Viewer}!render\+Main@{render\+Main}}
+\index{render\+Main@{render\+Main}!Viewer@{Viewer}}
+\subsubsection{\texorpdfstring{render\+Main()}{renderMain()}}
+{\footnotesize\ttfamily void Viewer\+::render\+Main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Renderiza a tela principal \mbox{\Hypertarget{classViewer_ab9787f02682d9e2b699ab16cd20fe43a}\label{classViewer_ab9787f02682d9e2b699ab16cd20fe43a}} 
+\index{Viewer@{Viewer}!update\+Map@{update\+Map}}
+\index{update\+Map@{update\+Map}!Viewer@{Viewer}}
+\subsubsection{\texorpdfstring{update\+Map()}{updateMap()}}
+{\footnotesize\ttfamily void Viewer\+::update\+Map (\begin{DoxyParamCaption}\item[{std\+::map$<$ std\+::pair$<$ int, int $>$, std\+::string $>$ \&}]{text\+Map }\end{DoxyParamCaption})}
+
+Guarda uma referencia para o dicionario do mapa 
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classViewer_a05710c1f079a9099419fd1882643a349}\label{classViewer_a05710c1f079a9099419fd1882643a349}} 
+\index{Viewer@{Viewer}!bg\+Tiles@{bg\+Tiles}}
+\index{bg\+Tiles@{bg\+Tiles}!Viewer@{Viewer}}
+\subsubsection{\texorpdfstring{bg\+Tiles}{bgTiles}}
+{\footnotesize\ttfamily S\+D\+L\+\_\+\+Texture$\ast$ Viewer\+::bg\+Tiles}
+
+Tile\+Sheet \mbox{\Hypertarget{classViewer_aaad98d13a259888e00ed2d58ca4645a2}\label{classViewer_aaad98d13a259888e00ed2d58ca4645a2}} 
+\index{Viewer@{Viewer}!camera\+Baixo\+Dir\+Rect@{camera\+Baixo\+Dir\+Rect}}
+\index{camera\+Baixo\+Dir\+Rect@{camera\+Baixo\+Dir\+Rect}!Viewer@{Viewer}}
+\subsubsection{\texorpdfstring{camera\+Baixo\+Dir\+Rect}{cameraBaixoDirRect}}
+{\footnotesize\ttfamily S\+D\+L\+\_\+\+Rect Viewer\+::camera\+Baixo\+Dir\+Rect}
+
+Tile Source Rectangles \mbox{\Hypertarget{classViewer_a036f0479074b0bf9c1e74ce55d262a6b}\label{classViewer_a036f0479074b0bf9c1e74ce55d262a6b}} 
+\index{Viewer@{Viewer}!camera\+Baixo\+Esq\+Rect@{camera\+Baixo\+Esq\+Rect}}
+\index{camera\+Baixo\+Esq\+Rect@{camera\+Baixo\+Esq\+Rect}!Viewer@{Viewer}}
+\subsubsection{\texorpdfstring{camera\+Baixo\+Esq\+Rect}{cameraBaixoEsqRect}}
+{\footnotesize\ttfamily S\+D\+L\+\_\+\+Rect Viewer\+::camera\+Baixo\+Esq\+Rect}
+
+Tile Source Rectangles \mbox{\Hypertarget{classViewer_a95a1339fd00bd739da9e6c2bd05e95ec}\label{classViewer_a95a1339fd00bd739da9e6c2bd05e95ec}} 
+\index{Viewer@{Viewer}!camera\+Baixo\+Rect@{camera\+Baixo\+Rect}}
+\index{camera\+Baixo\+Rect@{camera\+Baixo\+Rect}!Viewer@{Viewer}}
+\subsubsection{\texorpdfstring{camera\+Baixo\+Rect}{cameraBaixoRect}}
+{\footnotesize\ttfamily S\+D\+L\+\_\+\+Rect Viewer\+::camera\+Baixo\+Rect}
+
+Tile Source Rectangles \mbox{\Hypertarget{classViewer_a8cd66938fa5418497e5f8bb877960409}\label{classViewer_a8cd66938fa5418497e5f8bb877960409}} 
+\index{Viewer@{Viewer}!camera\+Cima\+Dir\+Rect@{camera\+Cima\+Dir\+Rect}}
+\index{camera\+Cima\+Dir\+Rect@{camera\+Cima\+Dir\+Rect}!Viewer@{Viewer}}
+\subsubsection{\texorpdfstring{camera\+Cima\+Dir\+Rect}{cameraCimaDirRect}}
+{\footnotesize\ttfamily S\+D\+L\+\_\+\+Rect Viewer\+::camera\+Cima\+Dir\+Rect}
+
+Tile Source Rectangles \mbox{\Hypertarget{classViewer_af8303b86bd4da1c5d93042b9c9a091f5}\label{classViewer_af8303b86bd4da1c5d93042b9c9a091f5}} 
+\index{Viewer@{Viewer}!camera\+Cima\+Esq\+Rect@{camera\+Cima\+Esq\+Rect}}
+\index{camera\+Cima\+Esq\+Rect@{camera\+Cima\+Esq\+Rect}!Viewer@{Viewer}}
+\subsubsection{\texorpdfstring{camera\+Cima\+Esq\+Rect}{cameraCimaEsqRect}}
+{\footnotesize\ttfamily S\+D\+L\+\_\+\+Rect Viewer\+::camera\+Cima\+Esq\+Rect}
+
+Tile Source Rectangles \mbox{\Hypertarget{classViewer_a2564f386e8d491f4a3a52cd21037b0ab}\label{classViewer_a2564f386e8d491f4a3a52cd21037b0ab}} 
+\index{Viewer@{Viewer}!camera\+Cima\+Rect@{camera\+Cima\+Rect}}
+\index{camera\+Cima\+Rect@{camera\+Cima\+Rect}!Viewer@{Viewer}}
+\subsubsection{\texorpdfstring{camera\+Cima\+Rect}{cameraCimaRect}}
+{\footnotesize\ttfamily S\+D\+L\+\_\+\+Rect Viewer\+::camera\+Cima\+Rect}
+
+Tile Source Rectangles \mbox{\Hypertarget{classViewer_a802293c85d676e0ceca2637312e9ca61}\label{classViewer_a802293c85d676e0ceca2637312e9ca61}} 
+\index{Viewer@{Viewer}!camera\+Dir\+Rect@{camera\+Dir\+Rect}}
+\index{camera\+Dir\+Rect@{camera\+Dir\+Rect}!Viewer@{Viewer}}
+\subsubsection{\texorpdfstring{camera\+Dir\+Rect}{cameraDirRect}}
+{\footnotesize\ttfamily S\+D\+L\+\_\+\+Rect Viewer\+::camera\+Dir\+Rect}
+
+Tile Source Rectangles \mbox{\Hypertarget{classViewer_a03275a5d07e4096525ec9e3168268dd6}\label{classViewer_a03275a5d07e4096525ec9e3168268dd6}} 
+\index{Viewer@{Viewer}!camera\+Esq\+Rect@{camera\+Esq\+Rect}}
+\index{camera\+Esq\+Rect@{camera\+Esq\+Rect}!Viewer@{Viewer}}
+\subsubsection{\texorpdfstring{camera\+Esq\+Rect}{cameraEsqRect}}
+{\footnotesize\ttfamily S\+D\+L\+\_\+\+Rect Viewer\+::camera\+Esq\+Rect}
+
+Tile Source Rectangles \mbox{\Hypertarget{classViewer_abc5bc66b70995658bc7485a83a66555d}\label{classViewer_abc5bc66b70995658bc7485a83a66555d}} 
+\index{Viewer@{Viewer}!corridor\+Rect@{corridor\+Rect}}
+\index{corridor\+Rect@{corridor\+Rect}!Viewer@{Viewer}}
+\subsubsection{\texorpdfstring{corridor\+Rect}{corridorRect}}
+{\footnotesize\ttfamily S\+D\+L\+\_\+\+Rect Viewer\+::corridor\+Rect}
+
+Tile Source Rectangles \mbox{\Hypertarget{classViewer_a9c91a1e8d706ae06579922ba31088775}\label{classViewer_a9c91a1e8d706ae06579922ba31088775}} 
+\index{Viewer@{Viewer}!door\+Tiles@{door\+Tiles}}
+\index{door\+Tiles@{door\+Tiles}!Viewer@{Viewer}}
+\subsubsection{\texorpdfstring{door\+Tiles}{doorTiles}}
+{\footnotesize\ttfamily S\+D\+L\+\_\+\+Texture$\ast$ Viewer\+::door\+Tiles}
+
+Tile\+Sheet \mbox{\Hypertarget{classViewer_a15a2d333c70e4d16bd85368bdbffaec7}\label{classViewer_a15a2d333c70e4d16bd85368bdbffaec7}} 
+\index{Viewer@{Viewer}!evento@{evento}}
+\index{evento@{evento}!Viewer@{Viewer}}
+\subsubsection{\texorpdfstring{evento}{evento}}
+{\footnotesize\ttfamily S\+D\+L\+\_\+\+Event Viewer\+::evento}
+
+Variaveis para guardar e verificar eventos \mbox{\Hypertarget{classViewer_a9b3c83a12e44f5761001b4dd5369cf4f}\label{classViewer_a9b3c83a12e44f5761001b4dd5369cf4f}} 
+\index{Viewer@{Viewer}!exclamation\+Text@{exclamation\+Text}}
+\index{exclamation\+Text@{exclamation\+Text}!Viewer@{Viewer}}
+\subsubsection{\texorpdfstring{exclamation\+Text}{exclamationText}}
+{\footnotesize\ttfamily S\+D\+L\+\_\+\+Texture$\ast$ Viewer\+::exclamation\+Text}
+
+\mbox{\Hypertarget{classViewer_a6885109c94a29d43259967707ab3910e}\label{classViewer_a6885109c94a29d43259967707ab3910e}} 
+\index{Viewer@{Viewer}!heliport\+Text@{heliport\+Text}}
+\index{heliport\+Text@{heliport\+Text}!Viewer@{Viewer}}
+\subsubsection{\texorpdfstring{heliport\+Text}{heliportText}}
+{\footnotesize\ttfamily S\+D\+L\+\_\+\+Texture$\ast$ Viewer\+::heliport\+Text}
+
+Tile\+Sheet \mbox{\Hypertarget{classViewer_a1bad0e9a1333a329d968d289938265a5}\label{classViewer_a1bad0e9a1333a329d968d289938265a5}} 
+\index{Viewer@{Viewer}!main\+Title@{main\+Title}}
+\index{main\+Title@{main\+Title}!Viewer@{Viewer}}
+\subsubsection{\texorpdfstring{main\+Title}{mainTitle}}
+{\footnotesize\ttfamily S\+D\+L\+\_\+\+Texture$\ast$ Viewer\+::main\+Title}
+
+\mbox{\Hypertarget{classViewer_a9bb70fa5cb5dd60d328cee1f6b23c7de}\label{classViewer_a9bb70fa5cb5dd60d328cee1f6b23c7de}} 
+\index{Viewer@{Viewer}!player\+Sheet@{player\+Sheet}}
+\index{player\+Sheet@{player\+Sheet}!Viewer@{Viewer}}
+\subsubsection{\texorpdfstring{player\+Sheet}{playerSheet}}
+{\footnotesize\ttfamily S\+D\+L\+\_\+\+Texture$\ast$ Viewer\+::player\+Sheet}
+
+Tile\+Sheet \mbox{\Hypertarget{classViewer_a29c1477b7847d678e5927ccfa5950969}\label{classViewer_a29c1477b7847d678e5927ccfa5950969}} 
+\index{Viewer@{Viewer}!player\+Sprites@{player\+Sprites}}
+\index{player\+Sprites@{player\+Sprites}!Viewer@{Viewer}}
+\subsubsection{\texorpdfstring{player\+Sprites}{playerSprites}}
+{\footnotesize\ttfamily std\+::vector$<$S\+D\+L\+\_\+\+Rect$\ast$$>$ Viewer\+::player\+Sprites}
+
+\hyperlink{classPlayer}{Player} Animation Sprites Rectangles \mbox{\Hypertarget{classViewer_a6c875f769828a91e54df3c5c379e74a1}\label{classViewer_a6c875f769828a91e54df3c5c379e74a1}} 
+\index{Viewer@{Viewer}!porta\+Aberta\+Rect@{porta\+Aberta\+Rect}}
+\index{porta\+Aberta\+Rect@{porta\+Aberta\+Rect}!Viewer@{Viewer}}
+\subsubsection{\texorpdfstring{porta\+Aberta\+Rect}{portaAbertaRect}}
+{\footnotesize\ttfamily S\+D\+L\+\_\+\+Rect Viewer\+::porta\+Aberta\+Rect}
+
+Tile Source Rectangles \mbox{\Hypertarget{classViewer_a43249e2007827e3cd55529efd37c528d}\label{classViewer_a43249e2007827e3cd55529efd37c528d}} 
+\index{Viewer@{Viewer}!porta\+Fechada\+Rect@{porta\+Fechada\+Rect}}
+\index{porta\+Fechada\+Rect@{porta\+Fechada\+Rect}!Viewer@{Viewer}}
+\subsubsection{\texorpdfstring{porta\+Fechada\+Rect}{portaFechadaRect}}
+{\footnotesize\ttfamily S\+D\+L\+\_\+\+Rect Viewer\+::porta\+Fechada\+Rect}
+
+Tile Source Rectangles \mbox{\Hypertarget{classViewer_aa242869e70efed8cbd51e0345db286d5}\label{classViewer_aa242869e70efed8cbd51e0345db286d5}} 
+\index{Viewer@{Viewer}!renderer@{renderer}}
+\index{renderer@{renderer}!Viewer@{Viewer}}
+\subsubsection{\texorpdfstring{renderer}{renderer}}
+{\footnotesize\ttfamily S\+D\+L\+\_\+\+Renderer$\ast$ Viewer\+::renderer}
+
+\mbox{\Hypertarget{classViewer_a20f47b2f2d1558fff5feb4dfe075f9fc}\label{classViewer_a20f47b2f2d1558fff5feb4dfe075f9fc}} 
+\index{Viewer@{Viewer}!S\+C\+R\+E\+E\+N\+\_\+\+H\+E\+I\+G\+HT@{S\+C\+R\+E\+E\+N\+\_\+\+H\+E\+I\+G\+HT}}
+\index{S\+C\+R\+E\+E\+N\+\_\+\+H\+E\+I\+G\+HT@{S\+C\+R\+E\+E\+N\+\_\+\+H\+E\+I\+G\+HT}!Viewer@{Viewer}}
+\subsubsection{\texorpdfstring{S\+C\+R\+E\+E\+N\+\_\+\+H\+E\+I\+G\+HT}{SCREEN\_HEIGHT}}
+{\footnotesize\ttfamily const int Viewer\+::\+S\+C\+R\+E\+E\+N\+\_\+\+H\+E\+I\+G\+HT = 10$\ast$\hyperlink{classViewer_a1c2c61744bd1f39a6c99671105eee03d}{tile\+Size}}
+
+Tamanho da tela \mbox{\Hypertarget{classViewer_a57814822429ca824ac0c3d355df4ec78}\label{classViewer_a57814822429ca824ac0c3d355df4ec78}} 
+\index{Viewer@{Viewer}!S\+C\+R\+E\+E\+N\+\_\+\+W\+I\+D\+TH@{S\+C\+R\+E\+E\+N\+\_\+\+W\+I\+D\+TH}}
+\index{S\+C\+R\+E\+E\+N\+\_\+\+W\+I\+D\+TH@{S\+C\+R\+E\+E\+N\+\_\+\+W\+I\+D\+TH}!Viewer@{Viewer}}
+\subsubsection{\texorpdfstring{S\+C\+R\+E\+E\+N\+\_\+\+W\+I\+D\+TH}{SCREEN\_WIDTH}}
+{\footnotesize\ttfamily const int Viewer\+::\+S\+C\+R\+E\+E\+N\+\_\+\+W\+I\+D\+TH = 10$\ast$\hyperlink{classViewer_a1c2c61744bd1f39a6c99671105eee03d}{tile\+Size}}
+
+Tamanho da tela \mbox{\Hypertarget{classViewer_a2c820741a53119711fa1f43b812aa33b}\label{classViewer_a2c820741a53119711fa1f43b812aa33b}} 
+\index{Viewer@{Viewer}!state@{state}}
+\index{state@{state}!Viewer@{Viewer}}
+\subsubsection{\texorpdfstring{state}{state}}
+{\footnotesize\ttfamily const Uint8$\ast$ Viewer\+::state = S\+D\+L\+\_\+\+Get\+Keyboard\+State(nullptr)}
+
+Estado do teclado \mbox{\Hypertarget{classViewer_a68100cc46ca81331b8eb394de47ead87}\label{classViewer_a68100cc46ca81331b8eb394de47ead87}} 
+\index{Viewer@{Viewer}!test\+Tile@{test\+Tile}}
+\index{test\+Tile@{test\+Tile}!Viewer@{Viewer}}
+\subsubsection{\texorpdfstring{test\+Tile}{testTile}}
+{\footnotesize\ttfamily S\+D\+L\+\_\+\+Texture$\ast$ Viewer\+::test\+Tile}
+
+Tile\+Sheet \mbox{\Hypertarget{classViewer_a336123429ce452088ba9833f8f80cfff}\label{classViewer_a336123429ce452088ba9833f8f80cfff}} 
+\index{Viewer@{Viewer}!text\+Dict@{text\+Dict}}
+\index{text\+Dict@{text\+Dict}!Viewer@{Viewer}}
+\subsubsection{\texorpdfstring{text\+Dict}{textDict}}
+{\footnotesize\ttfamily std\+::map$<$std\+::string, std\+::pair$<$S\+D\+L\+\_\+\+Texture$\ast$, S\+D\+L\+\_\+\+Rect$\ast$$>$ $>$ Viewer\+::text\+Dict}
+
+Dicionário de Texturas \mbox{\Hypertarget{classViewer_a34e0e3043d5155be7fbaef0b07b647f8}\label{classViewer_a34e0e3043d5155be7fbaef0b07b647f8}} 
+\index{Viewer@{Viewer}!text\+Map@{text\+Map}}
+\index{text\+Map@{text\+Map}!Viewer@{Viewer}}
+\subsubsection{\texorpdfstring{text\+Map}{textMap}}
+{\footnotesize\ttfamily std\+::map$<$std\+::pair$<$int, int$>$, std\+::string$>$ Viewer\+::text\+Map}
+
+Referencia para Texture \hyperlink{classMap}{Map} \mbox{\Hypertarget{classViewer_a7e38c4e4399e4e4f4d9a1a148843d7f5}\label{classViewer_a7e38c4e4399e4e4f4d9a1a148843d7f5}} 
+\index{Viewer@{Viewer}!tile\+Rect@{tile\+Rect}}
+\index{tile\+Rect@{tile\+Rect}!Viewer@{Viewer}}
+\subsubsection{\texorpdfstring{tile\+Rect}{tileRect}}
+{\footnotesize\ttfamily S\+D\+L\+\_\+\+Rect Viewer\+::tile\+Rect}
+
+Retangulo alvo para texturas do fundo (bg) \mbox{\Hypertarget{classViewer_a1c2c61744bd1f39a6c99671105eee03d}\label{classViewer_a1c2c61744bd1f39a6c99671105eee03d}} 
+\index{Viewer@{Viewer}!tile\+Size@{tile\+Size}}
+\index{tile\+Size@{tile\+Size}!Viewer@{Viewer}}
+\subsubsection{\texorpdfstring{tile\+Size}{tileSize}}
+{\footnotesize\ttfamily int Viewer\+::tile\+Size = 72}
+
+\mbox{\Hypertarget{classViewer_a5475b38369314f06da131e7ca558dec0}\label{classViewer_a5475b38369314f06da131e7ca558dec0}} 
+\index{Viewer@{Viewer}!wall\+Rect@{wall\+Rect}}
+\index{wall\+Rect@{wall\+Rect}!Viewer@{Viewer}}
+\subsubsection{\texorpdfstring{wall\+Rect}{wallRect}}
+{\footnotesize\ttfamily S\+D\+L\+\_\+\+Rect Viewer\+::wall\+Rect}
+
+Tile Source Rectangles \mbox{\Hypertarget{classViewer_a9f4bbe40df531d56d30098af395bfd42}\label{classViewer_a9f4bbe40df531d56d30098af395bfd42}} 
+\index{Viewer@{Viewer}!window@{window}}
+\index{window@{window}!Viewer@{Viewer}}
+\subsubsection{\texorpdfstring{window}{window}}
+{\footnotesize\ttfamily S\+D\+L\+\_\+\+Window$\ast$ Viewer\+::window}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\hyperlink{viewer_8h}{viewer.\+h}\item 
+src/\hyperlink{viewer_8cpp}{viewer.\+cpp}\end{DoxyCompactItemize}

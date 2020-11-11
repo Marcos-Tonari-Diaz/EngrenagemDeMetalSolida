@@ -154,6 +154,12 @@ Viewer::~Viewer(){
 	for (it = textDict.begin(); it!=textDict.end(); ++it){
 		SDL_DestroyTexture(std::get<0>(textDict[it->first]));
 	}
+	SDL_DestroyTexture(bgTiles);
+	SDL_DestroyTexture(doorTiles);
+	SDL_DestroyTexture(testTile);
+	SDL_DestroyTexture(playerSheet);
+	SDL_DestroyTexture(heliportText);
+
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
 	SDL_Quit();

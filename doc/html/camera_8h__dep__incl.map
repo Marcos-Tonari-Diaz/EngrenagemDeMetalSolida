@@ -1,0 +1,12 @@
+<map id="include/camera.h" name="include/camera.h">
+<area shape="rect" id="node2" href="$camera_8cpp.html" title="src/camera.cpp" alt="" coords="5,80,117,107"/>
+<area shape="rect" id="node3" href="$eventos_8cpp.html" title="src/eventos.cpp" alt="" coords="124,155,239,181"/>
+<area shape="rect" id="node4" href="$camera__controller_8h.html" title="include/camera_controller.h" alt="" coords="392,80,573,107"/>
+<area shape="rect" id="node6" href="$controller_8h.html" title="include/controller.h" alt="" coords="269,155,400,181"/>
+<area shape="rect" id="node9" href="$viewer_8h.html" title="include/viewer.h" alt="" coords="598,80,714,107"/>
+<area shape="rect" id="node11" href="$eventos_8h.html" title="include/eventos.h" alt="" coords="193,80,317,107"/>
+<area shape="rect" id="node5" href="$camera__controller_8cpp.html" title="src/camera_controller.cpp" alt="" coords="425,155,597,181"/>
+<area shape="rect" id="node7" href="$controller_8cpp.html" title="src/controller.cpp" alt="" coords="207,229,329,256"/>
+<area shape="rect" id="node8" href="$main_8cpp.html" title="src/main.cpp" alt="" coords="354,229,451,256"/>
+<area shape="rect" id="node10" href="$viewer_8cpp.html" title="src/viewer.cpp" alt="" coords="621,155,728,181"/>
+</map>

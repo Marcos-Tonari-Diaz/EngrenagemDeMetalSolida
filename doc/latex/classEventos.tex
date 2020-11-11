@@ -1,0 +1,97 @@
+\hypertarget{classEventos}{}\section{Eventos Class Reference}
+\label{classEventos}\index{Eventos@{Eventos}}
+
+
+{\ttfamily \#include $<$eventos.\+h$>$}
+
+
+
+Collaboration diagram for Eventos\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=157pt]{classEventos__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{classEventos_af534be40ac7143eb360a575296ec6b06}{checagem} (\hyperlink{classPlayer}{Player} \&jogador, \hyperlink{classCamera}{Camera} \&camera, int tilesize, int boundingbox)
+\begin{DoxyCompactList}\small\item\em Checagem de camera e fim de fase Checar se alguma camera detectou o jogador ou se o jogador chegou no fim da fase. \end{DoxyCompactList}\item 
+void \hyperlink{classEventos_a9d2ebdf756c3bb3b0bfe6ad2f73f1202}{set\+End} (int x, int y)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{classEventos_afdf3e21f837f2a84c5d258383ada6c29}{x\+\_\+final} = 72$\ast$9
+\item 
+int \hyperlink{classEventos_a52967e28579a67b2fef4ed6d427a042d}{y\+\_\+final} = 72$\ast$9
+\item 
+int \hyperlink{classEventos_aa09d32f02896554a3409d0093114cab1}{x\+\_\+inicial} = 0
+\item 
+int \hyperlink{classEventos_a42c55facc39e42b7c816a06b3009e228}{y\+\_\+inicial} = 0
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classEventos_af534be40ac7143eb360a575296ec6b06}\label{classEventos_af534be40ac7143eb360a575296ec6b06}} 
+\index{Eventos@{Eventos}!checagem@{checagem}}
+\index{checagem@{checagem}!Eventos@{Eventos}}
+\subsubsection{\texorpdfstring{checagem()}{checagem()}}
+{\footnotesize\ttfamily int Eventos\+::checagem (\begin{DoxyParamCaption}\item[{\hyperlink{classPlayer}{Player} \&}]{jogador,  }\item[{\hyperlink{classCamera}{Camera} \&}]{camera,  }\item[{int}]{tilesize,  }\item[{int}]{boundingbox }\end{DoxyParamCaption})}
+
+
+
+Checagem de camera e fim de fase Checar se alguma camera detectou o jogador ou se o jogador chegou no fim da fase. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em jogador} & Jogador \\
+\hline
+{\em camera} & \hyperlink{classCamera}{Camera} \\
+\hline
+{\em tilesize} & Tamanho da textura \\
+\hline
+{\em boundingbox} & Bounding box do jogador \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classEventos_a9d2ebdf756c3bb3b0bfe6ad2f73f1202}\label{classEventos_a9d2ebdf756c3bb3b0bfe6ad2f73f1202}} 
+\index{Eventos@{Eventos}!set\+End@{set\+End}}
+\index{set\+End@{set\+End}!Eventos@{Eventos}}
+\subsubsection{\texorpdfstring{set\+End()}{setEnd()}}
+{\footnotesize\ttfamily void Eventos\+::set\+End (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})}
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classEventos_afdf3e21f837f2a84c5d258383ada6c29}\label{classEventos_afdf3e21f837f2a84c5d258383ada6c29}} 
+\index{Eventos@{Eventos}!x\+\_\+final@{x\+\_\+final}}
+\index{x\+\_\+final@{x\+\_\+final}!Eventos@{Eventos}}
+\subsubsection{\texorpdfstring{x\+\_\+final}{x\_final}}
+{\footnotesize\ttfamily int Eventos\+::x\+\_\+final = 72$\ast$9\hspace{0.3cm}{\ttfamily [private]}}
+
+Coordenada do fim da fase \mbox{\Hypertarget{classEventos_aa09d32f02896554a3409d0093114cab1}\label{classEventos_aa09d32f02896554a3409d0093114cab1}} 
+\index{Eventos@{Eventos}!x\+\_\+inicial@{x\+\_\+inicial}}
+\index{x\+\_\+inicial@{x\+\_\+inicial}!Eventos@{Eventos}}
+\subsubsection{\texorpdfstring{x\+\_\+inicial}{x\_inicial}}
+{\footnotesize\ttfamily int Eventos\+::x\+\_\+inicial = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+Coordenada do inicio da fase \mbox{\Hypertarget{classEventos_a52967e28579a67b2fef4ed6d427a042d}\label{classEventos_a52967e28579a67b2fef4ed6d427a042d}} 
+\index{Eventos@{Eventos}!y\+\_\+final@{y\+\_\+final}}
+\index{y\+\_\+final@{y\+\_\+final}!Eventos@{Eventos}}
+\subsubsection{\texorpdfstring{y\+\_\+final}{y\_final}}
+{\footnotesize\ttfamily int Eventos\+::y\+\_\+final = 72$\ast$9\hspace{0.3cm}{\ttfamily [private]}}
+
+Coordenada do fim da fase \mbox{\Hypertarget{classEventos_a42c55facc39e42b7c816a06b3009e228}\label{classEventos_a42c55facc39e42b7c816a06b3009e228}} 
+\index{Eventos@{Eventos}!y\+\_\+inicial@{y\+\_\+inicial}}
+\index{y\+\_\+inicial@{y\+\_\+inicial}!Eventos@{Eventos}}
+\subsubsection{\texorpdfstring{y\+\_\+inicial}{y\_inicial}}
+{\footnotesize\ttfamily int Eventos\+::y\+\_\+inicial = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+Coordenada do inicio da fase 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\hyperlink{eventos_8h}{eventos.\+h}\item 
+src/\hyperlink{eventos_8cpp}{eventos.\+cpp}\end{DoxyCompactItemize}

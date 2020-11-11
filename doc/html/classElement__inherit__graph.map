@@ -1,0 +1,5 @@
+<map id="Element" name="Element">
+<area shape="rect" id="node2" href="$classCamera.html" title="{Camera\n|&#45; direcao\l&#45; alcance\l&#45; detectado\l&#45; avistado\l&#45; x_vis\l&#45; y_vis\l|+ Camera()\l+ get_direcao()\l+ get_alcance()\l+ get_detectado()\l+ get_avistado()\l+ get_x_vis()\l+ get_y_vis()\l+ set_avistado()\l+ set_x_vis()\l+ set_y_vis()\l+ set_detectado()\l}" alt="" coords="5,248,129,545"/>
+<area shape="rect" id="node3" href="$classPlayer.html" title="Classe Player. " alt="" coords="153,336,251,457"/>
+<area shape="rect" id="node4" href="$classPorta.html" title="{Porta\n|&#45; flag\l|+ Porta()\l+ get_flag()\l+ set_flag()\l}" alt="" coords="275,343,363,450"/>
+</map>

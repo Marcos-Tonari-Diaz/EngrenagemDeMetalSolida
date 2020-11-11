@@ -1,0 +1,216 @@
+\hypertarget{classController}{}\section{Controller Class Reference}
+\label{classController}\index{Controller@{Controller}}
+
+
+Classe para o controller.  
+
+
+
+
+{\ttfamily \#include $<$controller.\+h$>$}
+
+
+
+Collaboration diagram for Controller\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=178pt]{classController__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classController_a95c56822d667e94b031451729ce069a9}{Controller} ()
+\begin{DoxyCompactList}\small\item\em Construtor do \hyperlink{classController}{Controller}. \end{DoxyCompactList}\item 
+void \hyperlink{classController_a31ede2d3d9dba71913635bfe025b443d}{game\+Loop} ()
+\begin{DoxyCompactList}\small\item\em Loop principal. \end{DoxyCompactList}\item 
+void \hyperlink{classController_a18960c9e5f51f4844d51d27fb394ff85}{title\+Screen} ()
+\begin{DoxyCompactList}\small\item\em Tela Principal. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ \hyperlink{classViewer}{Viewer} $>$ \hyperlink{classController_a9a290ffa5eeaf96a42daa9a68dc501ff}{viewer}
+\item 
+std\+::shared\+\_\+ptr$<$ \hyperlink{classEventos}{Eventos} $>$ \hyperlink{classController_a4f7ee884b34086ac959074caeb3b5107}{event}
+\item 
+std\+::shared\+\_\+ptr$<$ \hyperlink{classMap}{Map} $>$ \hyperlink{classController_a48cd1eac2b8cf98947433f580aa72feb}{map}
+\item 
+std\+::shared\+\_\+ptr$<$ \hyperlink{classPlayer}{Player} $>$ \hyperlink{classController_a96a143b0a60e1429c60f5fae58326bb6}{player}
+\item 
+std\+::shared\+\_\+ptr$<$ \hyperlink{classcollisionController}{collision\+Controller} $>$ \hyperlink{classController_a94db10a8bbfe6ad62d893cb4589d48d1}{collisioncontroller}
+\item 
+std\+::shared\+\_\+ptr$<$ \hyperlink{classCamera__controller}{Camera\+\_\+controller} $>$ \hyperlink{classController_a0fff98a80ea67c6c500d4f06f0d11995}{cameracontroller}
+\item 
+std\+::shared\+\_\+ptr$<$ \hyperlink{classPorta__controller}{Porta\+\_\+controller} $>$ \hyperlink{classController_a0dbb09739500259753bd2340d54e031c}{portacontroller}
+\item 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \hyperlink{classCamera}{Camera} $>$ $>$ \hyperlink{classController_a44b8398dc1a926b7528e32288b9bb7cd}{camera\+Vec}
+\item 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \hyperlink{classPorta}{Porta} $>$ $>$ \hyperlink{classController_ab386b5e19c31282f0471e011b65393ae}{porta\+Vec}
+\item 
+const Uint8 $\ast$ \hyperlink{classController_a4e2c7234de84518990f047e5e3d2f35e}{state} = N\+U\+LL
+\item 
+bool \hyperlink{classController_aafde74afadbef3109d8af8c324f6cc44}{rodando} = true
+\item 
+S\+D\+L\+\_\+\+Event \hyperlink{classController_aff78b97e8a07364fd11317c50fb98f88}{evento}
+\item 
+int \hyperlink{classController_ace9ec6683586dc71ad011b5b364b353e}{porta\+Event\+Counter} = 0
+\item 
+int \hyperlink{classController_aa4a9bf69dacf847c848e14838838f272}{porta\+Go} = 0
+\item 
+int \hyperlink{classController_a1f75badb13e3132e0f390a8838c33ad5}{tile\+Size}
+\item 
+int \hyperlink{classController_afdb6115d8bbca2eb32d253e66ee0b105}{box\+Size}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Classe para o controller. 
+
+\hyperlink{classController}{Controller} Principal. Responsável pelo loop principal do jogo. Guarda ponteiros para todos os objetos. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classController_a95c56822d667e94b031451729ce069a9}\label{classController_a95c56822d667e94b031451729ce069a9}} 
+\index{Controller@{Controller}!Controller@{Controller}}
+\index{Controller@{Controller}!Controller@{Controller}}
+\subsubsection{\texorpdfstring{Controller()}{Controller()}}
+{\footnotesize\ttfamily Controller\+::\+Controller (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Construtor do \hyperlink{classController}{Controller}. 
+
+Aloca memória para os objetos principais. Configura objetos.
+
+\begin{DoxyReturn}{Returns}
+Nada (este é um construtor!) 
+\end{DoxyReturn}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classController_a31ede2d3d9dba71913635bfe025b443d}\label{classController_a31ede2d3d9dba71913635bfe025b443d}} 
+\index{Controller@{Controller}!game\+Loop@{game\+Loop}}
+\index{game\+Loop@{game\+Loop}!Controller@{Controller}}
+\subsubsection{\texorpdfstring{game\+Loop()}{gameLoop()}}
+{\footnotesize\ttfamily void Controller\+::game\+Loop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Loop principal. 
+
+Loop principal do jogo. Roda os controllers secundáros. \mbox{\Hypertarget{classController_a18960c9e5f51f4844d51d27fb394ff85}\label{classController_a18960c9e5f51f4844d51d27fb394ff85}} 
+\index{Controller@{Controller}!title\+Screen@{title\+Screen}}
+\index{title\+Screen@{title\+Screen}!Controller@{Controller}}
+\subsubsection{\texorpdfstring{title\+Screen()}{titleScreen()}}
+{\footnotesize\ttfamily void Controller\+::title\+Screen (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Tela Principal. 
+
+Renderiza a tela principal até que o jogador aperte espaço. 
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classController_afdb6115d8bbca2eb32d253e66ee0b105}\label{classController_afdb6115d8bbca2eb32d253e66ee0b105}} 
+\index{Controller@{Controller}!box\+Size@{box\+Size}}
+\index{box\+Size@{box\+Size}!Controller@{Controller}}
+\subsubsection{\texorpdfstring{box\+Size}{boxSize}}
+{\footnotesize\ttfamily int Controller\+::box\+Size\hspace{0.3cm}{\ttfamily [private]}}
+
+Tamanho do bounding box do Jogador \mbox{\Hypertarget{classController_a0fff98a80ea67c6c500d4f06f0d11995}\label{classController_a0fff98a80ea67c6c500d4f06f0d11995}} 
+\index{Controller@{Controller}!cameracontroller@{cameracontroller}}
+\index{cameracontroller@{cameracontroller}!Controller@{Controller}}
+\subsubsection{\texorpdfstring{cameracontroller}{cameracontroller}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$\hyperlink{classCamera__controller}{Camera\+\_\+controller}$>$ Controller\+::cameracontroller\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classController_a44b8398dc1a926b7528e32288b9bb7cd}\label{classController_a44b8398dc1a926b7528e32288b9bb7cd}} 
+\index{Controller@{Controller}!camera\+Vec@{camera\+Vec}}
+\index{camera\+Vec@{camera\+Vec}!Controller@{Controller}}
+\subsubsection{\texorpdfstring{camera\+Vec}{cameraVec}}
+{\footnotesize\ttfamily std\+::vector$<$std\+::shared\+\_\+ptr$<$\hyperlink{classCamera}{Camera}$>$ $>$ Controller\+::camera\+Vec\hspace{0.3cm}{\ttfamily [private]}}
+
+Guarda todas as cameras \mbox{\Hypertarget{classController_a94db10a8bbfe6ad62d893cb4589d48d1}\label{classController_a94db10a8bbfe6ad62d893cb4589d48d1}} 
+\index{Controller@{Controller}!collisioncontroller@{collisioncontroller}}
+\index{collisioncontroller@{collisioncontroller}!Controller@{Controller}}
+\subsubsection{\texorpdfstring{collisioncontroller}{collisioncontroller}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$\hyperlink{classcollisionController}{collision\+Controller}$>$ Controller\+::collisioncontroller\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classController_a4f7ee884b34086ac959074caeb3b5107}\label{classController_a4f7ee884b34086ac959074caeb3b5107}} 
+\index{Controller@{Controller}!event@{event}}
+\index{event@{event}!Controller@{Controller}}
+\subsubsection{\texorpdfstring{event}{event}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$\hyperlink{classEventos}{Eventos}$>$ Controller\+::event\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classController_aff78b97e8a07364fd11317c50fb98f88}\label{classController_aff78b97e8a07364fd11317c50fb98f88}} 
+\index{Controller@{Controller}!evento@{evento}}
+\index{evento@{evento}!Controller@{Controller}}
+\subsubsection{\texorpdfstring{evento}{evento}}
+{\footnotesize\ttfamily S\+D\+L\+\_\+\+Event Controller\+::evento\hspace{0.3cm}{\ttfamily [private]}}
+
+Usado para o controle de eventos \mbox{\Hypertarget{classController_a48cd1eac2b8cf98947433f580aa72feb}\label{classController_a48cd1eac2b8cf98947433f580aa72feb}} 
+\index{Controller@{Controller}!map@{map}}
+\index{map@{map}!Controller@{Controller}}
+\subsubsection{\texorpdfstring{map}{map}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$\hyperlink{classMap}{Map}$>$ Controller\+::map\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classController_a96a143b0a60e1429c60f5fae58326bb6}\label{classController_a96a143b0a60e1429c60f5fae58326bb6}} 
+\index{Controller@{Controller}!player@{player}}
+\index{player@{player}!Controller@{Controller}}
+\subsubsection{\texorpdfstring{player}{player}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$\hyperlink{classPlayer}{Player}$>$ Controller\+::player\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classController_a0dbb09739500259753bd2340d54e031c}\label{classController_a0dbb09739500259753bd2340d54e031c}} 
+\index{Controller@{Controller}!portacontroller@{portacontroller}}
+\index{portacontroller@{portacontroller}!Controller@{Controller}}
+\subsubsection{\texorpdfstring{portacontroller}{portacontroller}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$\hyperlink{classPorta__controller}{Porta\+\_\+controller}$>$ Controller\+::portacontroller\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classController_ace9ec6683586dc71ad011b5b364b353e}\label{classController_ace9ec6683586dc71ad011b5b364b353e}} 
+\index{Controller@{Controller}!porta\+Event\+Counter@{porta\+Event\+Counter}}
+\index{porta\+Event\+Counter@{porta\+Event\+Counter}!Controller@{Controller}}
+\subsubsection{\texorpdfstring{porta\+Event\+Counter}{portaEventCounter}}
+{\footnotesize\ttfamily int Controller\+::porta\+Event\+Counter = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classController_aa4a9bf69dacf847c848e14838838f272}\label{classController_aa4a9bf69dacf847c848e14838838f272}} 
+\index{Controller@{Controller}!porta\+Go@{porta\+Go}}
+\index{porta\+Go@{porta\+Go}!Controller@{Controller}}
+\subsubsection{\texorpdfstring{porta\+Go}{portaGo}}
+{\footnotesize\ttfamily int Controller\+::porta\+Go = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classController_ab386b5e19c31282f0471e011b65393ae}\label{classController_ab386b5e19c31282f0471e011b65393ae}} 
+\index{Controller@{Controller}!porta\+Vec@{porta\+Vec}}
+\index{porta\+Vec@{porta\+Vec}!Controller@{Controller}}
+\subsubsection{\texorpdfstring{porta\+Vec}{portaVec}}
+{\footnotesize\ttfamily std\+::vector$<$std\+::shared\+\_\+ptr$<$\hyperlink{classPorta}{Porta}$>$ $>$ Controller\+::porta\+Vec\hspace{0.3cm}{\ttfamily [private]}}
+
+Guarda todas as portas \mbox{\Hypertarget{classController_aafde74afadbef3109d8af8c324f6cc44}\label{classController_aafde74afadbef3109d8af8c324f6cc44}} 
+\index{Controller@{Controller}!rodando@{rodando}}
+\index{rodando@{rodando}!Controller@{Controller}}
+\subsubsection{\texorpdfstring{rodando}{rodando}}
+{\footnotesize\ttfamily bool Controller\+::rodando = true\hspace{0.3cm}{\ttfamily [private]}}
+
+Estado do teclado \mbox{\Hypertarget{classController_a4e2c7234de84518990f047e5e3d2f35e}\label{classController_a4e2c7234de84518990f047e5e3d2f35e}} 
+\index{Controller@{Controller}!state@{state}}
+\index{state@{state}!Controller@{Controller}}
+\subsubsection{\texorpdfstring{state}{state}}
+{\footnotesize\ttfamily const Uint8$\ast$ Controller\+::state = N\+U\+LL\hspace{0.3cm}{\ttfamily [private]}}
+
+Estado do teclado \mbox{\Hypertarget{classController_a1f75badb13e3132e0f390a8838c33ad5}\label{classController_a1f75badb13e3132e0f390a8838c33ad5}} 
+\index{Controller@{Controller}!tile\+Size@{tile\+Size}}
+\index{tile\+Size@{tile\+Size}!Controller@{Controller}}
+\subsubsection{\texorpdfstring{tile\+Size}{tileSize}}
+{\footnotesize\ttfamily int Controller\+::tile\+Size\hspace{0.3cm}{\ttfamily [private]}}
+
+Tamanho do lado do Tile \mbox{\Hypertarget{classController_a9a290ffa5eeaf96a42daa9a68dc501ff}\label{classController_a9a290ffa5eeaf96a42daa9a68dc501ff}} 
+\index{Controller@{Controller}!viewer@{viewer}}
+\index{viewer@{viewer}!Controller@{Controller}}
+\subsubsection{\texorpdfstring{viewer}{viewer}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$\hyperlink{classViewer}{Viewer}$>$ Controller\+::viewer\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\hyperlink{controller_8h}{controller.\+h}\item 
+src/\hyperlink{controller_8cpp}{controller.\+cpp}\end{DoxyCompactItemize}

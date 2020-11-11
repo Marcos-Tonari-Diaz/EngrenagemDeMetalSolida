@@ -12,6 +12,13 @@
 #include "porta_controller.h"
 #include "eventos.h"
 
+ /*! \brief Classe para o controller
+   *
+   *  Controller Principal.
+   *  Responsável pelo loop principal do jogo.
+   *  Guarda ponteiros para todos os objetos.
+   *  
+   */
 
 class Controller {
 	private:
@@ -24,28 +31,46 @@ class Controller {
 		std::shared_ptr<Camera_controller> cameracontroller;
 		std::shared_ptr<Porta_controller> portacontroller;
 
-		/* stores all cameras */
+		/*! Guarda todas as cameras */
 		std::vector<std::shared_ptr<Camera>> cameraVec;
-		/* stores all portas */
+		/*! Guarda todas as portas */
 		std::vector<std::shared_ptr<Porta>> portaVec;
 
+		/*! Estado do teclado */
   		const Uint8* state = NULL;
+		/*! Estado do teclado */
 		bool rodando = true;
-  		SDL_Event evento; // eventos discretos
+		/*! Usado para o controle de eventos */
+  		SDL_Event evento; 
 
 		// porta timer
 		int portaEventCounter = 0;
 		int portaGo = 0;
 
-		// sizes	
+		/*! Tamanho do lado do Tile */
 		int tileSize;
-		/* tile subdivision */
-		//int subdivisions = 1;
-		/* bounding box size = tilesize/subdivisions */
+		/*! Tamanho do bounding box do Jogador */
 		int boxSize;
 	public:
+	    /*! \brief Construtor do Controller
+     	*
+     	* Aloca memória para os objetos principais.
+     	* Configura objetos.
+		* 
+     	* \return Nada (este é um construtor!)
+     	* */
 		Controller();
-		/* main game loop */
+	    /*! \brief Loop principal
+     	*
+		* Loop principal do jogo.
+		* Roda os controllers secundáros.
+		*
+     	* */
 		void gameLoop();
+		/*! \brief Tela Principal
+     	*
+		* Renderiza a tela principal até que o jogador aperte espaço.
+		*
+     	* */
 		void titleScreen();
 };

@@ -1,0 +1,125 @@
+\hypertarget{classMap}{}\section{Map Class Reference}
+\label{classMap}\index{Map@{Map}}
+
+
+\hyperlink{classMap}{Map} Class.  
+
+
+
+
+{\ttfamily \#include $<$map.\+h$>$}
+
+
+
+Collaboration diagram for Map\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=166pt]{classMap__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classMap_af48de256cfde701cd70a17bce1c5b727}{load\+Map} (std\+::string map\+File)
+\begin{DoxyCompactList}\small\item\em loads the map \end{DoxyCompactList}\item 
+std\+::map$<$ std\+::pair$<$ int, int $>$, std\+::string $>$ \& \hyperlink{classMap_ac4b82fa93d76c5891fc18212cd3d9098}{get\+\_\+text\+Map} ()
+\item 
+int \hyperlink{classMap_afd34d12227676b3cebeed9f5fae2508f}{get\+Width} ()
+\item 
+int \hyperlink{classMap_a2b09c8875af2efb711fc3a022e70427d}{get\+Height} ()
+\item 
+void \hyperlink{classMap_a6d9c1f8a1f65316a7a65983ad7ea9ff4}{set\+Tile\+Size} (int size)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{classMap_a9ecfe932ad2d2bc22492416033bdacfd}{width}
+\item 
+int \hyperlink{classMap_a0546fef98caebe38385bb2e0c7a15da1}{height}
+\item 
+int \hyperlink{classMap_ae686445a21a02aaf586633c5a69e8ff3}{tile\+Size}
+\item 
+std\+::map$<$ std\+::pair$<$ int, int $>$, std\+::string $>$ \hyperlink{classMap_ae2bfd5c888983cc73be6d9a4c3ad1bcf}{text\+Map}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{classMap}{Map} Class. 
+
+Mapa é responsável por transformar um arquivo mapa em código em um dicionário (x,y) -\/$>$ textura 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classMap_ac4b82fa93d76c5891fc18212cd3d9098}\label{classMap_ac4b82fa93d76c5891fc18212cd3d9098}} 
+\index{Map@{Map}!get\+\_\+text\+Map@{get\+\_\+text\+Map}}
+\index{get\+\_\+text\+Map@{get\+\_\+text\+Map}!Map@{Map}}
+\subsubsection{\texorpdfstring{get\+\_\+text\+Map()}{get\_textMap()}}
+{\footnotesize\ttfamily std\+::map$<$ std\+::pair$<$ int, int $>$, std\+::string $>$ \& Map\+::get\+\_\+text\+Map (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Retorna o dicionário por referência \mbox{\Hypertarget{classMap_a2b09c8875af2efb711fc3a022e70427d}\label{classMap_a2b09c8875af2efb711fc3a022e70427d}} 
+\index{Map@{Map}!get\+Height@{get\+Height}}
+\index{get\+Height@{get\+Height}!Map@{Map}}
+\subsubsection{\texorpdfstring{get\+Height()}{getHeight()}}
+{\footnotesize\ttfamily int Map\+::get\+Height (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classMap_afd34d12227676b3cebeed9f5fae2508f}\label{classMap_afd34d12227676b3cebeed9f5fae2508f}} 
+\index{Map@{Map}!get\+Width@{get\+Width}}
+\index{get\+Width@{get\+Width}!Map@{Map}}
+\subsubsection{\texorpdfstring{get\+Width()}{getWidth()}}
+{\footnotesize\ttfamily int Map\+::get\+Width (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classMap_af48de256cfde701cd70a17bce1c5b727}\label{classMap_af48de256cfde701cd70a17bce1c5b727}} 
+\index{Map@{Map}!load\+Map@{load\+Map}}
+\index{load\+Map@{load\+Map}!Map@{Map}}
+\subsubsection{\texorpdfstring{load\+Map()}{loadMap()}}
+{\footnotesize\ttfamily void Map\+::load\+Map (\begin{DoxyParamCaption}\item[{std\+::string}]{map\+File }\end{DoxyParamCaption})}
+
+
+
+loads the map 
+
+Carrega o mapa e o transforma num dicionário 
+\begin{DoxyParams}{Parameters}
+{\em map\+File} & file (.map) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classMap_a6d9c1f8a1f65316a7a65983ad7ea9ff4}\label{classMap_a6d9c1f8a1f65316a7a65983ad7ea9ff4}} 
+\index{Map@{Map}!set\+Tile\+Size@{set\+Tile\+Size}}
+\index{set\+Tile\+Size@{set\+Tile\+Size}!Map@{Map}}
+\subsubsection{\texorpdfstring{set\+Tile\+Size()}{setTileSize()}}
+{\footnotesize\ttfamily void Map\+::set\+Tile\+Size (\begin{DoxyParamCaption}\item[{int}]{size }\end{DoxyParamCaption})}
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classMap_a0546fef98caebe38385bb2e0c7a15da1}\label{classMap_a0546fef98caebe38385bb2e0c7a15da1}} 
+\index{Map@{Map}!height@{height}}
+\index{height@{height}!Map@{Map}}
+\subsubsection{\texorpdfstring{height}{height}}
+{\footnotesize\ttfamily int Map\+::height\hspace{0.3cm}{\ttfamily [private]}}
+
+map height \mbox{\Hypertarget{classMap_ae2bfd5c888983cc73be6d9a4c3ad1bcf}\label{classMap_ae2bfd5c888983cc73be6d9a4c3ad1bcf}} 
+\index{Map@{Map}!text\+Map@{text\+Map}}
+\index{text\+Map@{text\+Map}!Map@{Map}}
+\subsubsection{\texorpdfstring{text\+Map}{textMap}}
+{\footnotesize\ttfamily std\+::map$<$std\+::pair$<$int, int$>$, std\+::string$>$ Map\+::text\+Map\hspace{0.3cm}{\ttfamily [private]}}
+
+Mapa (x,y)-\/$>$ texture\+File \mbox{\Hypertarget{classMap_ae686445a21a02aaf586633c5a69e8ff3}\label{classMap_ae686445a21a02aaf586633c5a69e8ff3}} 
+\index{Map@{Map}!tile\+Size@{tile\+Size}}
+\index{tile\+Size@{tile\+Size}!Map@{Map}}
+\subsubsection{\texorpdfstring{tile\+Size}{tileSize}}
+{\footnotesize\ttfamily int Map\+::tile\+Size\hspace{0.3cm}{\ttfamily [private]}}
+
+size of 1 side of tile (always a square) \mbox{\Hypertarget{classMap_a9ecfe932ad2d2bc22492416033bdacfd}\label{classMap_a9ecfe932ad2d2bc22492416033bdacfd}} 
+\index{Map@{Map}!width@{width}}
+\index{width@{width}!Map@{Map}}
+\subsubsection{\texorpdfstring{width}{width}}
+{\footnotesize\ttfamily int Map\+::width\hspace{0.3cm}{\ttfamily [private]}}
+
+map width 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\hyperlink{map_8h}{map.\+h}\item 
+src/\hyperlink{map_8cpp}{map.\+cpp}\end{DoxyCompactItemize}

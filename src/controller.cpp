@@ -20,7 +20,6 @@ event(new Eventos())
 	cameracontroller->setTileSize(tileSize);
 	cameracontroller->setBoundBoxSize(boxSize);
 
-
 	// configure keyboard state
   	state = SDL_GetKeyboardState(nullptr); 
 	collisioncontroller->set_state(state);

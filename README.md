@@ -12,6 +12,8 @@
 8. Aperte Espaço para jogar!
 9. Ler a documentacao (dentro de build: firefox html/index.html)
 
+OBS: tecla a abre portas
+
 ### Gerador de Mapas
 Na pasta assets/maps podemos criar novos mapas em codigo.
 

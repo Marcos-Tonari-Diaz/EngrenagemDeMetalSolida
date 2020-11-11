@@ -5,14 +5,29 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
+ /*! \brief Classe base de Elementos
+   *
+   *  Classe base de Elementos.
+   *  Outros elementos herdam dessa classe.
+   *  
+   */
+
 class Element{
     protected:
-        /* rectangle yo copy texture into */
+        /*! Retangulo: posicao (x,y) e tamanho (w,h) */
         SDL_Rect textRect;
-        /* size of bounding boz size = textRect wodth*/
-	int boxSize;
+		/*! Tamanho do bounding box do Jogador */
+	    int boxSize;
     public:
+        /*! \brief Construtor do Elemento
+        * default
+     	* */
         Element() = default;
+        /*! \brief Construtor do Elemento
+        * Overloaded: define posição.
+        * \param x coordenada x
+        * \param y coordenada y
+     	* */
         Element(int x, int y);
         int getX();
         int getY();

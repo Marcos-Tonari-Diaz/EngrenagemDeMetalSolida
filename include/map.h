@@ -12,30 +12,30 @@
 
 /*! \brief Map Class
 *
-*  Map is responsible for mapping a code map to a texture map (to use as backgroud)
-*  It's representation is also used in collision detection
+*  Mapa é responsável por transformar um arquivo mapa em código em um dicionário (x,y) -> textura
 *
 */
 
 class Map{
 	private:
-		/* map width */
+		/*! map width */
 		int width;
-		/* map height */
+		/*! map height */
 		int height;
-		/* size of 1 side of tile (always a square)*/
+		/*! size of 1 side of tile (always a square)*/
 		int tileSize;
-		/* Texture Coordinates (x,y)-> textureFile*/
+		/*! Mapa (x,y)-> textureFile*/
 		std::map<std::pair<int, int>, std::string> textMap;
 
 	public:
 		/*! \brief loads the map 
 		*
-		* Loads the bytemap and saves it into mapArray
-		* \param map file (.map)
+		* Carrega o mapa e o transforma num dicionário
+		* \param mapFile file (.map)
 		*
 		* */
 		void loadMap(std::string mapFile);
+		/*! Retorna o dicionário por referência */
 		std::map<std::pair<int, int>, std::string>& get_textMap();
 		int getWidth();
 		int getHeight();

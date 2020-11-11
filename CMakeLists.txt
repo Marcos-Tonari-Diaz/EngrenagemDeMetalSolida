@@ -11,8 +11,8 @@ add_executable(EngrenagemDeMetalSolida src/main.cpp)
 # Especificar onde estao os header files
 include_directories(include)
 
-add_library(controller	src/controller.cpp)
-target_link_libraries(controller viewer map controller element player collisionController camera camera_controller eventos porta porta_controller SDL2 SDL2_image)
+add_library(controller src/controller.cpp)
+target_link_libraries(controller viewer map element player collisionController camera camera_controller eventos porta porta_controller SDL2 SDL2_image)
 
 # Bibliotecas locais (estaticas)
 add_library(viewer src/viewer.cpp)

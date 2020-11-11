@@ -1,0 +1,20 @@
+var searchData=
+[
+  ['gameloop',['gameLoop',['../classController.html#a31ede2d3d9dba71913635bfe025b443d',1,'Controller']]],
+  ['get_5falcance',['get_alcance',['../classCamera.html#a4603e48179e827b04679fce1f485dde1',1,'Camera']]],
+  ['get_5favistado',['get_avistado',['../classCamera.html#a9a87643bf6bde3ca94b8f51f66e85574',1,'Camera']]],
+  ['get_5fdetectado',['get_detectado',['../classCamera.html#a3b6202883eadc2e3b94f4cd1a2929111',1,'Camera']]],
+  ['get_5fdirecao',['get_direcao',['../classCamera.html#afd13cc91a3ce9a4d4d6b6dbb622ce7a4',1,'Camera']]],
+  ['get_5fflag',['get_flag',['../classPorta.html#ae2c04fc5bf8ddce2195252c526f653b8',1,'Porta']]],
+  ['get_5ftextmap',['get_textMap',['../classMap.html#ac4b82fa93d76c5891fc18212cd3d9098',1,'Map']]],
+  ['get_5fx_5fvis',['get_x_vis',['../classCamera.html#a7b38e3e530865054f4425add99421f96',1,'Camera']]],
+  ['get_5fy_5fvis',['get_y_vis',['../classCamera.html#ad4ed7f3d1e12fc637ae8bbe9fad08430',1,'Camera']]],
+  ['getboxsize',['getBoxSize',['../classElement.html#a9bb602a1a56055ea4b360b1a5486ff24',1,'Element']]],
+  ['getcollisionmap',['getCollisionMap',['../classcollisionController.html#adcba90a401d69ebeb270ae0b92b9c335',1,'collisionController']]],
+  ['getframe',['getFrame',['../classPlayer.html#a73374c899105e2ba7fab9340d279e3a0',1,'Player']]],
+  ['getheight',['getHeight',['../classMap.html#a2b09c8875af2efb711fc3a022e70427d',1,'Map']]],
+  ['getrect',['getRect',['../classElement.html#ac8e7a2a1670e95335b6924b873600ea3',1,'Element']]],
+  ['getwidth',['getWidth',['../classMap.html#afd34d12227676b3cebeed9f5fae2508f',1,'Map']]],
+  ['getx',['getX',['../classElement.html#ab5e2530eac11f0281769e6689856ceb2',1,'Element']]],
+  ['gety',['getY',['../classElement.html#aad10853bfba140e4ca5cab79d72f2d83',1,'Element']]]
+];
