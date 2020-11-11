@@ -32,10 +32,14 @@ class Controller {
 		bool rodando = true;
   		SDL_Event evento; // eventos discretos
 
+		// porta timer
+		int portaEventCounter = 0;
+		int portaGo = 0;
+
 		// sizes	
 		int tileSize;
 		/* tile subdivision */
-		int subdivisions = 1;
+		//int subdivisions = 1;
 		/* bounding box size = tilesize/subdivisions */
 		int boxSize;
 	public:

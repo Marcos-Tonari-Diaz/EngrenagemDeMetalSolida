@@ -141,17 +141,6 @@ void Viewer::render(Player& player){
 	// Player
 	// make sure the texture is rendered above the bounding box
 	SDL_RenderCopy(renderer, std::get<0>(textDict["player"]), playerSprites[player.getFrame()], (player.getRect()));
-	//player.incrementFrame();
-	// debbug
-	//SDL_RenderCopy(renderer, std::get<0>(textDict["player"]), nullptr, (player.getRect()));
-	/*
-  SDL_Rect test;
-  test.x = 3*72;
-  test.y = 3*72;
-  test.w = 72;
-  test.h = 72;
-  SDL_RenderCopy(renderer, doorTiles, nullptr, &test);
-  */
 	SDL_RenderPresent(renderer);
 	return;
 }

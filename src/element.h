@@ -7,9 +7,9 @@
 
 class Element{
     protected:
-	/* rectangle yo copy texture into */
-	SDL_Rect textRect;
-	/* size of bounding boz size = textRect wodth*/
+        /* rectangle yo copy texture into */
+        SDL_Rect textRect;
+        /* size of bounding boz size = textRect wodth*/
 	int boxSize;
     public:
         Element() = default;

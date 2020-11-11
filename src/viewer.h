@@ -41,8 +41,7 @@ class Viewer{
 		std::map<std::string, std::pair<SDL_Texture*, SDL_Rect*>> textDict;
 
 		// Reference to Texture Map
-		std::map<std::pair<int, int>, std::string> textMap ;
-
+		std::map<std::pair<int, int>, std::string> textMap;
 
 		// Size of tile sides (tiles are squares)
 		// OBS: tileRec.w is global tilesize

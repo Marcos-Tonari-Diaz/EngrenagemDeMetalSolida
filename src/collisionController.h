@@ -25,6 +25,7 @@ class collisionController{
 		void set_map(std::shared_ptr<Map> map);
 		void set_boundBoxSize(int size);
 		void set_tileSize(int size);
+		int** getCollisionMap();
 };
 
 #endif

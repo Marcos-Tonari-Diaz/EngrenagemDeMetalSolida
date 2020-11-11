@@ -3,7 +3,7 @@
 void collisionController::makeCollisionMap(){
 	// protection
 	if (map->getHeight()==0 && map->getWidth()==0) return;
-	// allocate collisionmap
+	// allocate collisionmap[y][x]
 	collisionMap = new int*[map->getHeight()];
 	for (int i=0; i < map->getHeight(); i++){
 		collisionMap[i] = new int[map->getWidth()];
@@ -56,20 +56,16 @@ void collisionController::move(Player& obj){
 	int x_mov_lmt = x_mov + boundBoxSize;
 	int y_mov_lmt = y_mov + boundBoxSize;
 	if ((x_mov_lmt> (map->getWidth()*tileSize)) || (y_mov_lmt>(map->getHeight()*tileSize))) return;
-	//std::cout << x_mov << ", " << y_mov << ", "<< x_mov_lmt << ", " << y_mov_lmt << std::endl;
-
-	// if all corners are in free tiles, update element's position
-	// obs: collisionMap is (y,x) (height, width)
-	//if (x_mov >= 0 && y_mov >= 0 && x_mov_lmt < map->getWidth() && y_mov_lmt < map->getHeight()){
+		// if all corners are in free tiles, update element's position
+		// obs: collisionMap is (y,x) (height, width)
 		if(
-		  ((collisionMap[(y_mov+1)/tileSize][(x_mov+1)/tileSize]==1)
-		&& (collisionMap[(y_mov_lmt-1)/tileSize][(x_mov+1)/tileSize]==1)	
-		&& (collisionMap[(y_mov_lmt-1)/tileSize][(x_mov_lmt-1)/tileSize]==1)	
-		&& (collisionMap[(y_mov+1)/tileSize][(x_mov_lmt-1)/tileSize]==1))
+		  ((collisionMap[(y_mov+2)/tileSize][(x_mov+2)/tileSize]==1)
+		&& (collisionMap[(y_mov_lmt-2)/tileSize][(x_mov+2)/tileSize]==1)	
+		&& (collisionMap[(y_mov_lmt-2)/tileSize][(x_mov_lmt-2)/tileSize]==1)	
+		&& (collisionMap[(y_mov+2)/tileSize][(x_mov_lmt-2)/tileSize]==1))
 		){
 			obj.setPosition(x_mov, y_mov);	
 		}
-	//}
 	// tests for element collision
 }
 
@@ -91,3 +87,5 @@ void collisionController::set_map(std::shared_ptr<Map> map){
 	this->map = map;
 	makeCollisionMap();
 }
+
+int** collisionController::getCollisionMap(){return collisionMap;}
