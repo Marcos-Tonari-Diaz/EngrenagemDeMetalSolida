@@ -10,7 +10,11 @@
 #include "player.h"
 #include "camera.h"
 
-
+/*! \brief Classe para o objeto Viewer.
+*	
+* Viewer é responsável por renderizar a tela de jogo.
+*
+*/
 class Viewer{
 	public:
 		SDL_Window* window;
@@ -78,8 +82,6 @@ class Viewer{
 		// OBS: tileRec.w is global tilesize
 		/*! Retangulo alvo para texturas do fundo (bg) */
 		SDL_Rect tileRect;
-		/*! Variaveis para guardar e verificar eventos */
-		SDL_Event evento;
 		int tileSize = 72;
 
 		/*! Tamanho da tela */

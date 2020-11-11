@@ -10,7 +10,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
-/*! \brief Map Class
+/*! \brief Classe Mapa
 *
 *  Mapa é responsável por transformar um arquivo mapa em código em um dicionário (x,y) -> textura
 *

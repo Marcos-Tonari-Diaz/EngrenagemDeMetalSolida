@@ -8,26 +8,35 @@
 #include "camera.h"
 #include <math.h>
 
+
+/*! \brief Classe para o objeto Eventos.
+*	Objeto que realiza a checagem de eventos durante o jogo.
+*
+*  Classe com variáveis internas de localização e métodos de checagem e finalização do jogo.
+*/
 class Eventos {
 	private:
-	    /*! Coordenada do fim da fase */
-		int x_final = 72*9;
-		/*! Coordenada do fim da fase */
-		int y_final = 72*9;
-		/*! Coordenada do inicio da fase */
-		int x_inicial = 0;
-		/*! Coordenada do inicio da fase */
-		int y_inicial = 0;
+		int x_final = 72*9; /*!< x_final (Coordenada x da posição alvo do jogador para o final do jogo) */
+		int y_final = 72*9; /*!< y_final (Coordenada y da posição alvo do jogador para o final do jogo) */
+		int x_inicial = 0; /*!< x_inicial (Coordenada x da posição inicial do jogador) */
+		int y_inicial = 0; /*!< y_inicial (Coordenada y da posição inicial do jogador) */
 	public:
-		/*! \brief Checagem de camera e fim de fase
-     	*  Checar se alguma camera detectou o jogador ou se o jogador chegou no fim da fase.
-		* \param jogador Jogador
-		* \param camera Camera
-		* \param tilesize Tamanho da textura
-		* \param boundingbox Bounding box do jogador
-     	* */
-		int checagem(Player& jogador, Camera& camera, int tilesize, int boundingbox);
+		/*! \brief Função que detecta a ocorrência de eventos.
+		*	Eventos são ocorrências que exigem uma mudança no estado do jogo.
+		*
+		* \param jogador Jogador analisado em questão
+		* \param cameras Vetor de todas as cameras presentes no mapa
+		* \param tilesize Tamanho do tile usado no mapa
+		* \param boundingbox Tamanho da caixa de colisão do jogador
+		*/
+		int checagem(Player& jogador, Camera& cameras, int tilesize, int boundingbox);
+		/*! \brief Função que inicializa as coordenadas finais do jogo.
+		*
+		* \param x Coordenada x final do mapa
+		* \param y Coordenada y final do mapa
+		*/
 		void setEnd(int x, int y);
+		//void reset(Player& jogador, std::vector<std::shared_ptr<Porta>>& portas, std::vector<std::shared_ptr<Camera>>& cameras, Map& mapa, int** collisionMap, Porta_controller& portacontroller);
 };
 
 #endif
