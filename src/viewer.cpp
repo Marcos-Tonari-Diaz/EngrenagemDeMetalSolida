@@ -10,7 +10,7 @@ Viewer::Viewer(){
 
 	  // Criando uma janela
 	  window = nullptr;
-	  window = SDL_CreateWindow("ENGRENAGEM DE METAL SOLIDA",
+	  window = SDL_CreateWindow("METAL GEAR LITE",
 	      SDL_WINDOWPOS_UNDEFINED,
 	      SDL_WINDOWPOS_UNDEFINED,
 	      SCREEN_WIDTH,
@@ -43,6 +43,16 @@ Viewer::Viewer(){
   mainTitle = IMG_LoadTexture(renderer, "../assets/main.png");
   exclamationText = IMG_LoadTexture(renderer, "../assets/exclamation.png");
   heliportText = IMG_LoadTexture(renderer, "../assets/heliport.png");
+
+  camera_cimaTile = IMG_LoadTexture(renderer, "../assets/camera2.0/cameraCima.png");
+  camera_cima_direitaTile = IMG_LoadTexture(renderer, "../assets/camera2.0/cameraCimaDir.png");
+  camera_cima_esquerdaTile = IMG_LoadTexture(renderer, "../assets/camera2.0/cameraCimaEsq.png");
+  camera_baixoTile = IMG_LoadTexture(renderer, "../assets/camera2.0/cameraBaixo.png");
+  camera_baixo_direitaTile = IMG_LoadTexture(renderer, "../assets/camera2.0/cameraBaixoDir.png");
+  camera_baixo_esquerdaTile = IMG_LoadTexture(renderer, "../assets/camera2.0/cameraBaixoEsq.pngg");
+  camera_direitaTile = IMG_LoadTexture(renderer, "../assets/camera2.0/cameraDireita.png");
+  camera_esquerdaTile = IMG_LoadTexture(renderer, "../assets/camera2.0/cameraEsquerda.png");
+
 
 
   // Set clipping rectangles
@@ -104,14 +114,14 @@ Viewer::Viewer(){
   textDict.insert(std::make_pair("porta_fechada", std::make_pair(doorTiles, &portaFechadaRect)));
   textDict.insert(std::make_pair("porta_aberta", std::make_pair(doorTiles, &portaAbertaRect)));
 
-  textDict.insert(std::make_pair("camera_cima", std::make_pair(testTile, nullptr)));
-  textDict.insert(std::make_pair("camera_cima_direita", std::make_pair(testTile, nullptr)));
-  textDict.insert(std::make_pair("camera_cima_esquerda", std::make_pair(testTile, nullptr)));
-  textDict.insert(std::make_pair("camera_baixo", std::make_pair(testTile, nullptr)));
-  textDict.insert(std::make_pair("camera_baixo_direita", std::make_pair(testTile, nullptr)));
-  textDict.insert(std::make_pair("camera_baixo_esquerda", std::make_pair(testTile, nullptr)));
-  textDict.insert(std::make_pair("camera_direita", std::make_pair(testTile, nullptr)));
-  textDict.insert(std::make_pair("camera_esquerda", std::make_pair(testTile, nullptr)));
+  textDict.insert(std::make_pair("camera_cima", std::make_pair(camera_cimaTile, nullptr)));
+  textDict.insert(std::make_pair("camera_cima_direita", std::make_pair(camera_cima_direitaTile, nullptr)));
+  textDict.insert(std::make_pair("camera_cima_esquerda", std::make_pair(camera_cima_esquerdaTile, nullptr)));
+  textDict.insert(std::make_pair("camera_baixo", std::make_pair(camera_baixoTile, nullptr)));
+  textDict.insert(std::make_pair("camera_baixo_direita", std::make_pair(camera_baixo_direitaTile, nullptr)));
+  textDict.insert(std::make_pair("camera_baixo_esquerda", std::make_pair(camera_baixo_esquerdaTile, nullptr)));
+  textDict.insert(std::make_pair("camera_direita", std::make_pair(camera_direitaTile, nullptr)));
+  textDict.insert(std::make_pair("camera_esquerda", std::make_pair(camera_esquerdaTile, nullptr)));
 
   // Load Player Texture
   textDict.insert(std::make_pair("player", std::make_pair(playerSheet, nullptr)));
@@ -129,7 +139,19 @@ void Viewer::render(Player& player){
 		tileRect.y = std::get<1>(it->first)*tileRect.w;
 		// render texture inside tileRect
 		// texture overlays: render on top of base texture
-		if (it->second == "porta_aberta" || it->second == "porta_fechada" || it->second == "end"){
+		if (
+    it->second == "porta_aberta" 
+    || it->second == "porta_fechada" 
+    || it->second == "camera_cima"
+    || it->second == "camera_cima_direita"
+    || it->second == "camera_cima_esquerda"
+    || it->second == "camera_baixo"
+    || it->second == "camera_baixo_direita"
+    || it->second == "camera_baixo_esquerda"
+    || it->second == "camera_direita"
+    || it->second == "camera_esquerda"
+    || it->second == "end"
+    ){
 			SDL_RenderCopy(renderer, std::get<0>(textDict["corridor"]), &corridorRect, &tileRect);
 			SDL_RenderCopy(renderer, std::get<0>(textDict[it->second]), std::get<1>(textDict[it->second]), &tileRect);
 		}
@@ -159,6 +181,15 @@ Viewer::~Viewer(){
 	SDL_DestroyTexture(testTile);
 	SDL_DestroyTexture(playerSheet);
 	SDL_DestroyTexture(heliportText);
+
+ 	SDL_DestroyTexture(camera_cimaTile);
+ 	SDL_DestroyTexture(camera_cima_direitaTile);
+ 	SDL_DestroyTexture(camera_cima_esquerdaTile);
+  SDL_DestroyTexture(camera_baixoTile);
+ 	SDL_DestroyTexture(camera_baixo_direitaTile);
+ 	SDL_DestroyTexture(camera_baixo_esquerdaTile);
+ 	SDL_DestroyTexture(camera_direitaTile);
+ 	SDL_DestroyTexture(camera_esquerdaTile);
 
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);

@@ -27,6 +27,16 @@ class Viewer{
 		/*! TileSheet */
 		SDL_Texture* heliportText;
 
+		SDL_Texture* camera_cimaTile;
+		SDL_Texture* camera_cima_direitaTile;
+		SDL_Texture* camera_cima_esquerdaTile;
+		SDL_Texture* camera_baixoTile;
+		SDL_Texture* camera_baixo_direitaTile;
+		SDL_Texture* camera_baixo_esquerdaTile;
+		SDL_Texture* camera_direitaTile;
+		SDL_Texture* camera_esquerdaTile;
+
+
 		/*! Player Animation Sprites Rectangles */
 		std::vector<SDL_Rect*> playerSprites;
 
