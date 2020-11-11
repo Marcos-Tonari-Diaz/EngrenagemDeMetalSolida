@@ -20,21 +20,25 @@ void Map::loadMap(std::string mapFile){
 	height = mapArray.size();
 
 	// wall
-  	textTable.insert(std::make_pair(0, "wall"));
+  	textTable.insert(std::make_pair('0', "wall"));
 	// corridor
-  	textTable.insert(std::make_pair(1, "corridor"));
+  	textTable.insert(std::make_pair('1', "corridor"));
 	// porta fechada 
-  	textTable.insert(std::make_pair(2, "porta_fechada"));
+  	textTable.insert(std::make_pair('2', "porta_fechada"));
   	// porta aberta
-  	textTable.insert(std::make_pair(3, "porta_aberta"));
+  	textTable.insert(std::make_pair('3', "porta_aberta"));
   	// camera cima
-  	textTable.insert(std::make_pair(4, "camera_cima"));
+  	textTable.insert(std::make_pair('4', "camera_cima"));
   	// camera baixo
-  	textTable.insert(std::make_pair(5, "camera_baixo"));
+  	textTable.insert(std::make_pair('5', "camera_baixo"));
   	// camera direita
-  	textTable.insert(std::make_pair(6, "camera_direita"));
+  	textTable.insert(std::make_pair('6', "camera_direita"));
   	// camera esquerda
-  	textTable.insert(std::make_pair(7, "camera_esquerda"));
+  	textTable.insert(std::make_pair('7', "camera_esquerda"));
+	// end tile ('E')
+	textTable.insert(std::make_pair('E', "end"));
+
+	/*
   	// camera cima direita
   	textTable.insert(std::make_pair(8, "camera_cima_direita"));
   	// camera cima esquerda
@@ -43,12 +47,12 @@ void Map::loadMap(std::string mapFile){
   	textTable.insert(std::make_pair(10, "camera_baixo_direita"));
   	// camera baixo esquerda
   	textTable.insert(std::make_pair(11, "camera_baixo_esquerda"));
-
+	*/
 	//parses the map, flling the texture map
 	for (int i=0; i < height; i++){
 		for (int j=0; j < width; j++){
 			// map has SDL style coordinates (x,y)
-			textMap.insert(std::make_pair(std::make_pair(j,i), textTable[mapArray[i][j]-'0']));
+			textMap.insert(std::make_pair(std::make_pair(j,i), textTable[mapArray[i][j]]));
 		}
 	}
 }

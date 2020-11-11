@@ -8,6 +8,8 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include "player.h"
+#include "camera.h"
+
 
 class Viewer{
 	public:
@@ -19,6 +21,7 @@ class Viewer{
 		SDL_Texture* doorTiles;
 		SDL_Texture* testTile;
 		SDL_Texture* playerSheet;
+		SDL_Texture* heliportText;
 
 		// Player Animation Sprites Rectangles
 		std::vector<SDL_Rect*> playerSprites;
@@ -39,10 +42,12 @@ class Viewer{
 
 		// Texture Dictionary
 		std::map<std::string, std::pair<SDL_Texture*, SDL_Rect*>> textDict;
+		SDL_Texture* mainTitle;
+		SDL_Texture* exclamationText;
+
 
 		// Reference to Texture Map
-		std::map<std::pair<int, int>, std::string> textMap ;
-
+		std::map<std::pair<int, int>, std::string> textMap;
 
 		// Size of tile sides (tiles are squares)
 		// OBS: tileRec.w is global tilesize
@@ -60,6 +65,8 @@ class Viewer{
 		Viewer();
 		~Viewer();
 		void render(Player& player);
+		void renderMain();
+		void renderExclamation(Camera& cam);
 		void updateMap(std::map<std::pair<int, int>, std::string>& textMap);
 };
 

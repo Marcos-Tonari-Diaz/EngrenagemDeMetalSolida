@@ -7,8 +7,7 @@ Camera::Camera(int direcao, int alcance, int x, int y) {
 	this->detectado = 0;
 	this->x_vis = x;
 	this->y_vis = y;
-	textRect.x = x;
-	textRect.y = y;
+	setPosition(x,y);
 }
 
 int Camera::get_direcao() {

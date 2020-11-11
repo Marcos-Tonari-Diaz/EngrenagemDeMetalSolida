@@ -4,35 +4,21 @@
 #include <vector>
 #include "eventos.h"
 #include "player.h"
-#include "porta.h"
 #include "camera.h"
 
-void Eventos::reset(Player& jogador, std::vector<std::shared_ptr<Porta>>& portas, std::vector<std::shared_ptr<Camera>>& cameras) {
-	int tam_cam = cameras.size();
-	int tam_por = portas.size();
-	for(int i = 0; i < tam_cam; i++) {
-		(*cameras[i]).set_detectado(0);
-	}
-	for(int i = 0; i < tam_por; i++) {
-		(*portas[i]).set_flag(0);
-	}
-	jogador.setPosition(x_inicial, y_inicial);
-}
-
-int Eventos::checagem(Player& jogador, std::vector<std::shared_ptr<Porta>>& portas, std::vector<std::shared_ptr<Camera>>& cameras) {
+int Eventos::checagem(Player& jogador, Camera& camera, int tilesize, int boundingbox) {
 	int delta_x; int delta_y;
-	int tam_cam = cameras.size();
-	for(int i = 0; i < tam_cam; i++) {
-		if((*cameras[i]).get_detectado() == 1) {
-			reset(jogador, portas, cameras);
-			return 2;
-		}
-	}
-	delta_x = fabs(x_final - (jogador.getX()));
-	delta_y = fabs(y_final - (jogador.getY()));
-	if(delta_x <= 3 && delta_y <= 3) {
-		reset(jogador, portas, cameras);
+	if(camera.get_avistado() == 1) 
+		return 2;
+	delta_x = fabs((x_final + tilesize/2) - (jogador.getX() + boundingbox/2));
+	delta_y = fabs((y_final + tilesize/2) - (jogador.getY() + boundingbox/2));
+	if(delta_x <= tilesize/4 && delta_y <= tilesize/4) {
 		return 0;
 	}
 	return 1;
+}
+
+void Eventos::setEnd(int x, int y){
+	x_final = x;
+	y_final = y;
 }

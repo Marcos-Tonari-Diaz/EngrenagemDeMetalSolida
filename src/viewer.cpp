@@ -40,6 +40,10 @@ Viewer::Viewer(){
   doorTiles = IMG_LoadTexture(renderer, "../assets/custom/doorVert.png");
   playerSheet = IMG_LoadTexture(renderer, "../assets/mg2/snakeSprites.png");
   testTile = IMG_LoadTexture(renderer, "../assets/test/testPlayer.png");
+  mainTitle = IMG_LoadTexture(renderer, "../assets/main.png");
+  exclamationText = IMG_LoadTexture(renderer, "../assets/exclamation.png");
+  heliportText = IMG_LoadTexture(renderer, "../assets/heliport.png");
+
 
   // Set clipping rectangles
   corridorRect.w = tileSize;
@@ -95,6 +99,7 @@ Viewer::Viewer(){
   // Map Tileset (name) -> (tilesheet, src_rect)
   textDict.insert(std::make_pair("wall", std::make_pair(bgTiles, &wallRect)));
   textDict.insert(std::make_pair("corridor", std::make_pair(bgTiles, &corridorRect)));
+  textDict.insert(std::make_pair("end", std::make_pair(heliportText, nullptr)));
 
   textDict.insert(std::make_pair("porta_fechada", std::make_pair(doorTiles, &portaFechadaRect)));
   textDict.insert(std::make_pair("porta_aberta", std::make_pair(doorTiles, &portaAbertaRect)));
@@ -102,7 +107,7 @@ Viewer::Viewer(){
   textDict.insert(std::make_pair("camera_cima", std::make_pair(testTile, nullptr)));
   textDict.insert(std::make_pair("camera_cima_direita", std::make_pair(testTile, nullptr)));
   textDict.insert(std::make_pair("camera_cima_esquerda", std::make_pair(testTile, nullptr)));
-  textDict.insert(std::make_pair("camera_baixo", std::make_pair(testTile, &wallRect)));
+  textDict.insert(std::make_pair("camera_baixo", std::make_pair(testTile, nullptr)));
   textDict.insert(std::make_pair("camera_baixo_direita", std::make_pair(testTile, nullptr)));
   textDict.insert(std::make_pair("camera_baixo_esquerda", std::make_pair(testTile, nullptr)));
   textDict.insert(std::make_pair("camera_direita", std::make_pair(testTile, nullptr)));
@@ -110,11 +115,6 @@ Viewer::Viewer(){
 
   // Load Player Texture
   textDict.insert(std::make_pair("player", std::make_pair(playerSheet, nullptr)));
-
-
-  //debbug
-  //textDict.insert(std::make_pair("player", std::make_pair(IMG_LoadTexture(renderer, "../assets/test/testPlayer.png"), nullptr)));
-	
 
 }
 
@@ -129,7 +129,7 @@ void Viewer::render(Player& player){
 		tileRect.y = std::get<1>(it->first)*tileRect.w;
 		// render texture inside tileRect
 		// texture overlays: render on top of base texture
-		if (it->second == "porta_aberta" || it->second == "porta_fechada"){
+		if (it->second == "porta_aberta" || it->second == "porta_fechada" || it->second == "end"){
 			SDL_RenderCopy(renderer, std::get<0>(textDict["corridor"]), &corridorRect, &tileRect);
 			SDL_RenderCopy(renderer, std::get<0>(textDict[it->second]), std::get<1>(textDict[it->second]), &tileRect);
 		}
@@ -141,17 +141,6 @@ void Viewer::render(Player& player){
 	// Player
 	// make sure the texture is rendered above the bounding box
 	SDL_RenderCopy(renderer, std::get<0>(textDict["player"]), playerSprites[player.getFrame()], (player.getRect()));
-	//player.incrementFrame();
-	// debbug
-	//SDL_RenderCopy(renderer, std::get<0>(textDict["player"]), nullptr, (player.getRect()));
-	/*
-  SDL_Rect test;
-  test.x = 3*72;
-  test.y = 3*72;
-  test.w = 72;
-  test.h = 72;
-  SDL_RenderCopy(renderer, doorTiles, nullptr, &test);
-  */
 	SDL_RenderPresent(renderer);
 	return;
 }
@@ -168,4 +157,17 @@ Viewer::~Viewer(){
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
 	SDL_Quit();
+}
+
+void Viewer::renderMain(){
+  SDL_RenderClear(renderer);
+  SDL_RenderCopy(renderer, mainTitle, nullptr, nullptr);
+	SDL_RenderPresent(renderer);
+}
+
+void Viewer::renderExclamation(Camera& cam){
+  cam.setTextSize(50,75);
+  SDL_RenderCopy(renderer, exclamationText, nullptr, cam.getRect());
+  SDL_RenderPresent(renderer);
+  SDL_Delay(1000);
 }
