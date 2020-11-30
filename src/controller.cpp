@@ -50,16 +50,14 @@ event(new Eventos())
 				cameraVec.push_back(std::shared_ptr<Camera> (new Camera(2, alcance, j*tileSize,i*tileSize)));
 			if (map->get_textMap()[std::make_pair(j,i)]=="camera_esquerda")
 				cameraVec.push_back(std::shared_ptr<Camera> (new Camera(3, alcance, j*tileSize,i*tileSize)));
-			/*
 			if (map->get_textMap()[std::make_pair(j,i)]=="camera_cima_direita")
-				cameraVec.push_back(std::shared_ptr<Camera> (new Camera(4, alcance, j*tileSize,i*tileSize)));
-			if (map->get_textMap()[std::make_pair(j,i)]=="camera_cima_esquerda")
-				cameraVec.push_back(std::shared_ptr<Camera> (new Camera(5, alcance, j*tileSize,i*tileSize)));
-			if (map->get_textMap()[std::make_pair(j,i)]=="camera_baixo_direita")
 				cameraVec.push_back(std::shared_ptr<Camera> (new Camera(6, alcance, j*tileSize,i*tileSize)));
-			if (map->get_textMap()[std::make_pair(j,i)]=="camera_baixo_esquerda")
+			if (map->get_textMap()[std::make_pair(j,i)]=="camera_cima_esquerda")
 				cameraVec.push_back(std::shared_ptr<Camera> (new Camera(7, alcance, j*tileSize,i*tileSize)));
-			*/
+			if (map->get_textMap()[std::make_pair(j,i)]=="camera_baixo_direita")
+				cameraVec.push_back(std::shared_ptr<Camera> (new Camera(4, alcance, j*tileSize,i*tileSize)));
+			if (map->get_textMap()[std::make_pair(j,i)]=="camera_baixo_esquerda")
+				cameraVec.push_back(std::shared_ptr<Camera> (new Camera(5, alcance, j*tileSize,i*tileSize)));
 		}
 	}
 	// register map in viewer
@@ -86,7 +84,7 @@ void Controller::gameLoop(){
 				portacontroller->abre_fecha(*(portaVec[i]), *player, *map, state, collisioncontroller->getCollisionMap());
 			}
 			// if "e" was pressed, start counting again
-			if (state[SDL_SCANCODE_A]){
+			if (state[SDL_SCANCODE_E]){
 				portaEventCounter++;
 				portaGo = 0;
 			}

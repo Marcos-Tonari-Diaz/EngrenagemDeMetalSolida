@@ -8,7 +8,7 @@
 
 int Eventos::checagem(Player& jogador, Camera& camera, int tilesize, int boundingbox) {
 	int delta_x; int delta_y;
-	if(camera.get_avistado() == 1) 
+	if(camera.get_detectado() == 1) 
 		return 2;
 	delta_x = fabs((x_final + tilesize/2) - (jogador.getX() + boundingbox/2));
 	delta_y = fabs((y_final + tilesize/2) - (jogador.getY() + boundingbox/2));
