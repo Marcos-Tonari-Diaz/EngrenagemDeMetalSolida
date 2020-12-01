@@ -1,23 +1,23 @@
 #include "element.h"
 
 Element::Element(int x, int y){
-    textRect.x = x;
-    textRect.y = y;
+    this->x = x;
+    this->y = y;
 }
 
 void Element::setPosition(int x, int y){
-    textRect.x = x;
-    textRect.y = y;
+    this->x = x;
+    this->y = y;
 }
 
 void Element::setTextSize(int w, int h){
-    textRect.w = w;
-    textRect.h = h;
+    this->w = w;
+    this->h = h;
     boxSize = w;
 }
 
-int Element::getX(){return textRect.x;}
-int Element::getY(){return textRect.y;}
+int Element::getX(){return this->x;}
+int Element::getY(){return this->y;}
+int Element::getW(){return this->w;}
+int Element::getH(){return this->h;}
 int Element::getBoxSize(){return boxSize;}
-
-SDL_Rect* Element::getRect(){return &textRect;}
