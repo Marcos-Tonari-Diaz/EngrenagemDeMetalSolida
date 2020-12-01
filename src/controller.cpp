@@ -5,6 +5,7 @@ map(new Map()),
 player(new Player(0, 0)), 
 collisioncontroller(new collisionController()),
 portacontroller(new Porta_controller()),
+slcontroller(new SLcontroller()),
 cameracontroller(new Camera_controller()),
 event(new Eventos())
 {
@@ -67,6 +68,7 @@ event(new Eventos())
 /* main game loop*/
 void Controller::gameLoop(){
 	int flag = 0;
+	std::string str;
 	titleScreen();
 	while(rodando){
 		// Event Polling
@@ -79,7 +81,7 @@ void Controller::gameLoop(){
 
 		// Door Control
 		// reset timer
-		if (portaGo){
+		if (portaGo && state[SDL_SCANCODE_E]){
 			for (int i = 0; i < portaVec.size(); i++){
 				portacontroller->abre_fecha(*(portaVec[i]), *player, *map, state, collisioncontroller->getCollisionMap());
 			}
@@ -89,6 +91,51 @@ void Controller::gameLoop(){
 				portaGo = 0;
 			}
 		}
+		
+		// Save Current State
+		if(portaGo && state[SDL_SCANCODE_S]) {
+			str.push_back('y'); str.push_back('1');
+			slcontroller->add(*player, str);
+			str.pop_back(); str.pop_back();
+			for (int i = 0; i < portaVec.size(); i++){
+				str.push_back('p'); str.push_back(i);
+				slcontroller->add(*(portaVec[i]), str);
+				str.pop_back(); str.pop_back();
+			}
+			for (int i = 0; i < cameraVec.size(); i++){
+				str.push_back('c'); str.push_back(i);
+				slcontroller->add(*(cameraVec[i]), str);
+				str.pop_back(); str.pop_back();
+			}
+			if (state[SDL_SCANCODE_S]){
+				portaEventCounter++;
+				portaGo = 0;
+			}
+			slcontroller->save();
+		}
+		
+		// Load Saved File
+		if(portaGo && state[SDL_SCANCODE_L]) {
+			str.push_back('y'); str.push_back('1');
+			slcontroller->load(*player, str);
+			str.pop_back(); str.pop_back();
+			for (int i = 0; i < portaVec.size(); i++){
+				str.push_back('p'); str.push_back(i);
+				slcontroller->load(*(portaVec[i]), str);
+				str.pop_back(); str.pop_back();
+				portaVec[i]->atualiza_porta(collisioncontroller->getCollisionMap(), tileSize, *map);
+			}
+			for (int i = 0; i < cameraVec.size(); i++){
+				str.push_back('c'); str.push_back(i);
+				slcontroller->load(*(cameraVec[i]), str);
+				str.pop_back(); str.pop_back();
+			}
+			if (state[SDL_SCANCODE_L]){
+				portaEventCounter++;
+				portaGo = 0;
+			}
+		}
+		
 		// increment reset timer
 		portaEventCounter = (portaEventCounter+1)%40;
 		if (portaEventCounter==0){portaGo = 1;}
@@ -110,6 +157,10 @@ void Controller::gameLoop(){
 			if(flag == 2) {
 				viewer->renderExclamation(*(cameraVec[i]));
 				player->setPosition(0,0);
+				for (int i = 0; i < portaVec.size(); i++){
+					portaVec[i]->set_flag(0);
+					portaVec[i]->atualiza_porta(collisioncontroller->getCollisionMap(), tileSize, *map);
+				}
 				break;
 			}
 		}

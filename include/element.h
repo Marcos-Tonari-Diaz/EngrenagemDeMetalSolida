@@ -15,9 +15,12 @@
 class Element{
     protected:
         /*! Retangulo: posicao (x,y) e tamanho (w,h) */
-        SDL_Rect textRect;
-		/*! Tamanho do bounding box do Jogador */
-	    int boxSize;
+	int x;
+	int y;
+	int w;
+	int h;
+	/*! Tamanho do bounding box do Jogador */
+	int boxSize;
     public:
         /*! \brief Construtor do Elemento
         * default
@@ -31,6 +34,8 @@ class Element{
         Element(int x, int y);
         int getX();
         int getY();
+        int getW();
+        int getH();
 	    int getBoxSize();
         void setPosition(int x, int y);
 	    void setTextSize(int w, int h);

@@ -1,6 +1,11 @@
 #ifndef PORTA_H
 #define PORTA_H
+
 #include "element.h"
+#include "json.hpp"
+#include "map.h"
+
+using nlohmann::json;
 
 /*! \brief Classe para o objeto Porta.
 *	Essa classe herda da classe Element.
@@ -19,6 +24,14 @@ class Porta : public Element{
 		 * \param flag Flag de estado da porta
 		 */
 		Porta(int x, int y, int flag);
+		/*! \brief Macro para json.
+		*
+		*/
+		NLOHMANN_DEFINE_TYPE_INTRUSIVE(Porta, flag);
+		/*! \brief Função que atualiza o estado da porta.
+		 *
+		 */
+		void atualiza_porta(int** collisionMap, int tile_size, Map& mapa);
 		/*! \brief Função que retorna o estado da porta.
 		 *		
 		 */

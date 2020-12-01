@@ -140,18 +140,18 @@ void Viewer::render(Player& player){
 		// render texture inside tileRect
 		// texture overlays: render on top of base texture
 		if (
-    it->second == "porta_aberta" 
-    || it->second == "porta_fechada" 
-    || it->second == "camera_cima"
-    || it->second == "camera_cima_direita"
-    || it->second == "camera_cima_esquerda"
-    || it->second == "camera_baixo"
-    || it->second == "camera_baixo_direita"
-    || it->second == "camera_baixo_esquerda"
-    || it->second == "camera_direita"
-    || it->second == "camera_esquerda"
-    || it->second == "end"
-    ){
+		       it->second == "porta_aberta" 
+		    || it->second == "porta_fechada" 
+		    || it->second == "camera_cima"
+		    || it->second == "camera_cima_direita"
+		    || it->second == "camera_cima_esquerda"
+		    || it->second == "camera_baixo"
+		    || it->second == "camera_baixo_direita"
+		    || it->second == "camera_baixo_esquerda"
+		    || it->second == "camera_direita"
+		    || it->second == "camera_esquerda"
+		    || it->second == "end"
+		    ){
 			SDL_RenderCopy(renderer, std::get<0>(textDict["corridor"]), &corridorRect, &tileRect);
 			SDL_RenderCopy(renderer, std::get<0>(textDict[it->second]), std::get<1>(textDict[it->second]), &tileRect);
 		}
@@ -162,7 +162,12 @@ void Viewer::render(Player& player){
 	}
 	// Player
 	// make sure the texture is rendered above the bounding box
-	SDL_RenderCopy(renderer, std::get<0>(textDict["player"]), playerSprites[player.getFrame()], (player.getRect()));
+        SDL_Rect playerRect;
+	playerRect.x = player.getX();
+	playerRect.y = player.getY();
+	playerRect.w = player.getW();
+	playerRect.h = player.getH();
+	SDL_RenderCopy(renderer, std::get<0>(textDict["player"]), playerSprites[player.getFrame()], &playerRect);
 	SDL_RenderPresent(renderer);
 	return;
 }
@@ -204,7 +209,12 @@ void Viewer::renderMain(){
 
 void Viewer::renderExclamation(Camera& cam){
   cam.setTextSize(50,75);
-  SDL_RenderCopy(renderer, exclamationText, nullptr, cam.getRect());
+  SDL_Rect camRect;
+  camRect.x = cam.getX();
+  camRect.y = cam.getY();
+  camRect.w = cam.getW();
+  camRect.h = cam.getH();
+  SDL_RenderCopy(renderer, exclamationText, nullptr, &camRect);
   SDL_RenderPresent(renderer);
   SDL_Delay(1000);
 }

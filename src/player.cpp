@@ -1,8 +1,8 @@
 #include "player.h"
 
 Player::Player(int x, int y){
-    textRect.x = x;
-    textRect.y = y;
+    this->x = x;
+    this->y = y;
 }
 
 int Player::getFrame(){

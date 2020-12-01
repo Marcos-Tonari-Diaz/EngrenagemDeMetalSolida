@@ -11,6 +11,7 @@
 #include "porta.h"
 #include "porta_controller.h"
 #include "eventos.h"
+#include "sl_controller.h"
 
  /*! \brief Classe para o controller
    *
@@ -30,6 +31,7 @@ class Controller {
 
 		std::shared_ptr<Camera_controller> cameracontroller;
 		std::shared_ptr<Porta_controller> portacontroller;
+		std::shared_ptr<SLcontroller> slcontroller;
 
 		/*! Guarda todas as cameras */
 		std::vector<std::shared_ptr<Camera>> cameraVec;

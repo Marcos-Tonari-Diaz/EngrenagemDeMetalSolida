@@ -12,7 +12,10 @@ add_executable(EngrenagemDeMetalSolida src/main.cpp)
 include_directories(include)
 
 add_library(controller src/controller.cpp)
-target_link_libraries(controller viewer map element player collisionController camera camera_controller eventos porta porta_controller SDL2 SDL2_image)
+target_link_libraries(controller slcontroller viewer map element player collisionController camera camera_controller eventos porta porta_controller SDL2 SDL2_image)
+
+add_library(slcontroller src/sl_controller.cpp)
+target_link_libraries(slcontroller player camera porta)
 
 # Bibliotecas locais (estaticas)
 add_library(viewer src/viewer.cpp)
@@ -40,7 +43,7 @@ add_library(eventos src/eventos.cpp)
 target_link_libraries(eventos player camera player)
 
 add_library(porta src/porta.cpp)
-target_link_libraries(porta element)
+target_link_libraries(porta element map)
 
 add_library(porta_controller src/porta_controller.cpp)
 target_link_libraries(porta_controller player porta map)

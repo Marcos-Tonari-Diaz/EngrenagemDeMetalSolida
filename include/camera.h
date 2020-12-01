@@ -2,6 +2,9 @@
 #define CAMERA_H
 
 #include "element.h"
+#include "json.hpp"
+
+using nlohmann::json;
 
 
 /*! \brief Classe do objeto camera.
@@ -27,6 +30,10 @@ class Camera : public Element {
 		 * \param y Coordenada y da camera
 		 */
 		Camera(int direcao, int alcance, int x, int y);
+		/*! \brief Macro para json.
+		*
+		*/
+		NLOHMANN_DEFINE_TYPE_INTRUSIVE(Camera, avistado, detectado);
 		 /*! \brief Retorna o valor da direção.
 		 *
 		 */
