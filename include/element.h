@@ -39,8 +39,14 @@ class Element{
 	int getBoxSize();
         void setPosition(int x, int y);
 	void setTextSize(int w, int h);
-	//virtual int* setAttributes();
-	//virtual int* getAttributes();
+	/*! Função virtual para setar atributos de classes derivadas
+	 * \param void* vetor de atributos
+	 * */
+	virtual void setAttributes(void* attributes){return;};
+	/*! Função virtual para receber atributos de classes derivadas
+	 * \return void* vetor de atributos
+	 * */
+	virtual void* getAttributes(){return nullptr;};
 	SDL_Rect* getRect();
 };
 
