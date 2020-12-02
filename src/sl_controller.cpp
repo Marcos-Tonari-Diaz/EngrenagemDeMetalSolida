@@ -10,7 +10,7 @@ using nlohmann::json;
 
 void SLcontroller::save() {
 	std::ofstream f;
-  	f.open("/home/augusto/EngrenagemDeMetalSolida/assets/file.json", std::ofstream::out | std::ofstream::trunc);
+  	f.open("../assets/file.json", std::ofstream::out | std::ofstream::trunc);
   	f << this->file;
   	f.close();
 }
@@ -26,6 +26,7 @@ void SLcontroller::add(Element& s, std::string tag) {
 	}
 	else if(tag[0] == 'y') {
 		Player& d = static_cast<Player&>(s);
+		std::cout << d.frame << std::endl;
 		this->file[tag] = d;
 	}
 }
@@ -39,7 +40,11 @@ void SLcontroller::load(Element& s, std::string tag) {
 	json j;
 	json aux;
 	std::ifstream f;
-  	f.open("/home/augusto/EngrenagemDeMetalSolida/assets/file.json");
+  	f.open("../assets/file.json");
+	if ((f.rdstate() & std::ifstream::failbit ) != 0 ){
+    		std::cerr << "Error opening JSON state\n";
+		return;
+	}
   	f >> j;
   	f.close();
 	if(tag[0] == 'p') {
@@ -57,5 +62,6 @@ void SLcontroller::load(Element& s, std::string tag) {
 		Player& d = static_cast<Player&>(s);
 		aux = j[tag];
 		d.setPosition(aux["x"], aux["y"]);
+		d.setTextSize(aux["h"], aux["w"]);
 	}
 }

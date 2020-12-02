@@ -36,10 +36,12 @@ class Element{
         int getY();
         int getW();
         int getH();
-	    int getBoxSize();
+	int getBoxSize();
         void setPosition(int x, int y);
-	    void setTextSize(int w, int h);
-	    SDL_Rect* getRect();
+	void setTextSize(int w, int h);
+	//virtual int* setAttributes();
+	//virtual int* getAttributes();
+	SDL_Rect* getRect();
 };
 
 #endif

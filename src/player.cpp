@@ -9,6 +9,10 @@ int Player::getFrame(){
 	return frame;
 }
 
+void Player::setFrame(int frame){
+	this->frame = frame;
+}
+
 void Player::setFrame(std::string s){
 	if (s=="left"){
 		// if the player was on a different direction, reset

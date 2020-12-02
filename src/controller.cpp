@@ -1,13 +1,13 @@
 #include "controller.h"
 
 Controller::Controller() : viewer(new Viewer), 
-map(new Map()), 
-player(new Player(0, 0)), 
-collisioncontroller(new collisionController()),
-portacontroller(new Porta_controller()),
-slcontroller(new SLcontroller()),
-cameracontroller(new Camera_controller()),
-event(new Eventos())
+			map(new Map()), 
+			player(new Player(0, 0)), 
+			collisioncontroller(new collisionController()),
+			portacontroller(new Porta_controller()),
+			slcontroller(new SLcontroller()),
+			cameracontroller(new Camera_controller()),
+			event(new Eventos())
 {
 	// pass tilesize 
 	tileSize = viewer->tileRect.w;
@@ -112,6 +112,7 @@ void Controller::gameLoop(){
 				portaGo = 0;
 			}
 			slcontroller->save();
+			std::cout << "Saved!" <<std::endl;
 		}
 		
 		// Load Saved File
@@ -134,6 +135,7 @@ void Controller::gameLoop(){
 				portaEventCounter++;
 				portaGo = 0;
 			}
+			std::cout << "Loaded!" <<std::endl;
 		}
 		
 		// increment reset timer

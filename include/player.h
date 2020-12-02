@@ -20,9 +20,9 @@ class Player : public Element {
 		/*! Contador para controle */
 		int counter = 0;
 		/*! \brief Construtor do Player
-       	* Define posição.
-       	* \param x coordenada x
-       	* \param y coordenada y
+		* Define posição.
+		* \param x coordenada x
+		* \param y coordenada y
      		*/
 		Player(int x, int y);
 		/*! \brief Macro para json.
@@ -30,6 +30,7 @@ class Player : public Element {
 		*/
 		NLOHMANN_DEFINE_TYPE_INTRUSIVE(Player, x, y, w, h, frame, counter);
 		int getFrame();	
+		void setFrame(int frame);	
 		void setFrame(std::string s);	
 };
 
