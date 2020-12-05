@@ -47,7 +47,7 @@ class Controller {
 
 		// porta timer
 		int portaEventCounter = 0;
-		int portaGo = 0;
+		int buttonReady = 0;
 
 		/*! Tamanho do lado do Tile */
 		int tileSize;

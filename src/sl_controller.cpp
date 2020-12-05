@@ -26,7 +26,6 @@ void SLcontroller::add(Element& s, std::string tag) {
 	}
 	else if(tag[0] == 'y') {
 		Player& d = static_cast<Player&>(s);
-		std::cout << d.frame << std::endl;
 		this->file[tag] = d;
 	}
 }
@@ -63,5 +62,7 @@ void SLcontroller::load(Element& s, std::string tag) {
 		aux = j[tag];
 		d.setPosition(aux["x"], aux["y"]);
 		d.setTextSize(aux["h"], aux["w"]);
+		d.setFrame((int) aux["frame"]);
+		d.setCounter(aux["counter"]);
 	}
 }

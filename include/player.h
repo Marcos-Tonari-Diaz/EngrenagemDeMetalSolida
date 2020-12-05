@@ -32,6 +32,9 @@ class Player : public Element {
 		int getFrame();	
 		void setFrame(int frame);	
 		void setFrame(std::string s);	
+		void setCounter(int counter){ this->counter = counter;};	
+		virtual void setAttributes(std::vector<int>& attributes);
+		virtual void getAttributes(std::vector<int>& attributes);
 };
 
 #endif

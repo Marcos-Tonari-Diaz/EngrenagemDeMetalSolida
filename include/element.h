@@ -1,6 +1,7 @@
 #ifndef ELEMENT_H
 #define ELEMENT_H
 
+#include <vector>
 #include <string>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
@@ -42,11 +43,11 @@ class Element{
 	/*! Função virtual para setar atributos de classes derivadas
 	 * \param void* vetor de atributos
 	 * */
-	virtual void setAttributes(void* attributes){return;};
+	virtual void setAttributes(std::vector<int>& attributes){return;};
 	/*! Função virtual para receber atributos de classes derivadas
 	 * \return void* vetor de atributos
 	 * */
-	virtual void* getAttributes(){return nullptr;};
+	virtual void getAttributes(std::vector<int>& attributes){return;};
 	SDL_Rect* getRect();
 };
 
