@@ -15,7 +15,9 @@ Controller::Controller() : viewer(new Viewer),
 	map->setTileSize(tileSize);
 	collisioncontroller->set_boundBoxSize(boxSize);
 	collisioncontroller->set_tileSize(tileSize);
-	player->setTextSize(boxSize, boxSize*(41/24));
+	player->setTextSize(boxSize, (int) ((float) boxSize*((float) 41/24)));
+	std::cout <<(int) ((float) boxSize*((float) 41/24))<<std::endl;
+	std::cout <<boxSize<<std::endl;
 	portacontroller->setTileSize(tileSize);
 	portacontroller->setBoundBoxSize(boxSize);
 	cameracontroller->setTileSize(tileSize);
@@ -81,19 +83,19 @@ void Controller::gameLoop(){
 
 		// Door Control
 		// reset timer
-		if (portaGo && state[SDL_SCANCODE_E]){
+		if (buttonReady && state[SDL_SCANCODE_E]){
 			for (int i = 0; i < portaVec.size(); i++){
 				portacontroller->abre_fecha(*(portaVec[i]), *player, *map, state, collisioncontroller->getCollisionMap());
 			}
 			// if "e" was pressed, start counting again
 			if (state[SDL_SCANCODE_E]){
 				portaEventCounter++;
-				portaGo = 0;
+				buttonReady = 0;
 			}
 		}
 		
 		// Save Current State
-		if(portaGo && state[SDL_SCANCODE_S]) {
+		if(buttonReady && state[SDL_SCANCODE_S]) {
 			str.push_back('y'); str.push_back('1');
 			slcontroller->add(*player, str);
 			str.pop_back(); str.pop_back();
@@ -109,14 +111,14 @@ void Controller::gameLoop(){
 			}
 			if (state[SDL_SCANCODE_S]){
 				portaEventCounter++;
-				portaGo = 0;
+				buttonReady = 0;
 			}
 			slcontroller->save();
 			std::cout << "Saved!" <<std::endl;
 		}
 		
 		// Load Saved File
-		if(portaGo && state[SDL_SCANCODE_L]) {
+		if(buttonReady && state[SDL_SCANCODE_L]) {
 			str.push_back('y'); str.push_back('1');
 			slcontroller->load(*player, str);
 			str.pop_back(); str.pop_back();
@@ -133,14 +135,14 @@ void Controller::gameLoop(){
 			}
 			if (state[SDL_SCANCODE_L]){
 				portaEventCounter++;
-				portaGo = 0;
+				buttonReady = 0;
 			}
 			std::cout << "Loaded!" <<std::endl;
 		}
 		
 		// increment reset timer
 		portaEventCounter = (portaEventCounter+1)%40;
-		if (portaEventCounter==0){portaGo = 1;}
+		if (portaEventCounter==0){buttonReady = 1;}
 
 		// Camera Control
 		for (int i = 0; i < cameraVec.size(); i++){
