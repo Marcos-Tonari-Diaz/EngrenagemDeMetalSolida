@@ -13,18 +13,6 @@ void Player::setFrame(int frame){
 	this->frame = frame;
 }
 
-//return 0-frame 1-counter
-void Player::getAttributes(std::vector<int>& attributes){
-	frame = attributes[0];
-	counter = attributes[1];
-}
-		
-//update 0-frame 1-counter
-void Player::setAttributes(std::vector<int>& attributes){
-	attributes[0]=frame;
-	attributes[0]=counter;
-}
-
 void Player::setFrame(std::string s){
 	if (s=="left"){
 		// if the player was on a different direction, reset

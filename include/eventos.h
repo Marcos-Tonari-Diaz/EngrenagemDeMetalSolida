@@ -29,7 +29,7 @@ class Eventos {
 		* \param tilesize Tamanho do tile usado no mapa
 		* \param boundingbox Tamanho da caixa de colisão do jogador
 		*/
-		int checagem(Player& jogador, Camera& cameras, int tilesize, int boundingbox);
+		int checagem(Player& jogador, Camera& cameras, int tilesize);
 		/*! \brief Função que inicializa as coordenadas finais do jogo.
 		*
 		* \param x Coordenada x final do mapa

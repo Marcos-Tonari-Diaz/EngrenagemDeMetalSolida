@@ -61,7 +61,6 @@ void SLcontroller::load(Element& s, std::string tag) {
 		Player& d = static_cast<Player&>(s);
 		aux = j[tag];
 		d.setPosition(aux["x"], aux["y"]);
-		d.setTextSize(aux["h"], aux["w"]);
 		d.setFrame((int) aux["frame"]);
 		d.setCounter(aux["counter"]);
 	}

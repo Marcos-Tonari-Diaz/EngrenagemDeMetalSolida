@@ -20,7 +20,8 @@ class collisionController{
 	private:
 		/*! Estado do Teclado */
   		const Uint8* state = NULL;
-		int boundBoxSize = 0;
+		int boundBoxH = 0;
+		int boundBoxW = 0;
 		int tileSize = 0;
 		/*! Mapa de colisão */
 		int** collisionMap = NULL;
@@ -37,7 +38,7 @@ class collisionController{
 		void move(Player& obj);
 		void set_state(const Uint8* state);
 		void set_map(std::shared_ptr<Map> map);
-		void set_boundBoxSize(int size);
+		void set_boundBoxSize(int w, int h);
 		void set_tileSize(int size);
 		int** getCollisionMap();
 };

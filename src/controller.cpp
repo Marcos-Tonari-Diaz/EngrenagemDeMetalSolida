@@ -9,15 +9,16 @@ Controller::Controller() : viewer(new Viewer),
 			cameracontroller(new Camera_controller()),
 			event(new Eventos())
 {
-	// pass tilesize 
+	// pass tilesize and bounding box size
 	tileSize = viewer->tileRect.w;
 	boxSize = tileSize - tileSize/4;
 	map->setTileSize(tileSize);
-	collisioncontroller->set_boundBoxSize(boxSize);
+	// character ounding box height
+	int boundBoxH = (int) ((float) boxSize*((float) 41/24));
+	player->setTextSize(boxSize, boundBoxH);
+	player->setPosition(3*tileSize, 3*tileSize);
+	collisioncontroller->set_boundBoxSize(boxSize, boundBoxH);
 	collisioncontroller->set_tileSize(tileSize);
-	player->setTextSize(boxSize, (int) ((float) boxSize*((float) 41/24)));
-	std::cout <<(int) ((float) boxSize*((float) 41/24))<<std::endl;
-	std::cout <<boxSize<<std::endl;
 	portacontroller->setTileSize(tileSize);
 	portacontroller->setBoundBoxSize(boxSize);
 	cameracontroller->setTileSize(tileSize);
@@ -28,7 +29,7 @@ Controller::Controller() : viewer(new Viewer),
 	collisioncontroller->set_state(state);
 
 	// load Map
-	map->loadMap("../assets/maps/map10x10.map");
+	map->loadMap("../assets/maps/15x10.map");
 	collisioncontroller->set_map(map);
 
 	// allocate new elements
@@ -76,7 +77,7 @@ void Controller::gameLoop(){
 		// Event Polling
 		SDL_PumpEvents(); // Updates Keyboard State
 
-		// Collision Control
+		// Movement and Collision Control
 		collisioncontroller->move(*player);
 
 		//std::cout <<portaVec.size()<<std::endl;
@@ -152,7 +153,7 @@ void Controller::gameLoop(){
 
 		// Events Control
 		for (int i = 0; i < cameraVec.size(); i++){
-			flag = event->checagem(*player, *(cameraVec[i]), tileSize, boxSize);
+			flag = event->checagem(*player, *(cameraVec[i]), tileSize);
 			if(flag == 0) {
 				titleScreen();
 				player->setPosition(0,0);

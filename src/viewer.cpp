@@ -1,6 +1,6 @@
 #include "viewer.h"
 
-Viewer::Viewer(){
+Viewer::Viewer(): generator(2), corrDistr(0,1) {
   // Inicializando o subsistema de video do SDL
   try{
 	  if ( SDL_Init (SDL_INIT_VIDEO) < 0 ) {
@@ -34,6 +34,7 @@ Viewer::Viewer(){
 	  }
   }
   catch(int i){std::cout << "SDL ERROR" <<std::endl;}
+
   
   // Load TileSheet
   bgTiles = IMG_LoadTexture(renderer, "../assets/72x72/72x72_tiles.png");
@@ -53,11 +54,12 @@ Viewer::Viewer(){
   camera_direitaTile = IMG_LoadTexture(renderer, "../assets/camera2.0/cameraDireita.png");
   camera_esquerdaTile = IMG_LoadTexture(renderer, "../assets/camera2.0/cameraEsquerda.png");
 
-
-
   // Set clipping rectangles
   corridorRect.w = tileSize;
   corridorRect.h = tileSize;
+  corridorRect2.w = tileSize;
+  corridorRect2.h = tileSize;
+
   wallRect.w = tileSize;
   wallRect.h = tileSize;
 
@@ -85,6 +87,8 @@ Viewer::Viewer(){
 
   corridorRect.x = 0;
   corridorRect.y = 0;
+  corridorRect2.x = 0;
+  corridorRect2.y = 1*tileSize;
   wallRect.x = 1*tileSize;
   wallRect.y = 9*tileSize;
   portaFechadaRect.x = 0;; 
@@ -100,31 +104,32 @@ Viewer::Viewer(){
 	playerSprites.back()->x = i*24;
 	playerSprites.back()->y = 5;
   }
-  
+
   // Set target rectanglge
   tileRect.w = tileSize;
   tileRect.h = tileSize;
 
   // Populate the Texture Dictionary
   // Map Tileset (name) -> (tilesheet, src_rect)
-  textDict.insert(std::make_pair("wall", std::make_pair(bgTiles, &wallRect)));
-  textDict.insert(std::make_pair("corridor", std::make_pair(bgTiles, &corridorRect)));
-  textDict.insert(std::make_pair("end", std::make_pair(heliportText, nullptr)));
+  textDict.insert(std::make_pair("wall", std::make_tuple(bgTiles, &wallRect, 0)));
+  textDict.insert(std::make_pair("corridor", std::make_tuple(bgTiles, &corridorRect, 0)));
+  textDict.insert(std::make_pair("end", std::make_tuple(heliportText, nullptr, 1)));
 
-  textDict.insert(std::make_pair("porta_fechada", std::make_pair(doorTiles, &portaFechadaRect)));
-  textDict.insert(std::make_pair("porta_aberta", std::make_pair(doorTiles, &portaAbertaRect)));
+  textDict.insert(std::make_pair("porta_fechada", std::make_tuple(doorTiles, &portaFechadaRect, 1)));
+  textDict.insert(std::make_pair("porta_aberta", std::make_tuple(doorTiles, &portaAbertaRect, 1)));
 
-  textDict.insert(std::make_pair("camera_cima", std::make_pair(camera_cimaTile, nullptr)));
-  textDict.insert(std::make_pair("camera_cima_direita", std::make_pair(camera_cima_direitaTile, nullptr)));
-  textDict.insert(std::make_pair("camera_cima_esquerda", std::make_pair(camera_cima_esquerdaTile, nullptr)));
-  textDict.insert(std::make_pair("camera_baixo", std::make_pair(camera_baixoTile, nullptr)));
-  textDict.insert(std::make_pair("camera_baixo_direita", std::make_pair(camera_baixo_direitaTile, nullptr)));
-  textDict.insert(std::make_pair("camera_baixo_esquerda", std::make_pair(camera_baixo_esquerdaTile, nullptr)));
-  textDict.insert(std::make_pair("camera_direita", std::make_pair(camera_direitaTile, nullptr)));
-  textDict.insert(std::make_pair("camera_esquerda", std::make_pair(camera_esquerdaTile, nullptr)));
+  textDict.insert(std::make_pair("camera_cima", std::make_tuple(camera_cimaTile, nullptr, 1)));
+  textDict.insert(std::make_pair("camera_cima_direita", std::make_tuple(camera_cima_direitaTile, nullptr, 1)));
+  textDict.insert(std::make_pair("camera_cima_esquerda", std::make_tuple(camera_cima_esquerdaTile, nullptr, 1)));
+  textDict.insert(std::make_pair("camera_baixo", std::make_tuple(camera_baixoTile, nullptr, 1)));
+  textDict.insert(std::make_pair("camera_baixo_direita", std::make_tuple(camera_baixo_direitaTile, nullptr, 1)));
+  textDict.insert(std::make_pair("camera_baixo_esquerda", std::make_tuple(camera_baixo_esquerdaTile, nullptr, 1)));
+  textDict.insert(std::make_pair("camera_direita", std::make_tuple(camera_direitaTile, nullptr, 1)));
+  textDict.insert(std::make_pair("camera_esquerda", std::make_tuple(camera_esquerdaTile, nullptr, 1)));
 
   // Load Player Texture
-  textDict.insert(std::make_pair("player", std::make_pair(playerSheet, nullptr)));
+  textDict.insert(std::make_pair("player", std::make_tuple(playerSheet, nullptr, 0)));
+  
 
 }
 
@@ -139,26 +144,27 @@ void Viewer::render(Player& player){
 		tileRect.y = std::get<1>(it->first)*tileRect.w;
 		// render texture inside tileRect
 		// texture overlays: render on top of base texture
-		if (
-		       it->second == "porta_aberta" 
-		    || it->second == "porta_fechada" 
-		    || it->second == "camera_cima"
-		    || it->second == "camera_cima_direita"
-		    || it->second == "camera_cima_esquerda"
-		    || it->second == "camera_baixo"
-		    || it->second == "camera_baixo_direita"
-		    || it->second == "camera_baixo_esquerda"
-		    || it->second == "camera_direita"
-		    || it->second == "camera_esquerda"
-		    || it->second == "end"
-		    ){
+		if (std::get<2>(textDict[it->second])){
 			SDL_RenderCopy(renderer, std::get<0>(textDict["corridor"]), &corridorRect, &tileRect);
 			SDL_RenderCopy(renderer, std::get<0>(textDict[it->second]), std::get<1>(textDict[it->second]), &tileRect);
+		}
+		// randomly assign corridor texture
+		else if (it->second=="corridor"){
+		  if (corridorRects.find(it->first) == corridorRects.end()){
+			  if (corrDistr(generator)==1)
+				  corridorRects.insert(std::make_pair(it->first, 1));
+			  else
+				  corridorRects.insert(std::make_pair(it->first, 0));
+		  //std::cout << corridorRects[it->first]<< std::endl; 
+		  }
+		  if (corridorRects[it->first]==0)
+			SDL_RenderCopy(renderer, std::get<0>(textDict[it->second]), &corridorRect, &tileRect);
+		  else
+			SDL_RenderCopy(renderer, std::get<0>(textDict[it->second]), &corridorRect2, &tileRect);
 		}
 		// base textures
 		else
 			SDL_RenderCopy(renderer, std::get<0>(textDict[it->second]), std::get<1>(textDict[it->second]), &tileRect);
-  		//std::cout <<  it->second<< std::endl;
 	}
 	// Player
 	// make sure the texture is rendered above the bounding box
@@ -177,10 +183,15 @@ void Viewer::updateMap(std::map<std::pair<int, int>, std::string>& textMap){
 }
 
 Viewer::~Viewer(){
-	std::map<std::string, std::pair<SDL_Texture*, SDL_Rect*>>::iterator it;
+	std::map<std::string, std::tuple<SDL_Texture*, SDL_Rect*, int>>::iterator it;
 	for (it = textDict.begin(); it!=textDict.end(); ++it){
 		SDL_DestroyTexture(std::get<0>(textDict[it->first]));
 	}
+
+  	for (int i=0; i<12; i++){
+		delete playerSprites[i];
+	}
+
 	SDL_DestroyTexture(bgTiles);
 	SDL_DestroyTexture(doorTiles);
 	SDL_DestroyTexture(testTile);

@@ -1,10 +1,10 @@
 import sys
 
 fname = sys.argv[1];
-height = int(sys.argv[2]);
-width = int(sys.argv[3]);
+width = int(sys.argv[2]);
+height = int(sys.argv[3]);
 
-map = [[0 for i in range(width)] for j in range(width)]
+map = [[0 for i in range(width)] for j in range(height)]
 
 out = open(fname+".map", "w")
 for i in map:

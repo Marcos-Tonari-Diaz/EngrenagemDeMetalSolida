@@ -5,8 +5,10 @@
 #include <iostream>
 #include <map>
 #include <vector>
+#include <tuple>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+#include <random>
 #include "player.h"
 #include "camera.h"
 
@@ -49,6 +51,8 @@ class Viewer{
 		/*! Tile Source Rectangles */
 		SDL_Rect corridorRect; 
 		/*! Tile Source Rectangles */
+		SDL_Rect corridorRect2; 
+		/*! Tile Source Rectangles */
 		SDL_Rect portaFechadaRect; 
 		/*! Tile Source Rectangles */		
 		SDL_Rect portaAbertaRect; 
@@ -69,23 +73,23 @@ class Viewer{
 		/*! Tile Source Rectangles */
 		SDL_Rect cameraDirRect; 
 
-		/*! Dicionário de Texturas*/
-		std::map<std::string, std::pair<SDL_Texture*, SDL_Rect*>> textDict;
+		/*! Dicionário de Texturas: (nome)->(textura, retangulo, overlay)*/
+		std::map<std::string, std::tuple<SDL_Texture*, SDL_Rect*, int>> textDict;
 		SDL_Texture* mainTitle;
 		SDL_Texture* exclamationText;
 
-
 		/*! Referencia para Texture Map */
 		std::map<std::pair<int, int>, std::string> textMap;
+		std::map<std::pair<int, int>, int> corridorRects;
 
 		// Size of tile sides (tiles are squares)
 		// OBS: tileRec.w is global tilesize
+		int tileSize = 72;
 		/*! Retangulo alvo para texturas do fundo (bg) */
 		SDL_Rect tileRect;
-		int tileSize = 72;
 
 		/*! Tamanho da tela */
-		const int SCREEN_WIDTH = 10*tileSize;
+		const int SCREEN_WIDTH = 15*tileSize;
 		/*! Tamanho da tela */
 		const int SCREEN_HEIGHT = 10*tileSize;
 
@@ -115,6 +119,12 @@ class Viewer{
 		/*! Guarda uma referencia para o dicionario do mapa
 		*/
 		void updateMap(std::map<std::pair<int, int>, std::string>& textMap);
+	private:
+	  // pseudo random number generator
+	  std::mt19937 generator;
+	  std::uniform_int_distribution<> corrDistr;
+	  std::uniform_int_distribution<> wallDist;
+
 };
 
 #endif
