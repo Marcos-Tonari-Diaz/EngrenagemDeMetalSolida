@@ -8,9 +8,9 @@
 
 using nlohmann::json;
 
-void SLcontroller::save() {
+void SLcontroller::save(std::string address) {
 	std::ofstream f;
-  	f.open("/home/augusto/EngrenagemDeMetalSolida/assets/file.json", std::ofstream::out | std::ofstream::trunc);
+  	f.open(address, std::ofstream::out | std::ofstream::trunc);
   	f << this->file;
   	f.close();
 }
@@ -35,11 +35,15 @@ void SLcontroller::clear() {
 	this->file = j;
 }
 
-void SLcontroller::load(Element& s, std::string tag) {
+json SLcontroller::get_file() {
+	return (this->file);
+}
+
+void SLcontroller::load(Element& s, std::string tag, std::string address) {
 	json j;
 	json aux;
 	std::ifstream f;
-  	f.open("/home/augusto/EngrenagemDeMetalSolida/assets/file.json");
+  	f.open(address);
   	f >> j;
   	f.close();
 	if(tag[0] == 'p') {

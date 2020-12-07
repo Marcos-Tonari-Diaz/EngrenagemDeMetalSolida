@@ -13,7 +13,7 @@ using nlohmann::json;
 */
 class SLcontroller{
 	private:
-		json file; /*!< FIle (Arquivo com os dados dos objetos salvos) */
+		json file; /*!< File (Arquivo com os dados dos objetos salvos) */
 	public:
 		/*! \brief Inicializador do objeto "Save-Load Controller".
 		 *		
@@ -22,19 +22,25 @@ class SLcontroller{
 		 */
 		SLcontroller() = default;
 		/*! \brief Função que salva os objetos guardados.
-		 *		
+		 *	
+		 * \param address Path do arquivo em que se deseja salvar.
 		 */
-		void save();
+		void save(std::string address);
 		/*! \brief Função que carrega os objetos guardados.
 		 *
 		 */
-		void load(Element& s, std::string tag);
+		void load(Element& s, std::string tag, std::string address);
 		/*! \brief Função que adiciona um objeto a ser salvo.
 		 *
+		 * \param address Path do arquivo que se deseja ler.
 		 * \param s Objeto a ser guardado.
 		 * \param tag Identificador do objeto a ser guardado.
 		 */
 		void add(Element& s, std::string tag);
+		/*! \brief Função que retorna o json de dados salvos.
+		 *
+		 */
+		json get_file();
 		/*! \brief Função que apaga a lista de objetos guardados.
 		 *
 		 */

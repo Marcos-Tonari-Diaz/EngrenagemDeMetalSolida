@@ -5,6 +5,7 @@ map(new Map()),
 player(new Player(0, 0)), 
 collisioncontroller(new collisionController()),
 portacontroller(new Porta_controller()),
+trcontroller(new TRcontroller()),
 slcontroller(new SLcontroller()),
 cameracontroller(new Camera_controller()),
 event(new Eventos())
@@ -68,7 +69,10 @@ event(new Eventos())
 /* main game loop*/
 void Controller::gameLoop(){
 	int flag = 0;
+	int transmission = 0;
 	std::string str;
+	std::string address ("/home/augusto/EngrenagemDeMetalSolida/assets/file.json");
+	std::string transfer ("/home/augusto/EngrenagemDeMetalSolida/assets/transfer.json");
 	titleScreen();
 	while(rodando){
 		// Event Polling
@@ -111,23 +115,23 @@ void Controller::gameLoop(){
 				portaEventCounter++;
 				portaGo = 0;
 			}
-			slcontroller->save();
+			slcontroller->save(address);
 		}
 		
 		// Load Saved File
 		if(portaGo && state[SDL_SCANCODE_L]) {
 			str.push_back('y'); str.push_back('1');
-			slcontroller->load(*player, str);
+			slcontroller->load(*player, str, address);
 			str.pop_back(); str.pop_back();
 			for (int i = 0; i < portaVec.size(); i++){
 				str.push_back('p'); str.push_back(i);
-				slcontroller->load(*(portaVec[i]), str);
+				slcontroller->load(*(portaVec[i]), str, address);
 				str.pop_back(); str.pop_back();
 				portaVec[i]->atualiza_porta(collisioncontroller->getCollisionMap(), tileSize, *map);
 			}
 			for (int i = 0; i < cameraVec.size(); i++){
 				str.push_back('c'); str.push_back(i);
-				slcontroller->load(*(cameraVec[i]), str);
+				slcontroller->load(*(cameraVec[i]), str, address);
 				str.pop_back(); str.pop_back();
 			}
 			if (state[SDL_SCANCODE_L]){
@@ -164,6 +168,23 @@ void Controller::gameLoop(){
 				break;
 			}
 		}
+		
+		// Save in file to transfer to viwer
+		str.push_back('y'); str.push_back('1');
+		slcontroller->add(*player, str);
+		str.pop_back(); str.pop_back();
+		for (int i = 0; i < portaVec.size(); i++){
+			str.push_back('p'); str.push_back(i);
+			slcontroller->add(*(portaVec[i]), str);
+			str.pop_back(); str.pop_back();
+		}
+		for (int i = 0; i < cameraVec.size(); i++){
+			str.push_back('c'); str.push_back(i);
+			slcontroller->add(*(cameraVec[i]), str);
+			str.pop_back(); str.pop_back();
+		}
+		if(state[SDL_SCANCODE_T]) transmission = 1;
+		if(transmission) trcontroller->send(slcontroller->get_file(), 9001);
 
 		// Rendering
 		viewer->updateMap(map->get_textMap());	
