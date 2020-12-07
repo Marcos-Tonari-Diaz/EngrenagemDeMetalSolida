@@ -22,6 +22,7 @@ class Element{
 	int h;
 	/*! Tamanho do bounding box do Jogador */
 	int boxSize;
+	int currentMap;
     public:
         /*! \brief Construtor do Elemento
         * default
@@ -39,16 +40,11 @@ class Element{
         int getH();
 	int getBoxSize();
         void setPosition(int x, int y);
+        void setPosition(std::pair<int, int> coordinates){x = coordinates.first; y = coordinates.second;};
 	void setTextSize(int w, int h);
-	/*! Função virtual para setar atributos de classes derivadas
-	 * \param void* vetor de atributos
-	 * */
-	virtual void setAttributes(std::vector<int>& attributes){return;};
-	/*! Função virtual para receber atributos de classes derivadas
-	 * \return void* vetor de atributos
-	 * */
-	virtual void getAttributes(std::vector<int>& attributes){return;};
 	SDL_Rect* getRect();
+	void setCurrentMap(int index){currentMap = index;};
+	int getCurrentMap(){return currentMap;};
 };
 
 #endif

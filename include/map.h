@@ -26,6 +26,8 @@ class Map{
 		int tileSize;
 		/*! Mapa (x,y)-> textureFile*/
 		std::map<std::pair<int, int>, std::string> textMap;
+		/*! indice do mapa */
+		int index;
 
 	public:
 		/*! \brief loads the map 
@@ -40,6 +42,8 @@ class Map{
 		int getWidth();
 		int getHeight();
 		void setTileSize(int size);
+		int getIndex(){return index;}
+		Map(int index){this->index = index;}
 };
 
 #endif

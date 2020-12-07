@@ -29,7 +29,7 @@ class Camera : public Element {
 		 * \param x Coordenada x da camera.
 		 * \param y Coordenada y da camera
 		 */
-		Camera(int direcao, int alcance, int x, int y);
+		Camera(int direcao, int alcance, int x, int y, int onMap);
 		/*! \brief Macro para json.
 		*
 		*/

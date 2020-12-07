@@ -1,7 +1,7 @@
 #include "porta.h"
 #include "element.h"
 
-Porta::Porta(int x, int y, int flag) {
+Porta::Porta(int x, int y, int flag, int onMap) {
 	this->setPosition(x, y);
 	this->flag = flag;
 }

@@ -25,7 +25,8 @@ class Controller {
 	private:
 		std::shared_ptr<Viewer> viewer;
 		std::shared_ptr<Eventos> event;
-		std::shared_ptr<Map> map;
+		std::vector<std::shared_ptr<Map>> mapVec;
+		int currentMapIndex=0;
 		std::shared_ptr<Player> player;
 		std::shared_ptr<collisionController> collisioncontroller;
 
@@ -46,7 +47,7 @@ class Controller {
   		SDL_Event evento; 
 
 		// porta timer
-		int portaEventCounter = 0;
+		int buttonEventCounter = 0;
 		int buttonReady = 0;
 
 		/*! Tamanho do lado do Tile */
@@ -54,25 +55,26 @@ class Controller {
 		/*! Tamanho do bounding box do Jogador */
 		int boxSize;
 	public:
-	    /*! \brief Construtor do Controller
-     	*
-     	* Aloca memória para os objetos principais.
-     	* Configura objetos.
-		* 
-     	* \return Nada (este é um construtor!)
-     	* */
+		/*! \brief Construtor do Controller
+		*
+		* Aloca memória para os objetos principais.
+		* Configura objetos.
+			* 
+		* \return Nada (este é um construtor!)
+		* */
 		Controller();
-	    /*! \brief Loop principal
-     	*
+	    	/*! \brief Loop principal
 		* Loop principal do jogo.
 		* Roda os controllers secundáros.
 		*
-     	* */
+		* */
 		void gameLoop();
 		/*! \brief Tela Principal
-     	*
+     		*
 		* Renderiza a tela principal até que o jogador aperte espaço.
 		*
-     	* */
+     		* */
 		void titleScreen();
+		void setCurrentMapIndex(int index){this->currentMapIndex = index;};
+		int getCurrentMapIndex(){return currentMapIndex;};
 };

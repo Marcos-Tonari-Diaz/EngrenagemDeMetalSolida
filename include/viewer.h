@@ -42,16 +42,31 @@ class Viewer{
 		SDL_Texture* camera_direitaTile;
 		SDL_Texture* camera_esquerdaTile;
 
-
 		/*! Player Animation Sprites Rectangles */
 		std::vector<SDL_Rect*> playerSprites;
+		/*! Corridor Textures*/
+		std::map<std::pair<int, int>, int> corridorRects;
+		/*! Wall Textures*/
+		std::map<std::pair<int, int>, int> wallRects;
 
 		/*! Tile Source Rectangles */
 		SDL_Rect wallRect; 
 		/*! Tile Source Rectangles */
+		SDL_Rect wallRect2; 
+		/*! Tile Source Rectangles */
+		SDL_Rect wallRect3; 
+		/*! Tile Source Rectangles */
+		SDL_Rect wallRect4; 
+		/*! Tile Source Rectangles */
+		SDL_Rect wallRect5; 
+		/*! Tile Source Rectangles */
+		SDL_Rect wallRect6; 
+		/*! Tile Source Rectangles */
 		SDL_Rect corridorRect; 
 		/*! Tile Source Rectangles */
 		SDL_Rect corridorRect2; 
+		/*! Tile Source Rectangles */
+		SDL_Rect corridorRect3; 
 		/*! Tile Source Rectangles */
 		SDL_Rect portaFechadaRect; 
 		/*! Tile Source Rectangles */		
@@ -72,6 +87,24 @@ class Viewer{
 		SDL_Rect cameraEsqRect; 
 		/*! Tile Source Rectangles */
 		SDL_Rect cameraDirRect; 
+		/*! Tile Source Rectangles */
+		SDL_Rect emptyRect; 
+		/*! Tile Source Rectangles */
+		SDL_Rect topU_Rect; 
+		/*! Tile Source Rectangles */
+		SDL_Rect topUR_Rect; 
+		/*! Tile Source Rectangles */
+		SDL_Rect topR_Rect; 
+		/*! Tile Source Rectangles */
+		SDL_Rect topDR_Rect; 
+		/*! Tile Source Rectangles */
+		SDL_Rect topD_Rect; 
+		/*! Tile Source Rectangles */
+		SDL_Rect topDL_Rect; 
+		/*! Tile Source Rectangles */
+		SDL_Rect topL_Rect; 
+		/*! Tile Source Rectangles */
+		SDL_Rect topUL_Rect; 
 
 		/*! Dicionário de Texturas: (nome)->(textura, retangulo, overlay)*/
 		std::map<std::string, std::tuple<SDL_Texture*, SDL_Rect*, int>> textDict;
@@ -80,7 +113,6 @@ class Viewer{
 
 		/*! Referencia para Texture Map */
 		std::map<std::pair<int, int>, std::string> textMap;
-		std::map<std::pair<int, int>, int> corridorRects;
 
 		// Size of tile sides (tiles are squares)
 		// OBS: tileRec.w is global tilesize

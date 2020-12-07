@@ -23,7 +23,7 @@ class Porta : public Element{
 		 * \param y Coordenada y da porta
 		 * \param flag Flag de estado da porta
 		 */
-		Porta(int x, int y, int flag);
+		Porta(int x, int y, int flag, int onMap);
 		/*! \brief Macro para json.
 		*
 		*/

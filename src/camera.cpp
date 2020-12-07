@@ -1,6 +1,6 @@
 #include "camera.h"
 
-Camera::Camera(int direcao, int alcance, int x, int y) {
+Camera::Camera(int direcao, int alcance, int x, int y, int onMap) {
 	this->direcao = direcao;
 	this->alcance = alcance;
 	this->avistado = 0;
@@ -8,6 +8,7 @@ Camera::Camera(int direcao, int alcance, int x, int y) {
 	this->x_vis = x;
 	this->y_vis = y;
 	setPosition(x,y);
+	setCurrentMap(onMap);
 }
 
 int Camera::get_direcao() {

@@ -35,8 +35,6 @@ void Map::loadMap(std::string mapFile){
   	textTable.insert(std::make_pair('6', "camera_direita"));
   	// camera esquerda
   	textTable.insert(std::make_pair('7', "camera_esquerda"));
-	// end tile ('E')
-	textTable.insert(std::make_pair('E', "end"));
   	// camera cima direita
   	textTable.insert(std::make_pair('8', "camera_cima_direita"));
   	// camera cima esquerda
@@ -45,6 +43,37 @@ void Map::loadMap(std::string mapFile){
   	textTable.insert(std::make_pair('A', "camera_baixo_direita"));
   	// camera baixo esquerda
   	textTable.insert(std::make_pair('B', "camera_baixo_esquerda"));
+  	// empty
+  	textTable.insert(std::make_pair('C', "empty"));
+  	// topU
+  	textTable.insert(std::make_pair('D', "topU"));
+  	// topUR
+  	textTable.insert(std::make_pair('E', "topUR"));
+  	// topR
+  	textTable.insert(std::make_pair('F', "topR"));
+  	// topDR
+  	textTable.insert(std::make_pair('G', "topDR"));
+  	// topD
+  	textTable.insert(std::make_pair('H', "topD"));
+  	// topDL
+  	textTable.insert(std::make_pair('I', "topDL"));
+  	// topL
+  	textTable.insert(std::make_pair('J', "topL"));
+  	// topUL
+  	textTable.insert(std::make_pair('K', "topUL"));
+	// end tile 
+	textTable.insert(std::make_pair('L', "end"));
+	// to map 0
+	textTable.insert(std::make_pair('M', "to0"));
+	// to map 1
+	textTable.insert(std::make_pair('N', "to1"));
+	// to map 2
+	textTable.insert(std::make_pair('O', "to2"));
+	// to map 3
+	textTable.insert(std::make_pair('P', "to3"));
+	// map starting point
+	textTable.insert(std::make_pair('Q', "start"));
+
 	//parses the map, flling the texture map
 	for (int i=0; i < height; i++){
 		for (int j=0; j < width; j++){
