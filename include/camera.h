@@ -33,7 +33,7 @@ class Camera : public Element {
 		/*! \brief Macro para json.
 		*
 		*/
-		NLOHMANN_DEFINE_TYPE_INTRUSIVE(Camera, avistado, detectado);
+		NLOHMANN_DEFINE_TYPE_INTRUSIVE(Camera, avistado, detectado, currentMap);
 		 /*! \brief Retorna o valor da direção.
 		 *
 		 */

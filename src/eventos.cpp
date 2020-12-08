@@ -35,6 +35,8 @@ int Eventos::checagem(Player& player) {
 		delta_x = fabs((x_final + tilesize/2) - (player.getX() + pW/2));
 		delta_y = fabs((y_final + tilesize/2) - (player.getY() + pH/2));
 		if(delta_x <= tilesize/2 && delta_y <= tilesize/2) {
+			player.setCurrentMap(0);
+			player.setPosition(startMap[0]);
 			return 4;
 		}
 	}
@@ -46,8 +48,11 @@ int Eventos::checagem(Player& player, Camera& camera) {
 	// retorna 5
 	// if player is on the same map as camera
 	if (player.getCurrentMap()==camera.getCurrentMap()){
-		if(camera.get_detectado() == 1) 
+		if(camera.get_detectado() == 1) {
+			player.setCurrentMap(0);
+			player.setPosition(startMap[0]);
 			return 5;
+		}
 	}
 	return 6;
 }

@@ -50,12 +50,14 @@ void SLcontroller::load(Element& s, std::string tag) {
 		Porta& d = static_cast<Porta&>(s);
 		aux = j[tag];
 		d.set_flag(aux["flag"]);
+		d.setCurrentMap(aux["currentMap"]);
 	}
 	else if(tag[0] == 'c') {
 		Camera& d = static_cast<Camera&>(s);
 		aux = j[tag];
 		d.set_avistado(aux["avistado"]);
 		d.set_detectado(aux["detectado"]);
+		d.setCurrentMap(aux["currentMap"]);
 	}
 	else if(tag[0] == 'y') {
 		Player& d = static_cast<Player&>(s);
@@ -63,5 +65,6 @@ void SLcontroller::load(Element& s, std::string tag) {
 		d.setPosition(aux["x"], aux["y"]);
 		d.setFrame((int) aux["frame"]);
 		d.setCounter(aux["counter"]);
+		d.setCurrentMap(aux["currentMap"]);
 	}
 }

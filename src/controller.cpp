@@ -113,7 +113,7 @@ void Controller::gameLoop(){
 	titleScreen();
 	while(rodando){
 		// mapa inicial
-		collisioncontroller->set_map(mapVec[currentMapIndex]);
+		collisioncontroller->set_map(mapVec[player->getCurrentMap()]);
 
 		// Event Polling
 		SDL_PumpEvents(); // Updates Keyboard State
@@ -125,7 +125,7 @@ void Controller::gameLoop(){
 		// reset timer
 		if (buttonReady && state[SDL_SCANCODE_E]){
 			for (int i = 0; i < portaVec.size(); i++){
-				portacontroller->abre_fecha(*(portaVec[i]), *player, *mapVec[currentMapIndex], state, collisioncontroller->getCollisionMap());
+				portacontroller->abre_fecha(*(portaVec[i]), *player, *mapVec[player->getCurrentMap()], state, collisioncontroller->getCollisionMap());
 			}
 			// if "e" was pressed, start counting again
 			if (state[SDL_SCANCODE_E]){
@@ -166,7 +166,7 @@ void Controller::gameLoop(){
 				str.push_back('p'); str.push_back(i);
 				slcontroller->load(*(portaVec[i]), str);
 				str.pop_back(); str.pop_back();
-				portaVec[i]->atualiza_porta(collisioncontroller->getCollisionMap(), tileSize, *mapVec[currentMapIndex]);
+				portaVec[i]->atualiza_porta(collisioncontroller->getCollisionMap(), tileSize, *mapVec[player->getCurrentMap()]);
 			}
 			for (int i = 0; i < cameraVec.size(); i++){
 				str.push_back('c'); str.push_back(i);
@@ -186,36 +186,34 @@ void Controller::gameLoop(){
 
 		// Camera Control
 		for (int i = 0; i < cameraVec.size(); i++){
-			cameracontroller->visao(*mapVec[currentMapIndex], (*cameraVec[i]), *player);
-			cameracontroller->deteccao(*mapVec[currentMapIndex], (*cameraVec[i]), *player);
+			cameracontroller->visao(*mapVec[player->getCurrentMap()], (*cameraVec[i]), *player);
+			cameracontroller->deteccao(*mapVec[player->getCurrentMap()], (*cameraVec[i]), *player);
 		}
 
 		// Events Control
 		flag = event->checagem(*player);
 		// mudanca de mapa
 		if(flag>=0 && flag<=3) {
-			currentMapIndex = flag;	
 		}
 		// fim do jogo
 		if(flag == 4) {
 			titleScreen();
-			currentMapIndex = 0;	
 		}
 		for (int i = 0; i < cameraVec.size(); i++){
 			flag = event->checagem(*player, *(cameraVec[i]));
-			// avistado pela camera (recomeca o mapa)
+			// avistado pela camera (spawn no mapa 0)
 			if(flag == 5) {
 				viewer->renderExclamation(*(cameraVec[i]));
 				for (int i = 0; i < portaVec.size(); i++){
 					portaVec[i]->set_flag(0);
-					portaVec[i]->atualiza_porta(collisioncontroller->getCollisionMap(), tileSize, *mapVec[currentMapIndex]);
+					portaVec[i]->atualiza_porta(collisioncontroller->getCollisionMap(), tileSize, *mapVec[player->getCurrentMap()]);
 				}
 				break;
 			}
 		}
 
 		// Rendering
-		viewer->updateMap(mapVec[currentMapIndex]->get_textMap());	
+		viewer->updateMap(mapVec[player->getCurrentMap()]->get_textMap());	
 		viewer->render(*player);
 
 		//std::cout << currentMapIndex << std::endl;

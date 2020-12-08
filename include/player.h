@@ -28,7 +28,7 @@ class Player : public Element {
 		/*! \brief Macro para json.
 		*
 		*/
-		NLOHMANN_DEFINE_TYPE_INTRUSIVE(Player, x, y, w, h, frame, counter);
+		NLOHMANN_DEFINE_TYPE_INTRUSIVE(Player, x, y, w, h, frame, counter, currentMap);
 		int getFrame();	
 		void setFrame(int frame);	
 		void setFrame(std::string s);	

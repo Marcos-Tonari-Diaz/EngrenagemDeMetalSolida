@@ -27,7 +27,7 @@ class Porta : public Element{
 		/*! \brief Macro para json.
 		*
 		*/
-		NLOHMANN_DEFINE_TYPE_INTRUSIVE(Porta, flag);
+		NLOHMANN_DEFINE_TYPE_INTRUSIVE(Porta, flag, currentMap);
 		/*! \brief Função que atualiza o estado da porta.
 		 *
 		 */
