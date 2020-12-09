@@ -5,6 +5,7 @@ Controller::Controller() : viewer(new Viewer),
 			collisioncontroller(new collisionController()),
 			portacontroller(new Porta_controller()),
 			slcontroller(new SLcontroller()),
+			trcontroller(new TRcontroller()),
 			cameracontroller(new Camera_controller()),
 			event(new Eventos())
 {
@@ -101,16 +102,62 @@ Controller::Controller() : viewer(new Viewer),
 	player->setCurrentMap(0);
 }
 
+/* monitor loop*/
+void Controller::monitorLoop(){
+	std::cout << "Monitor mode" << std::endl;
+	int transmission = 0;
+	std::string str;
+
+	// Configurar o Cliente
+	trcontroller->configClient();
+
+	while(rodando){
+
+		// Load Received State
+		json stateJSON = trcontroller->receiveState();
+		str.push_back('y'); str.push_back('1');
+		slcontroller->load(stateJSON, *player, str);
+		str.pop_back(); str.pop_back();
+		for (int i = 0; i < portaVec.size(); i++){
+			str.push_back('p'); str.push_back(i);
+			slcontroller->load(stateJSON, *(portaVec[i]), str);
+			str.pop_back(); str.pop_back();
+			portaVec[i]->atualiza_porta(collisioncontroller->getCollisionMap(), tileSize, *mapVec[player->getCurrentMap()]);
+		}
+		for (int i = 0; i < cameraVec.size(); i++){
+			str.push_back('c'); str.push_back(i);
+			slcontroller->load(stateJSON, *(cameraVec[i]), str);
+			str.pop_back(); str.pop_back();
+		}
+		std::cout << "Monitor State Loaded!" <<std::endl;
+
+		// Rendering
+		viewer->updateMap(mapVec[player->getCurrentMap()]->get_textMap());	
+		viewer->render(*player);
+
+		while (SDL_PollEvent(&evento)) {
+			if (evento.type == SDL_QUIT) {
+				rodando = false;
+			}
+		}
+    	SDL_Delay(20);
+	}
+}
+
 /* main game loop*/
 void Controller::gameLoop(){
+	std::cout << "Game mode" << std::endl;
 	// event flag
 	int flag = 0;
+	int transmission = 0;
 	// auxiliary string for load/save
 	std::string str;
 
+	// Configurar o Server
+	trcontroller->configServer();
 
 	// Start at title screen
-	titleScreen();
+	//titleScreen();
 	while(rodando){
 		// mapa inicial
 		collisioncontroller->set_map(mapVec[player->getCurrentMap()]);
@@ -197,7 +244,7 @@ void Controller::gameLoop(){
 		}
 		// fim do jogo
 		if(flag == 4) {
-			titleScreen();
+			//titleScreen();
 		}
 		for (int i = 0; i < cameraVec.size(); i++){
 			flag = event->checagem(*player, *(cameraVec[i]));
@@ -212,12 +259,27 @@ void Controller::gameLoop(){
 			}
 		}
 
+		// Save in file to transfer to viwer
+		str.push_back('y'); str.push_back('1');
+		slcontroller->add(*player, str);
+		str.pop_back(); str.pop_back();
+		for (int i = 0; i < portaVec.size(); i++){
+			str.push_back('p'); str.push_back(i);
+			slcontroller->add(*(portaVec[i]), str);
+			str.pop_back(); str.pop_back();
+		}
+		for (int i = 0; i < cameraVec.size(); i++){
+			str.push_back('c'); str.push_back(i);
+			slcontroller->add(*(cameraVec[i]), str);
+			str.pop_back(); str.pop_back();
+		}
+		if(state[SDL_SCANCODE_T]) transmission = 1;
+		if(transmission) trcontroller->sendState(slcontroller->get_file(), 9001);
+		//trcontroller->sendState(slcontroller->get_file(), 9001);
+
 		// Rendering
 		viewer->updateMap(mapVec[player->getCurrentMap()]->get_textMap());	
 		viewer->render(*player);
-
-		//std::cout << currentMapIndex << std::endl;
-		//std::cout << player->getCurrentMap() << std::endl;
 
 		while (SDL_PollEvent(&evento)) {
 			if (evento.type == SDL_QUIT) {

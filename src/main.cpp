@@ -1,7 +1,14 @@
 #include "controller.h"
+#include <string>
 
-int main(){
+int main(int argc, char **argv){
 	Controller controller;
-	controller.gameLoop();
+	if (argc > 1){
+		std::string arg1 = argv[1];
+		if (arg1 == "monitor")
+			controller.monitorLoop();
+	}
+	else
+		controller.gameLoop();
 	return 0;
 }

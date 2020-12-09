@@ -3,6 +3,12 @@
 
 #include "element.h"
 #include "json.hpp"
+#include <fstream>
+#include <iostream>
+#include <string>
+#include "porta.h"
+#include "camera.h"
+#include "player.h"
 
 using nlohmann::json;
 
@@ -13,7 +19,7 @@ using nlohmann::json;
 */
 class SLcontroller{
 	private:
-		json file; /*!< FIle (Arquivo com os dados dos objetos salvos) */
+		json file; /*!< File (Arquivo com os dados dos objetos salvos) */
 	public:
 		/*! \brief Inicializador do objeto "Save-Load Controller".
 		 *		
@@ -29,6 +35,7 @@ class SLcontroller{
 		 *
 		 */
 		void load(Element& s, std::string tag);
+		void load(nlohmann::json j, Element& s, std::string tag);
 		/*! \brief Função que adiciona um objeto a ser salvo.
 		 *
 		 * \param s Objeto a ser guardado.
@@ -39,6 +46,10 @@ class SLcontroller{
 		 *
 		 */
 		void clear();
+		/*! \brief Função que retorna o json de dados salvos.
+		 *
+		 */
+		json get_file(){return (this->file);}
 };
 
 #endif

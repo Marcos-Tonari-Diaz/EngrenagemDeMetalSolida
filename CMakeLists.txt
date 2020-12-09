@@ -12,7 +12,7 @@ add_executable(EngrenagemDeMetalSolida src/main.cpp)
 include_directories(include)
 
 add_library(controller src/controller.cpp)
-target_link_libraries(controller slcontroller viewer map element player collisionController camera camera_controller eventos porta porta_controller SDL2 SDL2_image)
+target_link_libraries(controller viewer map element player collisionController camera camera_controller eventos porta porta_controller slcontroller transfer_controller SDL2 SDL2_image)
 
 add_library(slcontroller src/sl_controller.cpp)
 target_link_libraries(slcontroller player camera porta)
@@ -48,8 +48,14 @@ target_link_libraries(porta element map)
 add_library(porta_controller src/porta_controller.cpp)
 target_link_libraries(porta_controller player porta map)
 
+add_library(transfer_controller src/transfer_controller.cpp)
+target_link_libraries(transfer_controller pthread)
+
 #target_link_libraries(EngrenagemDeMetalSolida viewer map controller element player collisionController camera camera_controller eventos porta porta_controller SDL2 SDL2_image)
 target_link_libraries(EngrenagemDeMetalSolida controller)
+
+find_package(Boost REQUIRED COMPONENTS system)
+target_link_libraries(EngrenagemDeMetalSolida Boost::system)
 
 # Garantir que usaremos C++11 (ou superior, se preciso)
 set(CMAKE_CXX_STANDARD 11)
