@@ -71,6 +71,7 @@ class Controller {
 		*
      	* */
 		void gameLoop();
+		void monitorLoop();
 		/*! \brief Tela Principal
      	*
 		* Renderiza a tela principal até que o jogador aperte espaço.

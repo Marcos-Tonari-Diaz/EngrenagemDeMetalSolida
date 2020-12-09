@@ -54,6 +54,9 @@ target_link_libraries(porta_controller player porta map)
 #target_link_libraries(EngrenagemDeMetalSolida viewer map controller element player collisionController camera camera_controller eventos porta porta_controller SDL2 SDL2_image)
 target_link_libraries(EngrenagemDeMetalSolida controller)
 
+find_package(Boost REQUIRED COMPONENTS system)
+target_link_libraries(EngrenagemDeMetalSolida Boost::system)
+
 # Garantir que usaremos C++11 (ou superior, se preciso)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
@@ -75,4 +78,3 @@ set(DOXYGEN_UML_LOOK YES)
 set(DOXYGEN_CLASS_GRAPH YES)
 
 doxygen_add_docs(doc)
-
