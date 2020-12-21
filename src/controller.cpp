@@ -109,7 +109,7 @@ void Controller::monitorLoop(){
 	std::string str;
 
 	// Configurar o Cliente
-	trcontroller->configClient();
+	//trcontroller->configClient();
 
 	while(rodando){
 
@@ -154,7 +154,7 @@ void Controller::gameLoop(){
 	std::string str;
 
 	// Configurar o Server
-	trcontroller->configServer();
+	//trcontroller->configServer();
 
 	// Start at title screen
 	//titleScreen();
@@ -274,7 +274,7 @@ void Controller::gameLoop(){
 			str.pop_back(); str.pop_back();
 		}
 		if(state[SDL_SCANCODE_T]) transmission = 1;
-		if(transmission) trcontroller->sendState(slcontroller->get_file(), 9001);
+		if(transmission) trcontroller->sendState(slcontroller->get_file(), 0);
 		//trcontroller->sendState(slcontroller->get_file(), 9001);
 
 		// Rendering
