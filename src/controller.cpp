@@ -109,7 +109,7 @@ void Controller::monitorLoop(){
 	std::string str;
 
 	// Configurar o Cliente
-	//trcontroller->configClient();
+	trcontroller->configClient();
 
 	while(rodando){
 		// Load Received State
@@ -152,7 +152,7 @@ void Controller::gameLoop(){
 	std::string str;
 
 	// Configurar o Server
-	//trcontroller->configServer();
+	trcontroller->configServer();
 
 	// Start at title screen
 	//titleScreen();
