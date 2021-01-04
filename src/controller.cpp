@@ -1,13 +1,13 @@
 #include "controller.h"
 
 Controller::Controller() : viewer(new Viewer), 
-			player(new Player(0, 0)), 
-			collisioncontroller(new collisionController()),
-			portacontroller(new Porta_controller()),
-			slcontroller(new SLcontroller()),
-			trcontroller(new TRcontroller()),
-			cameracontroller(new Camera_controller()),
-			event(new Eventos())
+	player(new Player(0, 0)), 
+	collisioncontroller(new collisionController()),
+	portacontroller(new Porta_controller()),
+	slcontroller(new SLcontroller()),
+	trcontroller(new TRcontroller()),
+	cameracontroller(new Camera_controller()),
+	event(new Eventos())
 {
 	// create the 4 maps
 	mapVec.push_back(std::shared_ptr<Map> (new Map(0)));
@@ -36,7 +36,7 @@ Controller::Controller() : viewer(new Viewer),
 	event->setTileSize(tileSize);
 
 	// configure keyboard state
-  	state = SDL_GetKeyboardState(nullptr); 
+	state = SDL_GetKeyboardState(nullptr); 
 	collisioncontroller->set_state(state);
 
 	// load Map
@@ -105,14 +105,13 @@ Controller::Controller() : viewer(new Viewer),
 /* monitor loop*/
 void Controller::monitorLoop(){
 	std::cout << "Monitor mode" << std::endl;
-	int transmission = 0;
+	//int transmission = 0;
 	std::string str;
 
 	// Configurar o Cliente
 	//trcontroller->configClient();
 
 	while(rodando){
-
 		// Load Received State
 		json stateJSON = trcontroller->receiveState();
 		str.push_back('y'); str.push_back('1');
@@ -129,8 +128,7 @@ void Controller::monitorLoop(){
 			slcontroller->load(stateJSON, *(cameraVec[i]), str);
 			str.pop_back(); str.pop_back();
 		}
-		std::cout << "Monitor State Loaded!" <<std::endl;
-
+		std::cout << "Monitor State Loaded!" <<std::endl; 
 		// Rendering
 		viewer->updateMap(mapVec[player->getCurrentMap()]->get_textMap());	
 		viewer->render(*player);
@@ -149,7 +147,7 @@ void Controller::gameLoop(){
 	std::cout << "Game mode" << std::endl;
 	// event flag
 	int flag = 0;
-	int transmission = 0;
+	//int transmission = 0;
 	// auxiliary string for load/save
 	std::string str;
 
@@ -273,9 +271,9 @@ void Controller::gameLoop(){
 			slcontroller->add(*(cameraVec[i]), str);
 			str.pop_back(); str.pop_back();
 		}
-		if(state[SDL_SCANCODE_T]) transmission = 1;
-		if(transmission) trcontroller->sendState(slcontroller->get_file(), 0);
-		//trcontroller->sendState(slcontroller->get_file(), 9001);
+		//if(state[SDL_SCANCODE_T]) transmission = 1;
+		//if(transmission) trcontroller->sendState(slcontroller->get_file());
+		trcontroller->sendState(slcontroller->get_file());
 
 		// Rendering
 		viewer->updateMap(mapVec[player->getCurrentMap()]->get_textMap());	
@@ -286,7 +284,7 @@ void Controller::gameLoop(){
 				rodando = false;
 			}
 		}
-    	SDL_Delay(20);
+		SDL_Delay(20);
 	}		
 }
 

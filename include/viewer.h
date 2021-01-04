@@ -154,8 +154,8 @@ class Viewer{
 	private:
 	  // pseudo random number generator
 	  std::mt19937 generator;
-	  std::uniform_int_distribution<> corrDistr;
-	  std::uniform_int_distribution<> wallDist;
+	  std::normal_distribution<> corrDistr;
+	  std::normal_distribution<> wallDist;
 
 };
 
