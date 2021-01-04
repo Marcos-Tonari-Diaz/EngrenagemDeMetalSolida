@@ -1,6 +1,6 @@
 #include "viewer.h"
 
-Viewer::Viewer(): generator(5), corrDistr(1,3), wallDist(1,6) {
+Viewer::Viewer(): generator(5), corrDistr(1,0.25), wallDist(4,0.25) {
   // Inicializando o subsistema de video do SDL
   try{
 	  if ( SDL_Init (SDL_INIT_VIDEO) < 0 ) {
@@ -230,7 +230,7 @@ void Viewer::render(Player& player){
 		}
 		// randomly assign corridor texture
 		else if (it->second=="corridor"){
-		  random  = corrDistr(generator);
+		  random  = std::round(corrDistr(generator));
 		  if (corridorRects.find(it->first) == corridorRects.end()){
 			  if (random==1)
 				  corridorRects.insert(std::make_pair(it->first, 1));
@@ -238,6 +238,8 @@ void Viewer::render(Player& player){
 				  corridorRects.insert(std::make_pair(it->first, 2));
 			  else if (random==3)
 				  corridorRects.insert(std::make_pair(it->first, 3));
+			  else 
+				  corridorRects.insert(std::make_pair(it->first, 1));
 		  //std::cout << corridorRects[it->first]<< std::endl; 
 		  }
 		  if (corridorRects[it->first]==1)
@@ -249,7 +251,7 @@ void Viewer::render(Player& player){
 		}
 		// randomly assign wall texture
 		else if (it->second=="wall"){
-		  random  = wallDist(generator);
+		  random  = std::round(wallDist(generator));
 		  if (wallRects.find(it->first) == wallRects.end()){
 			  if (random==1)
 				  wallRects.insert(std::make_pair(it->first, 1));
@@ -263,6 +265,8 @@ void Viewer::render(Player& player){
 				  wallRects.insert(std::make_pair(it->first, 5));
 			  else if (random==6)
 				  wallRects.insert(std::make_pair(it->first, 6));
+			  else
+				  wallRects.insert(std::make_pair(it->first, 4));
 		  //std::cout << corridorRects[it->first]<< std::endl; 
 		  }
 		  if (wallRects[it->first]==1)
