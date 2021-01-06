@@ -29,27 +29,27 @@ void collisionController::makeCollisionMap(){
 	}
 }
 
-void collisionController::move(Player& obj){
+void collisionController::move(Player& obj, int Up, int Down, int Left, int Right){
 	// polls offset
 	int offsetX = 0;
 	int offsetY = 0;
-	if (state[SDL_SCANCODE_LEFT]){
+	if (Left){
 		offsetX--; 
 		obj.setFrame("left");
 	}
-	else if (state[SDL_SCANCODE_RIGHT]){
+	else if (Right){
 	       	offsetX++;
 		obj.setFrame("right");
 	}
-	else if (state[SDL_SCANCODE_UP]){
+	else if (Up){
 	       	offsetY--; 
 		obj.setFrame("up");
 	}
-	else if (state[SDL_SCANCODE_DOWN]){
+	else if (Down){
 	       	offsetY++;
 		obj.setFrame("down");
 	}
-	else 
+	else
 		obj.setFrame("iddle");
 
 	// tests for map collision

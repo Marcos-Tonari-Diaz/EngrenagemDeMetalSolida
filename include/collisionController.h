@@ -34,8 +34,12 @@ class collisionController{
 		void makeCollisionMap();
 		/*! Move o player controlando a colisão
 		 * \param obj Player a ser movido
+		 * \param Up Codigo de tecla cima
+		 * \param Down Codigo de tecla baixo
+		 * \param left Codigo de tecla esquerda
+		 * \param Right Codigo de tecla direita
 		 */
-		void move(Player& obj);
+		void move(Player& obj, int Up, int Down, int Left, int Right);
 		void set_state(const Uint8* state);
 		void set_map(std::shared_ptr<Map> map);
 		void set_boundBoxSize(int w, int h);

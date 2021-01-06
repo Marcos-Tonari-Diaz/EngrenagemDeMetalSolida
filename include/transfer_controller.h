@@ -15,6 +15,9 @@ using boost::asio::ip::udp;
 *  A calsse possuí uma função, send (enviar).
 */
 class TRcontroller{
+	private:
+		std::vector<boost::asio::ip::udp::endpoint> remote_endpoints;
+		std::vector<const char*> commands;
 	public:
 		boost::asio::io_service my_io_service;
 		udp::endpoint local_endpoint;
@@ -27,12 +30,19 @@ class TRcontroller{
 		 *  O inicializador do objeto é padrão.
 		 */
 		TRcontroller();
+		/*! \brief Função que envia o estado atual do jogo para o servidor.
+		 *	
+		 * \param j Arquivo json com o estado atual do jogo.
+		 */
+		void sendState(nlohmann::json j);
 		/*! \brief Função que envia o estado atual do jogo para os clientes do servidor.
 		 *	
 		 * \param j Arquivo json com o estado atual do jogo.
 		 * \param IP Endereço de ip do servidor do jogo.
 		 */
-		void sendState(nlohmann::json j);
+		void sendState_server(nlohmann::json j, int porta);
+		void checkConexion(int porta);
+		std::vector<const char*> get_commands();
 		nlohmann::json receiveState();
 		void configServer();
 		void configClient();
