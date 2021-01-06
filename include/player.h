@@ -24,7 +24,7 @@ class Player : public Element {
 		* \param x coordenada x
 		* \param y coordenada y
      		*/
-		Player(int x, int y);
+		Player(int x, int y, int boxSize);
 		/*! \brief Macro para json.
 		*
 		*/

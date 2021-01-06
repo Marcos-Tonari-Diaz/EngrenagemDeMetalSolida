@@ -1,7 +1,7 @@
 #include "controller.h"
 
 Controller::Controller() : viewer(new Viewer), 
-	player(new Player(0, 0)), 
+	//player(new Player(3, 3)), 
 	collisioncontroller(new collisionController()),
 	portacontroller(new Porta_controller()),
 	slcontroller(new SLcontroller()),
@@ -25,8 +25,8 @@ Controller::Controller() : viewer(new Viewer),
 
 	// character ounding box height
 	int boundBoxH = (int) ((float) boxSize*((float) 41/24));
-	player->setTextSize(boxSize, boundBoxH);
-	player->setPosition(3*tileSize, 3*tileSize);
+	//player->setTextSize(boxSize, boundBoxH);
+	//player->setPosition(3*tileSize, 3*tileSize);
 	collisioncontroller->set_boundBoxSize(boxSize, boundBoxH);
 	collisioncontroller->set_tileSize(tileSize);
 	portacontroller->setTileSize(tileSize);
@@ -99,7 +99,7 @@ Controller::Controller() : viewer(new Viewer),
 	// mapa inicial
 	collisioncontroller->set_map(mapVec[0]);
 	viewer->updateMap(mapVec[0]->get_textMap());	
-	player->setCurrentMap(0);
+	//player->setCurrentMap(0);
 }
 
 /* monitor loop*/
@@ -144,6 +144,10 @@ void Controller::monitorLoop(){
 
 /* main game loop*/
 void Controller::gameLoop(){
+	// Inicializa o player
+	player = std::make_shared<Player>(3*tileSize, 3*tileSize, boxSize);
+	player->setCurrentMap(0);
+	
 	std::cout << "Game mode" << std::endl;
 	// event flag
 	int flag = 0;

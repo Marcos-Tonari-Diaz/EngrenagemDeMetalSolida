@@ -1,8 +1,11 @@
 #include "player.h"
 
-Player::Player(int x, int y){
+Player::Player(int x, int y, int boxSize){
     this->x = x;
     this->y = y;
+    this->w = boxSize;
+    this->h = (int) ((float) boxSize*((float) 41/24));
+    boxSize = boxSize;
 }
 
 int Player::getFrame(){
