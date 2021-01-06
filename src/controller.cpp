@@ -104,6 +104,10 @@ Controller::Controller() : viewer(new Viewer),
 
 /* monitor loop*/
 void Controller::monitorLoop(){
+	// Inicializa o player
+	player = std::make_shared<Player>(3*tileSize, 3*tileSize, boxSize);
+	player->setCurrentMap(0);
+
 	std::cout << "Monitor mode" << std::endl;
 	//int transmission = 0;
 	std::string str;
