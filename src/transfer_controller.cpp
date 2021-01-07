@@ -35,30 +35,33 @@ void TRcontroller::checkConexion(int porta) {
 
 	udp::socket my_socket(my_io_service, local_endpoint);
 	
-	udp::endpoint remote_endpoint; // endpoint temporario
-
-	my_socket.receive_from(boost::asio::buffer(v,120), remote_endpoint); // Confs. do Cliente
+	while(this->flag) {
 		
-	if(strcmp(v, a) == 0) {
-		(this->remote_endpoints).push_back(remote_endpoint);
-		(this->commands).push_back("\0");
-	}
+		udp::endpoint remote_endpoint; // endpoint temporario
 
-	else if(strcmp(v, b) == 0) {
-		for (int i = 0; i < remote_endpoints.size(); i++) {
-			if(this->remote_endpoints[i] == remote_endpoint) {
-				(this->remote_endpoints).erase((this->remote_endpoints).begin() + i);
-				this->commands[i] = "\n";
-				break;
+		my_socket.receive_from(boost::asio::buffer(v,120), remote_endpoint); // Confs. do Cliente
+			
+		if(strcmp(v, a) == 0) {
+			(this->remote_endpoints).push_back(remote_endpoint);
+			(this->commands).push_back("\0");
+		}
+
+		else if(strcmp(v, b) == 0) {
+			for (int i = 0; i < remote_endpoints.size(); i++) {
+				if(this->remote_endpoints[i] == remote_endpoint) {
+					(this->remote_endpoints).erase((this->remote_endpoints).begin() + i);
+					this->commands[i] = "\n";
+					break;
+				}
 			}
 		}
-	}
 
-	else {
-		for (int i = 0; i < remote_endpoints.size(); i++) {
-			if(this->remote_endpoints[i] == remote_endpoint) {
-				this->commands[i] = v;
-				break;
+		else {
+			for (int i = 0; i < remote_endpoints.size(); i++) {
+				if(this->remote_endpoints[i] == remote_endpoint) {
+					this->commands[i] = v;
+					break;
+				}
 			}
 		}
 	}
@@ -66,6 +69,10 @@ void TRcontroller::checkConexion(int porta) {
 
 std::vector<const char*> TRcontroller::get_commands() {
 	return (this->commands);
+}
+
+void TRcontroller::set_flag(int flag) {
+	this->flag = flag;
 }
 
 void TRcontroller::sendState(nlohmann::json j){

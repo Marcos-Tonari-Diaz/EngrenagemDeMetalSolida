@@ -156,7 +156,7 @@ void Controller::gameLoop(){
 	std::thread conexion (&TRcontroller::checkConexion, trcontroller, 0);
 	
 	// Configurar o Server
-	trcontroller->configServer();
+	trcontroller->configServer(); // NAO SEI O QUE ISSO FAZ, E SE ISSO ATRAPALHA NO Q EU FIZ
 
 	// Start at title screen
 	//titleScreen();
@@ -312,7 +312,9 @@ void Controller::gameLoop(){
 				SDL_Delay(20);
 			}
 		}
-	}		
+	}
+	trcontroller->set_flag(0);
+	conexion.join();
 }
 
 void Controller::titleScreen(){

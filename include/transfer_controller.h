@@ -18,6 +18,7 @@ class TRcontroller{
 	private:
 		std::vector<boost::asio::ip::udp::endpoint> remote_endpoints;
 		std::vector<const char*> commands;
+		int flag = 1;
 	public:
 		boost::asio::io_service my_io_service;
 		udp::endpoint local_endpoint;
@@ -42,6 +43,7 @@ class TRcontroller{
 		 */
 		void sendState_server(nlohmann::json j, int porta);
 		void checkConexion(int porta);
+		void set_flag(int flag);
 		std::vector<const char*> get_commands();
 		nlohmann::json receiveState();
 		void configServer();
