@@ -137,6 +137,9 @@ void Controller::monitorLoop(){
 		viewer->updateMap(mapVec[player->getCurrentMap()]->get_textMap());	
 		viewer->render(*player);
 
+		// Send Input to Server
+
+
 		while (SDL_PollEvent(&evento)) {
 			if (evento.type == SDL_QUIT) {
 				rodando = false;

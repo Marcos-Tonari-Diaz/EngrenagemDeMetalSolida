@@ -5,12 +5,11 @@ using boost::asio::ip::udp;
 //!!! procurar um jeito de configurar sem depender de construtor
 TRcontroller::TRcontroller(): local_endpoint(udp::v4(), 0), remote_endpoint(udp::v4(), 0), my_socket(my_io_service){}
 
-void TRcontroller::sendState(nlohmann::json j){
+void TRcontroller::sendJSON(nlohmann::json j){
 	// Encontrando IP remoto
 	boost::asio::ip::address ip_remoto =
 	boost::asio::ip::address::from_string("127.0.0.1");
 	remote_endpoint.address(ip_remoto);
-	//remote_endpoint.port(0);
 
 	std::string msg = j.dump();
 	my_socket.send_to(boost::asio::buffer(msg), remote_endpoint);
@@ -21,7 +20,7 @@ void TRcontroller::sendState(nlohmann::json j){
 	std::cout << recv << std::endl;
 }
 
-nlohmann::json TRcontroller::receiveState(){
+nlohmann::json TRcontroller::receiveJSON(){
 	char recv[1000];
 	for (int i =0; i<1000; i++){recv[i]='\0';}
 	my_socket.receive_from(boost::asio::buffer(recv, 1000), remote_endpoint);
