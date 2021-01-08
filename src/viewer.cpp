@@ -212,7 +212,7 @@ Viewer::Viewer(): generator(5), corrDistr(1,0.25), wallDist(4,0.25) {
 }
 
 /* Draws the scene */
-void Viewer::render(Player& player){
+void Viewer::render(std::vector<std::shared_ptr<Player>> players){
 	SDL_RenderClear(renderer);
 	// Map Rendering
 	std::map<std::pair<int, int>, std::string>::iterator it;
@@ -267,7 +267,6 @@ void Viewer::render(Player& player){
 				  wallRects.insert(std::make_pair(it->first, 6));
 			  else
 				  wallRects.insert(std::make_pair(it->first, 4));
-		  //std::cout << corridorRects[it->first]<< std::endl; 
 		  }
 		  if (wallRects[it->first]==1)
 			SDL_RenderCopy(renderer, std::get<0>(textDict[it->second]), &wallRect, &tileRect);
@@ -288,12 +287,14 @@ void Viewer::render(Player& player){
 	}
 	// Player Rendering
 	// make sure the texture is rendered above the bounding box
-        SDL_Rect playerRect;
-	playerRect.x = player.getX();
-	playerRect.y = player.getY();
-	playerRect.w = player.getW();
-	playerRect.h = player.getH();
-	SDL_RenderCopy(renderer, std::get<0>(textDict["player"]), playerSprites[player.getFrame()], &playerRect);
+	for (int i; i<players.size(); i++){
+		SDL_Rect playerRect;
+		playerRect.x = players[i]->getX();
+		playerRect.y = players[i]->getY();
+		playerRect.w = players[i]->getW();
+		playerRect.h = players[i]->getH();
+		SDL_RenderCopy(renderer, std::get<0>(textDict["player"]), playerSprites[players[i]->getFrame()], &playerRect);
+	}
 	SDL_RenderPresent(renderer);
 	return;
 }

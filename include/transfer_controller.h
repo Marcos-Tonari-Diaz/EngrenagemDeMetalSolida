@@ -24,6 +24,7 @@ class TRcontroller{
 		udp::endpoint local_endpoint;
 		udp::endpoint remote_endpoint;
 		udp::socket my_socket;
+		int player_number = 0;
 
 		/*! \brief Inicializador do objeto "Transference Controller".
 		 *		
@@ -35,17 +36,19 @@ class TRcontroller{
 		 *	
 		 * \param j Arquivo json com o estado atual do jogo.
 		 */
-		void sendState(nlohmann::json j);
+		void sendJSON(nlohmann::json j);
+		void sendString(std::string msg); 
+		void sendJSON(nlohmann::json j, boost::asio::ip::udp::endpoint arg_remote_endpoint);
+		nlohmann::json receiveJSON();
 		/*! \brief Função que envia o estado atual do jogo para os clientes do servidor.
 		 *	
 		 * \param j Arquivo json com o estado atual do jogo.
 		 * \param IP Endereço de ip do servidor do jogo.
 		 */
-		void sendState_server(nlohmann::json j, int porta);
-		void checkConexion(int porta);
+		void sendState_server(nlohmann::json j);
+		void checkConnection(int porta);
 		void set_flag(int flag);
-		std::vector<const char*> get_commands();
-		nlohmann::json receiveState();
+		std::vector<const char*>& get_commands();
 		void configServer();
 		void configClient();
 };

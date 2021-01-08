@@ -141,7 +141,7 @@ class Viewer{
 		/*! Renderiza a cena
 		* \param player Jogador a ser renderizado
 		*/
-		void render(Player& player);
+		void render(std::vector<std::shared_ptr<Player>> players);
 		/*! Renderiza a tela principal
 		*/
 		void renderMain();

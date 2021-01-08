@@ -22,7 +22,7 @@ Controller::Controller() : viewer(new Viewer),
 	mapVec[2]->setTileSize(tileSize);
 	mapVec[3]->setTileSize(tileSize);
 
-	// character ounding box height
+	// character bounding box height
 	int boundBoxH = (int) ((float) boxSize*((float) 41/24));
 	collisioncontroller->set_boundBoxSize(boxSize, boundBoxH);
 	collisioncontroller->set_tileSize(tileSize);
@@ -107,17 +107,28 @@ void Controller::monitorLoop(){
 	// Configurar o Cliente
 	trcontroller->configClient();
 
+	// Garbage command to initiate
+	std::string init= "D";
+	trcontroller->sendJSON(init);
 	while(rodando){
+		// increment reset timer
+		buttonEventCounter = (buttonEventCounter+1)%40;
+		if (buttonEventCounter==0){buttonReady = 1;}
+
+		// for all players
 		// Load Received State
-		json stateJSON = trcontroller->receiveState();
-		str.push_back('y'); str.push_back('1');
-		slcontroller->load(stateJSON, *player, str);
-		str.pop_back(); str.pop_back();
+		json stateJSON = trcontroller->receiveJSON();
+		std::cout << "recebeu estado" << std::endl;
+		for (int ouo = 0; ouo < ; ouo++) {
+			str.push_back('y'); str.push_back('1');
+			slcontroller->load(stateJSON, *(players[ouo]), str);
+			str.pop_back(); str.pop_back();
+		}
 		for (int i = 0; i < portaVec.size(); i++){
 			str.push_back('p'); str.push_back(i);
 			slcontroller->load(stateJSON, *(portaVec[i]), str);
 			str.pop_back(); str.pop_back();
-			portaVec[i]->atualiza_porta(collisioncontroller->getCollisionMap(), tileSize, *mapVec[player->getCurrentMap()]);
+			portaVec[i]->atualiza_porta(collisioncontroller->getCollisionMap(), tileSize, *mapVec[players[trcontroller->player_number-1]->getCurrentMap()]);
 		}
 		for (int i = 0; i < cameraVec.size(); i++){
 			str.push_back('c'); str.push_back(i);
@@ -125,9 +136,50 @@ void Controller::monitorLoop(){
 			str.pop_back(); str.pop_back();
 		}
 		std::cout << "Monitor State Loaded!" <<std::endl; 
+		std::cout << players.size() <<std::endl; 
 		// Rendering
-		viewer->updateMap(mapVec[player->getCurrentMap()]->get_textMap());	
-		viewer->render(*player);
+		viewer->updateMap(mapVec[players[trcontroller->player_number-1]->getCurrentMap()]->get_textMap());	
+		//viewer->updateMap(mapVec[0]->get_textMap());	
+		std::cout << "updated map" <<std::endl; 
+		viewer->render(players);
+
+		// Send Player Input 
+		if(buttonReady && state[SDL_SCANCODE_UP]) {
+			str= "U";
+			trcontroller->sendString(str);
+			if (state[SDL_SCANCODE_UP]){
+				buttonEventCounter++;
+				buttonReady = 0;
+			}
+		}
+
+		if(buttonReady && state[SDL_SCANCODE_LEFT]) {
+			str ="L";
+			trcontroller->sendString(str);
+			if (state[SDL_SCANCODE_LEFT]){
+				buttonEventCounter++;
+				buttonReady = 0;
+			}
+		}
+				
+		if(buttonReady && state[SDL_SCANCODE_RIGHT]) {
+			str = "R";
+			trcontroller->sendString(str);
+			if (state[SDL_SCANCODE_RIGHT]){
+				buttonEventCounter++;
+				buttonReady = 0;
+			}
+		}
+
+		if(buttonReady && state[SDL_SCANCODE_DOWN]) {
+			str= "D";
+			trcontroller->sendString(str);
+			if (state[SDL_SCANCODE_DOWN]){
+				buttonEventCounter++;
+				buttonReady = 0;
+			}
+		}
+
 
 		while (SDL_PollEvent(&evento)) {
 			if (evento.type == SDL_QUIT) {
@@ -152,16 +204,17 @@ void Controller::gameLoop(){
 	char m[] = "\0"; char n[] = "\n"; char nove[] = "9";
 	int Por; int Up; int Down; int Left; int Right;
 	
-	// Thread for reciving clients and information
-	std::thread conexion (&TRcontroller::checkConexion, trcontroller, 0);
-	
 	// Configurar o Server
 	trcontroller->configServer(); // NAO SEI O QUE ISSO FAZ, E SE ISSO ATRAPALHA NO Q EU FIZ
+
+	// Thread for reciving clients and information
+	std::thread connection (&TRcontroller::checkConnection, trcontroller, 0);
 
 	// Start at title screen
 	//titleScreen();
 	while(rodando){
 		for (int ouo = 0; ouo < ((trcontroller->get_commands()).size()); ouo++) {
+		//std::cout << trcontroller->get_commands()[ouo] << std::endl;
 			// Player has entered the server
 			if(strcmp(m, (trcontroller->get_commands())[ouo]) == 0) {
 				players.push_back(std::shared_ptr<Player> (new Player(0, 0)));
@@ -178,17 +231,19 @@ void Controller::gameLoop(){
 			}
 
 			// In case player in position "ouo" hasn't sent more commands
-			else if(strcmp(nove, (trcontroller->get_commands())[ouo]) == 0) continue;
+			else if(strcmp(nove, (trcontroller->get_commands())[ouo]) == 0){
+			       	continue;
+			}
 
 			// Processing commands from player in position "ouo"
 			else {
 				// Setting command flags
 				Por = 0; Up = 0; Down = 0; Left = 0; Right = 0;
-				if (((trcontroller->get_commands())[ouo])[12] == 'E') Por = 1;
-				else if (((trcontroller->get_commands())[ouo])[12] == 'U') Up = 1;
-				else if (((trcontroller->get_commands())[ouo])[12] == 'D') Down = 1;
-				else if (((trcontroller->get_commands())[ouo])[12] == 'L') Left = 1;
-				else if (((trcontroller->get_commands())[ouo])[12] == 'R') Right = 1;
+				if (((trcontroller->get_commands())[ouo]) == "E") Por = 1;
+				else if (((trcontroller->get_commands())[ouo]) == "U") Up = 1;
+				else if (((trcontroller->get_commands())[ouo]) == "D") Down = 1;
+				else if (((trcontroller->get_commands())[ouo]) == "L") Left = 1;
+				else if (((trcontroller->get_commands())[ouo]) == "R") Right = 1;
 				((trcontroller->get_commands())[ouo]) = "9";
 
 				// mapa inicial
@@ -206,52 +261,6 @@ void Controller::gameLoop(){
 					for (int i = 0; i < portaVec.size(); i++){
 						portacontroller->abre_fecha(*(portaVec[i]), *(players[ouo]), *mapVec[players[ouo]->getCurrentMap()], state, collisioncontroller->getCollisionMap());
 					}
-				}
-
-				// Save Current State
-				if(state[SDL_SCANCODE_S]) {
-					str.push_back('y'); str.push_back('1');
-					slcontroller->add(*(players[ouo]), str);
-					str.pop_back(); str.pop_back();
-					for (int i = 0; i < portaVec.size(); i++){
-						str.push_back('p'); str.push_back(i);
-						slcontroller->add(*(portaVec[i]), str);
-						str.pop_back(); str.pop_back();
-					}
-					for (int i = 0; i < cameraVec.size(); i++){
-						str.push_back('c'); str.push_back(i);
-						slcontroller->add(*(cameraVec[i]), str);
-						str.pop_back(); str.pop_back();
-					}
-					if (state[SDL_SCANCODE_S]){
-						buttonEventCounter++;
-						buttonReady = 0;
-					}
-					slcontroller->save();
-					std::cout << "Saved!" <<std::endl;
-				}
-				
-				// Load Saved File
-				if(state[SDL_SCANCODE_L]) {
-					str.push_back('y'); str.push_back('1');
-					slcontroller->load(*(players[ouo]), str);
-					str.pop_back(); str.pop_back();
-					for (int i = 0; i < portaVec.size(); i++){
-						str.push_back('p'); str.push_back(i);
-						slcontroller->load(*(portaVec[i]), str);
-						str.pop_back(); str.pop_back();
-						portaVec[i]->atualiza_porta(collisioncontroller->getCollisionMap(), tileSize, *mapVec[players[ouo]->getCurrentMap()]);
-					}
-					for (int i = 0; i < cameraVec.size(); i++){
-						str.push_back('c'); str.push_back(i);
-						slcontroller->load(*(cameraVec[i]), str);
-						str.pop_back(); str.pop_back();
-					}
-					if (state[SDL_SCANCODE_L]){
-						buttonEventCounter++;
-						buttonReady = 0;
-					}
-					std::cout << "Loaded!" <<std::endl;
 				}
 
 				// Camera Control
@@ -298,7 +307,8 @@ void Controller::gameLoop(){
 					slcontroller->add(*(cameraVec[i]), str);
 					str.pop_back(); str.pop_back();
 				}
-				trcontroller->sendState_server(slcontroller->get_file(), 0000);
+				std::cout << slcontroller->get_file() << std::endl;
+				trcontroller->sendState_server(slcontroller->get_file());
 
 				// Rendering
 				//viewer->updateMap(mapVec[player->getCurrentMap()]->get_textMap());	
@@ -314,7 +324,7 @@ void Controller::gameLoop(){
 		}
 	}
 	trcontroller->set_flag(0);
-	conexion.join();
+	connection.join();
 }
 
 void Controller::titleScreen(){
