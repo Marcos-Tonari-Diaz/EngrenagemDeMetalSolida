@@ -254,7 +254,7 @@ void Controller::gameLoop(){
 	
 			// Player has entered the server
 			//if(strcmp(m, (trcontroller->get_commands())[ouo]) == 0) {
-			if(strcmp("new", (trcontroller->get_commands())[ouo]) == 0) {
+			if((trcontroller->get_commands())[ouo].compare("new") == 0) {
 				players.push_back(std::shared_ptr<Player> (new Player(3*tileSize, 3*tileSize, boxSize, boundBoxH)));
 				((trcontroller->get_commands())[ouo]) = "9";
 				players[ouo]->setCurrentMap(0);
@@ -262,13 +262,13 @@ void Controller::gameLoop(){
 
 			// Player has left the server
 			//else if(strcmp(n, (trcontroller->get_commands())[ouo]) == 0) {
-			else if(strcmp("left", (trcontroller->get_commands())[ouo]) == 0) {
+			else if((trcontroller->get_commands())[ouo].compare("left") == 0) {
 				players.erase(players.begin() + ouo);
 				(trcontroller->get_commands()).erase((trcontroller->get_commands()).begin() + ouo);
 			}
 
 			// In case player in position "ouo" hasn't sent more commands
-			else if(strcmp("9", (trcontroller->get_commands())[ouo]) == 0){
+			else if((trcontroller->get_commands())[ouo].compare("9") == 0){
 			       	continue;
 			}
 
@@ -276,11 +276,17 @@ void Controller::gameLoop(){
 			else {
 				// Setting command flags
 				Por = 0; Up = 0; Down = 0; Left = 0; Right = 0;
-				if (strcmp(nove, (trcontroller->get_commands())[ouo]) == 0) Por = 1;
-				else if (strcmp("U", (trcontroller->get_commands())[ouo]) == 0) Up = 1;
+				if ((trcontroller->get_commands())[ouo].compare("R") == 0) Right = 1;
+				else if ((trcontroller->get_commands())[ouo].compare("U") == 0) Up = 1;
+				else if ((trcontroller->get_commands())[ouo].compare("D") == 0) Down = 1;
+				else if ((trcontroller->get_commands())[ouo].compare("L") == 0) Left = 1;
+				else if ((trcontroller->get_commands())[ouo].compare("E") == 0) Por = 1;
+				/*
+				if (strcmp("9", (trcontroller->get_commands())[ouo]) == 0) Por = 1;
 				else if (strcmp("D", (trcontroller->get_commands())[ouo]) == 0) Down = 1;
 				else if (strcmp("L", (trcontroller->get_commands())[ouo]) == 0) Left = 1;
 				else if (strcmp("R", (trcontroller->get_commands())[ouo]) == 0) Right = 1;
+				*/
 				std::cout << "right: " << Right << std::endl;
 				((trcontroller->get_commands())[ouo]) = "9";
 

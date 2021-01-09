@@ -17,7 +17,8 @@ using boost::asio::ip::udp;
 class TRcontroller{
 	private:
 		std::vector<boost::asio::ip::udp::endpoint> remote_endpoints;
-		std::vector<const char*> commands;
+		//std::vector<const char*> commands;
+		std::vector<std::string> commands;
 		int flag = 1;
 	public:
 		boost::asio::io_service my_io_service;
@@ -48,7 +49,7 @@ class TRcontroller{
 		void sendState_server(nlohmann::json j);
 		void checkConnection(int porta);
 		void set_flag(int flag);
-		std::vector<const char*>& get_commands();
+		std::vector<std::string>& get_commands();
 		void configServer();
 		void configClient();
 };
