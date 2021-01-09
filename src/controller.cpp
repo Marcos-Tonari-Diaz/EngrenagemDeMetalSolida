@@ -172,6 +172,7 @@ void Controller::monitorLoop(){
 
 		std::cout << "player X: " << monitorPlayers[1]->getX() << std::endl;
 		// Send Player Input 
+		buttonReady=1;
 		if(buttonReady && state[SDL_SCANCODE_UP]) {
 			str= "U";
 			trcontroller->sendString(str);
@@ -214,8 +215,8 @@ void Controller::monitorLoop(){
 		}
 
 		// increment reset timer
-		buttonEventCounter = (buttonEventCounter+1)%40;
-		if (buttonEventCounter==0){buttonReady = 1;}
+		//buttonEventCounter = (buttonEventCounter+1)%40;
+		//if (buttonEventCounter==0){buttonReady = 1;}
 
 		while (SDL_PollEvent(&evento)) {
 			if (evento.type == SDL_QUIT) {
@@ -237,7 +238,6 @@ void Controller::gameLoop(){
 	// auxiliary string for load/save
 	std::string str;
 	//chars de comparaçao
-	char m[] = "\0"; char n[] = "\n"; char nove[] = "9";
 	int Por; int Up; int Down; int Left; int Right;
 	
 	// Configurar o Server
@@ -268,7 +268,7 @@ void Controller::gameLoop(){
 			}
 
 			// In case player in position "ouo" hasn't sent more commands
-			else if(strcmp(nove, (trcontroller->get_commands())[ouo]) == 0){
+			else if(strcmp("9", (trcontroller->get_commands())[ouo]) == 0){
 			       	continue;
 			}
 
@@ -276,11 +276,11 @@ void Controller::gameLoop(){
 			else {
 				// Setting command flags
 				Por = 0; Up = 0; Down = 0; Left = 0; Right = 0;
-				if (((trcontroller->get_commands())[ouo]) == "E") Por = 1;
-				else if (((trcontroller->get_commands())[ouo]) == "U") Up = 1;
-				else if (((trcontroller->get_commands())[ouo]) == "D") Down = 1;
-				else if (((trcontroller->get_commands())[ouo]) == "L") Left = 1;
-				else if (((trcontroller->get_commands())[ouo]) == "R") Right = 1;
+				if (strcmp(nove, (trcontroller->get_commands())[ouo]) == 0) Por = 1;
+				else if (strcmp("U", (trcontroller->get_commands())[ouo]) == 0) Up = 1;
+				else if (strcmp("D", (trcontroller->get_commands())[ouo]) == 0) Down = 1;
+				else if (strcmp("L", (trcontroller->get_commands())[ouo]) == 0) Left = 1;
+				else if (strcmp("R", (trcontroller->get_commands())[ouo]) == 0) Right = 1;
 				std::cout << "right: " << Right << std::endl;
 				((trcontroller->get_commands())[ouo]) = "9";
 
