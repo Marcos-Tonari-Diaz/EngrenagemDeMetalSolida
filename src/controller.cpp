@@ -209,11 +209,6 @@ void Controller::monitorLoop(){
 			}
 		}
 
-		else{
-			str= "9";
-			trcontroller->sendString(str);
-		}
-
 		// increment reset timer
 		//buttonEventCounter = (buttonEventCounter+1)%40;
 		//if (buttonEventCounter==0){buttonReady = 1;}
@@ -223,7 +218,7 @@ void Controller::monitorLoop(){
 				rodando = false;
 			}
 		}
-    		SDL_Delay(20);
+    		SDL_Delay(5);
 	}
 }
 
