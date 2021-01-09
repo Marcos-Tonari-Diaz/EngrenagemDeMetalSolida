@@ -51,7 +51,7 @@ void TRcontroller::checkConnection(int porta) {
 			for (int i = 0; i < remote_endpoints.size(); i++) {
 				if(this->remote_endpoints[i] == remote_endpoint) {
 					std::cout << "input recebido: " << v << std::endl;
-					this->commands[i] = v;
+					this->commands[i] = std::string(v);
 					break;
 				}
 			}

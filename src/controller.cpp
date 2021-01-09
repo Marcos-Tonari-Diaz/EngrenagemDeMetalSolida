@@ -336,38 +336,38 @@ void Controller::gameLoop(){
 				}
 			}
 
-			// Save in file to transfer to viwer
-			//std::cout << "players vec size: " << players.size() << std::endl;
-			for (int i = 0; i < players.size(); i++){
-				str.push_back('y'); 
-				str+=std::to_string(i);
-				slcontroller->add(*(players[i]), str);
-				str.pop_back(); str.pop_back();
-			}
-			for (int i = 0; i < portaVec.size(); i++){
-				str.push_back('p'); 
-				str+=std::to_string(i);
-				slcontroller->add(*(portaVec[i]), str);
-				str.pop_back(); str.pop_back();
-			}
-			for (int i = 0; i < cameraVec.size(); i++){
-				str.push_back('c');
-				str+=std::to_string(i);
-				slcontroller->add(*(cameraVec[i]), str);
-				str.pop_back(); str.pop_back();
-			}
-			trcontroller->sendState_server(slcontroller->get_file());
-
-			while (SDL_PollEvent(&evento)) {
-				if (evento.type == SDL_QUIT) {
-					rodando = false;
-					trcontroller->set_flag(0);
-					connection.join();
-				}
-			}
-
-			SDL_Delay(20);
 		}
+		// Save in file to transfer to viwer
+		//std::cout << "players vec size: " << players.size() << std::endl;
+		for (int i = 0; i < players.size(); i++){
+			str.push_back('y'); 
+			str+=std::to_string(i);
+			slcontroller->add(*(players[i]), str);
+			str.pop_back(); str.pop_back();
+		}
+		for (int i = 0; i < portaVec.size(); i++){
+			str.push_back('p'); 
+			str+=std::to_string(i);
+			slcontroller->add(*(portaVec[i]), str);
+			str.pop_back(); str.pop_back();
+		}
+		for (int i = 0; i < cameraVec.size(); i++){
+			str.push_back('c');
+			str+=std::to_string(i);
+			slcontroller->add(*(cameraVec[i]), str);
+			str.pop_back(); str.pop_back();
+		}
+		trcontroller->sendState_server(slcontroller->get_file());
+
+		while (SDL_PollEvent(&evento)) {
+			if (evento.type == SDL_QUIT) {
+				rodando = false;
+				trcontroller->set_flag(0);
+				connection.join();
+			}
+		}
+
+		SDL_Delay(20);
 	}
 	trcontroller->set_flag(0);
 	connection.join();
