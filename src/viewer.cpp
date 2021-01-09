@@ -169,7 +169,7 @@ Viewer::Viewer(): generator(5), corrDistr(1,0.25), wallDist(4,0.25) {
 	playerSprites.back()->y = 5;
   }
 
-  // Set target rectanglge
+  // Set target rectangle
   tileRect.w = tileSize;
   tileRect.h = tileSize;
 
@@ -212,7 +212,7 @@ Viewer::Viewer(): generator(5), corrDistr(1,0.25), wallDist(4,0.25) {
 }
 
 /* Draws the scene */
-void Viewer::render(std::vector<std::shared_ptr<Player>> players){
+void Viewer::render(std::map<int ,std::shared_ptr<Player>>& monitorPlayers, int currentMap){
 	SDL_RenderClear(renderer);
 	// Map Rendering
 	std::map<std::pair<int, int>, std::string>::iterator it;
@@ -287,13 +287,17 @@ void Viewer::render(std::vector<std::shared_ptr<Player>> players){
 	}
 	// Player Rendering
 	// make sure the texture is rendered above the bounding box
-	for (int i; i<players.size(); i++){
-		SDL_Rect playerRect;
-		playerRect.x = players[i]->getX();
-		playerRect.y = players[i]->getY();
-		playerRect.w = players[i]->getW();
-		playerRect.h = players[i]->getH();
-		SDL_RenderCopy(renderer, std::get<0>(textDict["player"]), playerSprites[players[i]->getFrame()], &playerRect);
+	std::map<int, std::shared_ptr<Player>>::iterator pl;
+	SDL_Rect playerRect;
+	for (pl = monitorPlayers.begin(); pl != monitorPlayers.end(); pl++){
+		// only render players in the client current map
+		if (pl->second->getCurrentMap() == currentMap){
+			playerRect.x = pl->second->getX();
+			playerRect.y = pl->second->getY();
+			playerRect.w = pl->second->getW();
+			playerRect.h = pl->second->getH();
+			SDL_RenderCopy(renderer, std::get<0>(textDict["player"]), playerSprites[pl->second->getFrame()], &playerRect);
+		}
 	}
 	SDL_RenderPresent(renderer);
 	return;

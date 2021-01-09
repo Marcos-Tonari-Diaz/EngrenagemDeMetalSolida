@@ -25,6 +25,7 @@ class Player : public Element {
 		* \param y coordenada y
      		*/
 		Player(int x, int y);
+		Player(int x, int y, int w, int h);
 		/*! \brief Macro para json.
 		*
 		*/

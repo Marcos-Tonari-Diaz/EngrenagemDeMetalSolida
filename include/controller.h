@@ -43,6 +43,7 @@ class Controller {
 		std::vector<std::shared_ptr<Porta>> portaVec;
 		/*! Guarda todos os jogadores */
 		std::vector<std::shared_ptr<Player>> players;
+		std::map<int ,std::shared_ptr<Player>> monitorPlayers;
 
 		/*! Estado do teclado */
   		const Uint8* state = NULL;

@@ -5,6 +5,13 @@ Player::Player(int x, int y){
     this->y = y;
 }
 
+Player::Player(int x, int y, int w, int h){
+    this->x = x;
+    this->y = y;
+    this->w = w;
+    this->h = h;
+}
+
 int Player::getFrame(){
 	return frame;
 }

@@ -1,4 +1,5 @@
 #include "controller.h"
+#include <typeinfo>
 
 Controller::Controller() : viewer(new Viewer), 
 	collisioncontroller(new collisionController()),
@@ -107,42 +108,69 @@ void Controller::monitorLoop(){
 	// Configurar o Cliente
 	trcontroller->configClient();
 
-	// Garbage command to initiate
-	std::string init= "D";
-	trcontroller->sendJSON(init);
+	int boundBoxH = (int) ((float) boxSize*((float) 41/24));
 	while(rodando){
-		// increment reset timer
-		buttonEventCounter = (buttonEventCounter+1)%40;
-		if (buttonEventCounter==0){buttonReady = 1;}
-
-		// for all players
 		// Load Received State
 		json stateJSON = trcontroller->receiveJSON();
 		std::cout << "recebeu estado" << std::endl;
-		for (int ouo = 0; ouo < ; ouo++) {
-			str.push_back('y'); str.push_back('1');
-			slcontroller->load(stateJSON, *(players[ouo]), str);
-			str.pop_back(); str.pop_back();
-		}
-		for (int i = 0; i < portaVec.size(); i++){
-			str.push_back('p'); str.push_back(i);
-			slcontroller->load(stateJSON, *(portaVec[i]), str);
-			str.pop_back(); str.pop_back();
-			portaVec[i]->atualiza_porta(collisioncontroller->getCollisionMap(), tileSize, *mapVec[players[trcontroller->player_number-1]->getCurrentMap()]);
-		}
-		for (int i = 0; i < cameraVec.size(); i++){
-			str.push_back('c'); str.push_back(i);
-			slcontroller->load(stateJSON, *(cameraVec[i]), str);
-			str.pop_back(); str.pop_back();
-		}
-		std::cout << "Monitor State Loaded!" <<std::endl; 
-		std::cout << players.size() <<std::endl; 
-		// Rendering
-		viewer->updateMap(mapVec[players[trcontroller->player_number-1]->getCurrentMap()]->get_textMap());	
-		//viewer->updateMap(mapVec[0]->get_textMap());	
-		std::cout << "updated map" <<std::endl; 
-		viewer->render(players);
 
+		// check for new players/ delete removed players
+		str.push_back('y');
+		for (int i=1; i<21; i++){
+			str+=std::to_string(i-1);
+			//player on list...
+			/*
+			if(monitorPlayers.find(i) != monitorPlayers.end()){
+				//.. but not on received State
+				if(!(stateJSON.contains(str))){
+					monitorPlayers.erase(i);
+				}
+			}
+			*/
+			// player on received State...
+			if(stateJSON.contains(str)){
+				// ... but not on list
+				if(monitorPlayers.find(i)==monitorPlayers.end()){
+					monitorPlayers.insert(std::make_pair(i,std::shared_ptr<Player> (new Player(0, 0, boxSize, boundBoxH))));
+				}	
+			}
+		str = "";
+		}
+
+		// reset str
+		str = "";
+
+		//std::cout << monitorPlayers.size()<<std::endl; 
+		// update all players
+		//std::cout << "monitor players size: " << monitorPlayers.size() << std::endl;
+		std::map<int, std::shared_ptr<Player>>::iterator pl;
+		for (pl = monitorPlayers.begin(); pl != monitorPlayers.end(); ++pl){
+			str.push_back('y'); 
+			str+=std::to_string((pl->first)-1);
+			slcontroller->load(stateJSON, *(pl->second), str);
+			str.pop_back(); str.pop_back();
+			// update all portas
+			for (int i = 0; i < portaVec.size(); i++){
+				str.push_back('p'); 
+				str+=std::to_string(i);
+				slcontroller->load(stateJSON, *(portaVec[i]), str);
+				str.pop_back(); str.pop_back();
+				portaVec[i]->atualiza_porta(collisioncontroller->getCollisionMap(), tileSize, *mapVec[pl->second->getCurrentMap()]);
+			}
+			// update all cameras
+			for (int i = 0; i < cameraVec.size(); i++){
+				str.push_back('c');
+				str+=std::to_string(i);
+				slcontroller->load(stateJSON, *(cameraVec[i]), str);
+				str.pop_back(); str.pop_back();
+			}
+		}
+
+		// Rendering
+		viewer->updateMap(mapVec[monitorPlayers[trcontroller->player_number]->getCurrentMap()]->get_textMap());	
+		viewer->render(monitorPlayers, monitorPlayers[trcontroller->player_number]->getCurrentMap());
+
+		std::cout << "player X: " << monitorPlayers[1]->getX() << std::endl;
 		// Send Player Input 
 		if(buttonReady && state[SDL_SCANCODE_UP]) {
 			str= "U";
@@ -153,7 +181,7 @@ void Controller::monitorLoop(){
 			}
 		}
 
-		if(buttonReady && state[SDL_SCANCODE_LEFT]) {
+		else if(buttonReady && state[SDL_SCANCODE_LEFT]) {
 			str ="L";
 			trcontroller->sendString(str);
 			if (state[SDL_SCANCODE_LEFT]){
@@ -162,7 +190,7 @@ void Controller::monitorLoop(){
 			}
 		}
 				
-		if(buttonReady && state[SDL_SCANCODE_RIGHT]) {
+		else if(buttonReady && state[SDL_SCANCODE_RIGHT]) {
 			str = "R";
 			trcontroller->sendString(str);
 			if (state[SDL_SCANCODE_RIGHT]){
@@ -171,7 +199,7 @@ void Controller::monitorLoop(){
 			}
 		}
 
-		if(buttonReady && state[SDL_SCANCODE_DOWN]) {
+		else if(buttonReady && state[SDL_SCANCODE_DOWN]) {
 			str= "D";
 			trcontroller->sendString(str);
 			if (state[SDL_SCANCODE_DOWN]){
@@ -180,13 +208,21 @@ void Controller::monitorLoop(){
 			}
 		}
 
+		else{
+			str= "9";
+			trcontroller->sendString(str);
+		}
+
+		// increment reset timer
+		buttonEventCounter = (buttonEventCounter+1)%40;
+		if (buttonEventCounter==0){buttonReady = 1;}
 
 		while (SDL_PollEvent(&evento)) {
 			if (evento.type == SDL_QUIT) {
 				rodando = false;
 			}
 		}
-    	SDL_Delay(20);
+    		SDL_Delay(20);
 	}
 }
 
@@ -205,7 +241,7 @@ void Controller::gameLoop(){
 	int Por; int Up; int Down; int Left; int Right;
 	
 	// Configurar o Server
-	trcontroller->configServer(); // NAO SEI O QUE ISSO FAZ, E SE ISSO ATRAPALHA NO Q EU FIZ
+	trcontroller->configServer();
 
 	// Thread for reciving clients and information
 	std::thread connection (&TRcontroller::checkConnection, trcontroller, 0);
@@ -215,17 +251,18 @@ void Controller::gameLoop(){
 	while(rodando){
 		for (int ouo = 0; ouo < ((trcontroller->get_commands()).size()); ouo++) {
 		//std::cout << trcontroller->get_commands()[ouo] << std::endl;
+	
 			// Player has entered the server
-			if(strcmp(m, (trcontroller->get_commands())[ouo]) == 0) {
-				players.push_back(std::shared_ptr<Player> (new Player(0, 0)));
+			//if(strcmp(m, (trcontroller->get_commands())[ouo]) == 0) {
+			if(strcmp("new", (trcontroller->get_commands())[ouo]) == 0) {
+				players.push_back(std::shared_ptr<Player> (new Player(3*tileSize, 3*tileSize, boxSize, boundBoxH)));
 				((trcontroller->get_commands())[ouo]) = "9";
-				players[ouo]->setTextSize(boxSize, boundBoxH);
-				players[ouo]->setPosition(3*tileSize, 3*tileSize);
 				players[ouo]->setCurrentMap(0);
 			}
 
 			// Player has left the server
-			else if(strcmp(n, (trcontroller->get_commands())[ouo]) == 0) {
+			//else if(strcmp(n, (trcontroller->get_commands())[ouo]) == 0) {
+			else if(strcmp("left", (trcontroller->get_commands())[ouo]) == 0) {
 				players.erase(players.begin() + ouo);
 				(trcontroller->get_commands()).erase((trcontroller->get_commands()).begin() + ouo);
 			}
@@ -244,6 +281,7 @@ void Controller::gameLoop(){
 				else if (((trcontroller->get_commands())[ouo]) == "D") Down = 1;
 				else if (((trcontroller->get_commands())[ouo]) == "L") Left = 1;
 				else if (((trcontroller->get_commands())[ouo]) == "R") Right = 1;
+				std::cout << "right: " << Right << std::endl;
 				((trcontroller->get_commands())[ouo]) = "9";
 
 				// mapa inicial
@@ -290,37 +328,39 @@ void Controller::gameLoop(){
 						break;
 					}
 				}
-
-				// Save in file to transfer to viwer
-				for (int i = 0; i < players.size(); i++){
-					str.push_back('y'); str.push_back(i);
-					slcontroller->add(*(players[i]), str);
-					str.pop_back(); str.pop_back();
-				}
-				for (int i = 0; i < portaVec.size(); i++){
-					str.push_back('p'); str.push_back(i);
-					slcontroller->add(*(portaVec[i]), str);
-					str.pop_back(); str.pop_back();
-				}
-				for (int i = 0; i < cameraVec.size(); i++){
-					str.push_back('c'); str.push_back(i);
-					slcontroller->add(*(cameraVec[i]), str);
-					str.pop_back(); str.pop_back();
-				}
-				std::cout << slcontroller->get_file() << std::endl;
-				trcontroller->sendState_server(slcontroller->get_file());
-
-				// Rendering
-				//viewer->updateMap(mapVec[player->getCurrentMap()]->get_textMap());	
-				//viewer->render(*player);
-
-				while (SDL_PollEvent(&evento)) {
-					if (evento.type == SDL_QUIT) {
-						rodando = false;
-					}
-				}
-				SDL_Delay(20);
 			}
+
+			// Save in file to transfer to viwer
+			//std::cout << "players vec size: " << players.size() << std::endl;
+			for (int i = 0; i < players.size(); i++){
+				str.push_back('y'); 
+				str+=std::to_string(i);
+				slcontroller->add(*(players[i]), str);
+				str.pop_back(); str.pop_back();
+			}
+			for (int i = 0; i < portaVec.size(); i++){
+				str.push_back('p'); 
+				str+=std::to_string(i);
+				slcontroller->add(*(portaVec[i]), str);
+				str.pop_back(); str.pop_back();
+			}
+			for (int i = 0; i < cameraVec.size(); i++){
+				str.push_back('c');
+				str+=std::to_string(i);
+				slcontroller->add(*(cameraVec[i]), str);
+				str.pop_back(); str.pop_back();
+			}
+			trcontroller->sendState_server(slcontroller->get_file());
+
+			while (SDL_PollEvent(&evento)) {
+				if (evento.type == SDL_QUIT) {
+					rodando = false;
+					trcontroller->set_flag(0);
+					connection.join();
+				}
+			}
+
+			SDL_Delay(20);
 		}
 	}
 	trcontroller->set_flag(0);
