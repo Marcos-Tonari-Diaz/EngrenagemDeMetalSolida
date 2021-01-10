@@ -134,7 +134,7 @@ void Controller::monitorLoop(){
 					monitorPlayers.insert(std::make_pair(i,std::shared_ptr<Player> (new Player(0, 0, boxSize, boundBoxH))));
 				}	
 			}
-		str = "";
+		str = "y";
 		}
 
 		// reset str
@@ -172,8 +172,8 @@ void Controller::monitorLoop(){
 
 		std::cout << "player X: " << monitorPlayers[1]->getX() << std::endl;
 		// Send Player Input 
-		buttonReady=1;
-		if(buttonReady && state[SDL_SCANCODE_UP]) {
+		//buttonReady=1;
+		if(state[SDL_SCANCODE_UP]) {
 			str= "U";
 			trcontroller->sendString(str);
 			if (state[SDL_SCANCODE_UP]){
@@ -182,7 +182,7 @@ void Controller::monitorLoop(){
 			}
 		}
 
-		else if(buttonReady && state[SDL_SCANCODE_LEFT]) {
+		else if(state[SDL_SCANCODE_LEFT]) {
 			str ="L";
 			trcontroller->sendString(str);
 			if (state[SDL_SCANCODE_LEFT]){
@@ -191,7 +191,7 @@ void Controller::monitorLoop(){
 			}
 		}
 				
-		else if(buttonReady && state[SDL_SCANCODE_RIGHT]) {
+		else if(state[SDL_SCANCODE_RIGHT]) {
 			str = "R";
 			trcontroller->sendString(str);
 			if (state[SDL_SCANCODE_RIGHT]){
@@ -200,7 +200,7 @@ void Controller::monitorLoop(){
 			}
 		}
 
-		else if(buttonReady && state[SDL_SCANCODE_DOWN]) {
+		else if(state[SDL_SCANCODE_DOWN]) {
 			str= "D";
 			trcontroller->sendString(str);
 			if (state[SDL_SCANCODE_DOWN]){
@@ -208,14 +208,25 @@ void Controller::monitorLoop(){
 				buttonReady = 0;
 			}
 		}
+		
+		else if(buttonReady && state[SDL_SCANCODE_E]) {
+			str= "E";
+			trcontroller->sendString(str);
+			if (state[SDL_SCANCODE_E]){
+				buttonEventCounter++;
+				buttonReady = 0;
+			}
+		}
 
 		// increment reset timer
-		//buttonEventCounter = (buttonEventCounter+1)%40;
-		//if (buttonEventCounter==0){buttonReady = 1;}
+		buttonEventCounter = (buttonEventCounter+1)%30;
+		if (buttonEventCounter==0){buttonReady = 1;}
 
 		while (SDL_PollEvent(&evento)) {
 			if (evento.type == SDL_QUIT) {
 				rodando = false;
+				str = "Client: Adeus";
+				trcontroller->sendString(str);
 			}
 		}
     		SDL_Delay(5);
@@ -239,7 +250,7 @@ void Controller::gameLoop(){
 	trcontroller->configServer();
 
 	// Thread for reciving clients and information
-	std::thread connection (&TRcontroller::checkConnection, trcontroller, 0);
+	std::thread *connection = new std::thread(&TRcontroller::checkConnection, trcontroller, 0);
 
 	// Start at title screen
 	//titleScreen();
@@ -358,14 +369,13 @@ void Controller::gameLoop(){
 			if (evento.type == SDL_QUIT) {
 				rodando = false;
 				trcontroller->set_flag(0);
-				connection.join();
+				delete connection;
+				//connection.join();
 			}
 		}
 
 		SDL_Delay(20);
 	}
-	trcontroller->set_flag(0);
-	connection.join();
 }
 
 void Controller::titleScreen(){
