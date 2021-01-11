@@ -112,26 +112,23 @@ void Controller::monitorLoop(){
 	while(rodando){
 		// Load Received State
 		json stateJSON = trcontroller->receiveJSON();
-		std::cout << "recebeu estado" << std::endl;
 		std::cout << stateJSON << std::endl;
 
 		// check for new players/ delete removed players
 		str.push_back('y');
 		for (int i=1; i<21; i++){
 			str+=std::to_string(i);
-			//player on list...
-			/*
-			if(players.find(i) != players.end()){
-				//.. but not on received State
-				if(!(stateJSON.contains(str))){
+			if(!(stateJSON.contains(str))){
+				if((players.count(i)==1) && (i!=trcontroller->player_number)){
+				// ... but not on receive State
 					players.erase(i);
-				}
+					//std::cout << "player removed\n";
+				}	
 			}
-			*/
 			// player on received State...
 			if(stateJSON.contains(str)){
 				// ... but not on list
-				if(players.find(i)==players.end()){
+				if(players.count(i)==0){
 					players.insert(std::make_pair(i,std::shared_ptr<Player> (new Player(0, 0, boxSize, boundBoxH))));
 				}	
 			}
@@ -141,9 +138,7 @@ void Controller::monitorLoop(){
 		// reset str
 		str = "";
 
-		//std::cout << players.size()<<std::endl; 
 		// update all players
-		//std::cout << "monitor players size: " << players.size() << std::endl;
 		std::map<int, std::shared_ptr<Player>>::iterator pl;
 		for (pl = players.begin(); pl != players.end(); ++pl){
 			str.push_back('y'); 
@@ -171,12 +166,10 @@ void Controller::monitorLoop(){
 		viewer->updateMap(mapVec[players[trcontroller->player_number]->getCurrentMap()]->get_textMap());	
 		viewer->render(players, players[trcontroller->player_number]->getCurrentMap());
 
-		std::cout << "player X: " << players[1]->getX() << std::endl;
 		// Send Player Input 
-		//buttonReady=1;
 		if(state[SDL_SCANCODE_UP]) {
 			str= "U";
-			trcontroller->sendString(str);
+			trcontroller->sendString("U");
 			if (state[SDL_SCANCODE_UP]){
 				buttonEventCounter++;
 				buttonReady = 0;
@@ -251,7 +244,7 @@ void Controller::gameLoop(){
 	trcontroller->configServer();
 
 	// Thread for reciving clients and information
-	std::thread *connection = new std::thread(&TRcontroller::checkConnection, trcontroller, 0);
+	std::thread *connection = new std::thread(&TRcontroller::checkConnection, trcontroller);
 
 	// Start at title screen
 	//titleScreen();
@@ -331,6 +324,7 @@ void Controller::gameLoop(){
 			}
 
 		}
+
 		// Save in file to transfer to viwer
 		std::map<int, std::shared_ptr<Player>>::iterator pl;
 		for (pl = players.begin(); pl != players.end(); ++pl){
@@ -352,6 +346,7 @@ void Controller::gameLoop(){
 			str.pop_back(); str.pop_back();
 		}
 		trcontroller->sendState_server(slcontroller->get_file());
+		slcontroller->clear();
 
 		while (SDL_PollEvent(&evento)) {
 			if (evento.type == SDL_QUIT) {

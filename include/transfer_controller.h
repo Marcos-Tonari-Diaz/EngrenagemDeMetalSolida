@@ -46,7 +46,7 @@ class TRcontroller{
 		 * \param IP Endereço de ip do servidor do jogo.
 		 */
 		void sendState_server(nlohmann::json j);
-		void checkConnection(int porta);
+		void checkConnection();
 		void set_flag(int flag);
 		std::map<int, std::string>& get_commands();
 		void configServer();

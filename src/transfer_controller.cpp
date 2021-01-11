@@ -2,7 +2,6 @@
 
 using boost::asio::ip::udp;
 
-//!!! procurar um jeito de configurar sem depender de construtor
 TRcontroller::TRcontroller(): local_endpoint(udp::v4(), 0), remote_endpoint(udp::v4(), 0), my_socket(my_io_service){}
 
 void TRcontroller::sendState_server(nlohmann::json j) {
@@ -12,7 +11,7 @@ void TRcontroller::sendState_server(nlohmann::json j) {
 	}
 }
 
-void TRcontroller::checkConnection(int porta) {
+void TRcontroller::checkConnection() {
 
 	char v[5000];
 	for (int i =0; i<5000; i++){v[i]='\0';}
@@ -56,7 +55,6 @@ void TRcontroller::checkConnection(int porta) {
 			std::map<int, boost::asio::ip::udp::endpoint>::iterator ep;
 			for (ep = remote_endpoints.begin(); ep!= remote_endpoints.end(); ++ep) {
 				if(ep->second == remote_endpoint) {
-					std::cout << "input recebido: " << v << std::endl;
 					commands[ep->first] = std::string(v);
 					break;
 				}

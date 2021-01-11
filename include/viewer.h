@@ -44,6 +44,7 @@ class Viewer{
 
 		/*! Player Animation Sprites Rectangles */
 		std::vector<SDL_Rect*> playerSprites;
+
 		/*! Corridor Textures*/
 		std::map<std::pair<int, int>, int> corridorRects;
 		/*! Wall Textures*/
@@ -113,6 +114,9 @@ class Viewer{
 
 		/*! Referencia para Texture Map */
 		std::map<std::pair<int, int>, std::string> textMap;
+
+		/*! Player colors */
+		std::map<int, std::tuple<int, int, int>> playerColorMap;
 
 		// Size of tile sides (tiles are squares)
 		// OBS: tileRec.w is global tilesize
