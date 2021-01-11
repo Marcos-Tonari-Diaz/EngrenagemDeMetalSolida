@@ -1,7 +1,7 @@
 #include "controller.h"
 #include <typeinfo>
 
-Controller::Controller() : viewer(new Viewer), 
+Controller::Controller(int create_screen) : viewer(new Viewer(create_screen)), 
 	collisioncontroller(new collisionController()),
 	portacontroller(new Porta_controller()),
 	slcontroller(new SLcontroller()),
@@ -112,17 +112,17 @@ void Controller::monitorLoop(){
 	while(rodando){
 		// Load Received State
 		json stateJSON = trcontroller->receiveJSON();
-		std::cout << stateJSON << std::endl;
 
+		str = "";
 		// check for new players/ delete removed players
 		str.push_back('y');
 		for (int i=1; i<21; i++){
 			str+=std::to_string(i);
 			if(!(stateJSON.contains(str))){
-				if((players.count(i)==1) && (i!=trcontroller->player_number)){
+				//if((players.count(i)==1) && (i!=trcontroller->player_number)){
+				if((players.count(i)==1)){
 				// ... but not on receive State
 					players.erase(i);
-					//std::cout << "player removed\n";
 				}	
 			}
 			// player on received State...

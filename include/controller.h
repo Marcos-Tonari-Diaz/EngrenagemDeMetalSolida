@@ -67,7 +67,7 @@ class Controller {
 			* 
 		* \return Nada (este é um construtor!)
 		* */
-		Controller();
+		Controller(int create_screen);
 	    	/*! \brief Loop principal
 		* Loop principal do jogo.
 		* Roda os controllers secundáros.

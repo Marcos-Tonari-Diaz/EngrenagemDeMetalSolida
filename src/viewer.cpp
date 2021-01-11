@@ -1,6 +1,6 @@
 #include "viewer.h"
 
-Viewer::Viewer(): generator(5), corrDistr(1,0.25), wallDist(4,0.25) {
+Viewer::Viewer(int create_screen): generator(5), corrDistr(1,0.25), wallDist(4,0.25) {
   // Inicializando o subsistema de video do SDL
   try{
 	  if ( SDL_Init (SDL_INIT_VIDEO) < 0 ) {
@@ -32,6 +32,7 @@ Viewer::Viewer(): generator(5), corrDistr(1,0.25), wallDist(4,0.25) {
 	    SDL_Quit();
 	    throw 1;
 	  }
+  	  //if (!create_screen) SDL_DestroyWindow(window);
   }
   catch(int i){std::cout << "SDL ERROR" <<std::endl;}
 
