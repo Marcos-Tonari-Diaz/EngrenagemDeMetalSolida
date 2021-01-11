@@ -22,7 +22,7 @@ void TRcontroller::checkConnection(int porta) {
 
 	std::string msg;
 
-	int playerID = 0;
+	int playerID = 1;
 	
 	while(this->flag) {
 		//std::cout << "rodando a Server Thread... " << std::endl;

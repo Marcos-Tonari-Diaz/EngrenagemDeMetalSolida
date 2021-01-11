@@ -113,11 +113,12 @@ void Controller::monitorLoop(){
 		// Load Received State
 		json stateJSON = trcontroller->receiveJSON();
 		std::cout << "recebeu estado" << std::endl;
+		std::cout << stateJSON << std::endl;
 
 		// check for new players/ delete removed players
 		str.push_back('y');
 		for (int i=1; i<21; i++){
-			str+=std::to_string(i-1);
+			str+=std::to_string(i);
 			//player on list...
 			/*
 			if(players.find(i) != players.end()){
@@ -146,7 +147,7 @@ void Controller::monitorLoop(){
 		std::map<int, std::shared_ptr<Player>>::iterator pl;
 		for (pl = players.begin(); pl != players.end(); ++pl){
 			str.push_back('y'); 
-			str+=std::to_string((pl->first)-1);
+			str+=std::to_string((pl->first));
 			slcontroller->load(stateJSON, *(pl->second), str);
 			str.pop_back(); str.pop_back();
 			// update all portas
