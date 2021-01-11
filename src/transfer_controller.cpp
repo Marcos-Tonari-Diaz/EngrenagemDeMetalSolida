@@ -6,8 +6,9 @@ using boost::asio::ip::udp;
 TRcontroller::TRcontroller(): local_endpoint(udp::v4(), 0), remote_endpoint(udp::v4(), 0), my_socket(my_io_service){}
 
 void TRcontroller::sendState_server(nlohmann::json j) {
-	for (int i = 0; i < remote_endpoints.size(); i++) {
-		sendJSON(j, remote_endpoints[i]);
+	std::map<int, boost::asio::ip::udp::endpoint>::iterator ep;
+	for (ep = remote_endpoints.begin(); ep!= remote_endpoints.end(); ++ep) {
+		sendJSON(j, ep->second);
 	}
 }
 
@@ -20,6 +21,8 @@ void TRcontroller::checkConnection(int porta) {
 	char b[] = "Client: Adeus";
 
 	std::string msg;
+
+	int playerID = 0;
 	
 	while(this->flag) {
 		//std::cout << "rodando a Server Thread... " << std::endl;
@@ -28,19 +31,21 @@ void TRcontroller::checkConnection(int porta) {
 		my_socket.receive_from(boost::asio::buffer(v,5000), remote_endpoint); // Confs. do Cliente
 
 		if(strcmp(v, a) == 0) {
-			(this->remote_endpoints).push_back(remote_endpoint);
-			(this->commands).push_back("new");
-			msg = std::to_string(this->remote_endpoints.size());
+			remote_endpoints.insert({playerID,remote_endpoint});
+			commands.insert({playerID,"new"});
+			msg = std::to_string(playerID);
 			std::cout << "Cliente Adicionado: " << msg << std::endl;
 			my_socket.send_to(boost::asio::buffer(msg), remote_endpoint);
+			playerID++;
 		}
 
 		else if(strcmp(v, b) == 0) {
-			for (int i = 0; i < remote_endpoints.size(); i++) {
-				if(this->remote_endpoints[i] == remote_endpoint) {
-					(this->remote_endpoints).erase((this->remote_endpoints).begin() + i);
-					this->commands[i] = "left";
-					std::cout << "Cliente Removido: " << i << std::endl;
+			std::map<int, boost::asio::ip::udp::endpoint>::iterator ep;
+			for (ep = remote_endpoints.begin(); ep!= remote_endpoints.end(); ++ep) {
+				if(ep->second == remote_endpoint) {
+					remote_endpoints.erase(ep->first);
+					commands[ep->first] = "left";
+					std::cout << "Cliente Removido: " << ep->first << std::endl;
 					break;
 				}
 			}
@@ -48,10 +53,11 @@ void TRcontroller::checkConnection(int porta) {
 
 		// recebe comando do monitor
 		else {
-			for (int i = 0; i < remote_endpoints.size(); i++) {
-				if(this->remote_endpoints[i] == remote_endpoint) {
+			std::map<int, boost::asio::ip::udp::endpoint>::iterator ep;
+			for (ep = remote_endpoints.begin(); ep!= remote_endpoints.end(); ++ep) {
+				if(ep->second == remote_endpoint) {
 					std::cout << "input recebido: " << v << std::endl;
-					this->commands[i] = std::string(v);
+					commands[ep->first] = std::string(v);
 					break;
 				}
 			}
@@ -62,7 +68,7 @@ void TRcontroller::checkConnection(int porta) {
 
 }
 
-std::vector<std::string>& TRcontroller::get_commands() {
+std::map<int, std::string>& TRcontroller::get_commands() {
 	return (this->commands);
 }
 

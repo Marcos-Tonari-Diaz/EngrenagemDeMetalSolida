@@ -120,18 +120,18 @@ void Controller::monitorLoop(){
 			str+=std::to_string(i-1);
 			//player on list...
 			/*
-			if(monitorPlayers.find(i) != monitorPlayers.end()){
+			if(players.find(i) != players.end()){
 				//.. but not on received State
 				if(!(stateJSON.contains(str))){
-					monitorPlayers.erase(i);
+					players.erase(i);
 				}
 			}
 			*/
 			// player on received State...
 			if(stateJSON.contains(str)){
 				// ... but not on list
-				if(monitorPlayers.find(i)==monitorPlayers.end()){
-					monitorPlayers.insert(std::make_pair(i,std::shared_ptr<Player> (new Player(0, 0, boxSize, boundBoxH))));
+				if(players.find(i)==players.end()){
+					players.insert(std::make_pair(i,std::shared_ptr<Player> (new Player(0, 0, boxSize, boundBoxH))));
 				}	
 			}
 		str = "y";
@@ -140,11 +140,11 @@ void Controller::monitorLoop(){
 		// reset str
 		str = "";
 
-		//std::cout << monitorPlayers.size()<<std::endl; 
+		//std::cout << players.size()<<std::endl; 
 		// update all players
-		//std::cout << "monitor players size: " << monitorPlayers.size() << std::endl;
+		//std::cout << "monitor players size: " << players.size() << std::endl;
 		std::map<int, std::shared_ptr<Player>>::iterator pl;
-		for (pl = monitorPlayers.begin(); pl != monitorPlayers.end(); ++pl){
+		for (pl = players.begin(); pl != players.end(); ++pl){
 			str.push_back('y'); 
 			str+=std::to_string((pl->first)-1);
 			slcontroller->load(stateJSON, *(pl->second), str);
@@ -167,10 +167,10 @@ void Controller::monitorLoop(){
 		}
 
 		// Rendering
-		viewer->updateMap(mapVec[monitorPlayers[trcontroller->player_number]->getCurrentMap()]->get_textMap());	
-		viewer->render(monitorPlayers, monitorPlayers[trcontroller->player_number]->getCurrentMap());
+		viewer->updateMap(mapVec[players[trcontroller->player_number]->getCurrentMap()]->get_textMap());	
+		viewer->render(players, players[trcontroller->player_number]->getCurrentMap());
 
-		std::cout << "player X: " << monitorPlayers[1]->getX() << std::endl;
+		std::cout << "player X: " << players[1]->getX() << std::endl;
 		// Send Player Input 
 		//buttonReady=1;
 		if(state[SDL_SCANCODE_UP]) {
@@ -255,26 +255,23 @@ void Controller::gameLoop(){
 	// Start at title screen
 	//titleScreen();
 	while(rodando){
-		for (int ouo = 0; ouo < ((trcontroller->get_commands()).size()); ouo++) {
-		//std::cout << trcontroller->get_commands()[ouo] << std::endl;
-	
+		std::map<int, std::string>::iterator com;
+		for (com = trcontroller->get_commands().begin(); com!= trcontroller->get_commands().end(); ++com) {
 			// Player has entered the server
-			//if(strcmp(m, (trcontroller->get_commands())[ouo]) == 0) {
-			if((trcontroller->get_commands())[ouo].compare("new") == 0) {
-				players.push_back(std::shared_ptr<Player> (new Player(3*tileSize, 3*tileSize, boxSize, boundBoxH)));
-				((trcontroller->get_commands())[ouo]) = "9";
-				players[ouo]->setCurrentMap(0);
+			if(com->second.compare("new") == 0) {
+				players.insert({com->first, std::shared_ptr<Player> (new Player(3*tileSize, 3*tileSize, boxSize, boundBoxH))});
+				com->second = "9";
+				players[com->first]->setCurrentMap(0);
 			}
 
 			// Player has left the server
-			//else if(strcmp(n, (trcontroller->get_commands())[ouo]) == 0) {
-			else if((trcontroller->get_commands())[ouo].compare("left") == 0) {
-				players.erase(players.begin() + ouo);
-				(trcontroller->get_commands()).erase((trcontroller->get_commands()).begin() + ouo);
+			else if(com->second.compare("left") == 0) {
+				players.erase(com->first);
+				(trcontroller->get_commands()).erase(com->first);
 			}
 
 			// In case player in position "ouo" hasn't sent more commands
-			else if((trcontroller->get_commands())[ouo].compare("9") == 0){
+			else if(com->second.compare("9") == 0){
 			       	continue;
 			}
 
@@ -282,45 +279,35 @@ void Controller::gameLoop(){
 			else {
 				// Setting command flags
 				Por = 0; Up = 0; Down = 0; Left = 0; Right = 0;
-				if ((trcontroller->get_commands())[ouo].compare("R") == 0) Right = 1;
-				else if ((trcontroller->get_commands())[ouo].compare("U") == 0) Up = 1;
-				else if ((trcontroller->get_commands())[ouo].compare("D") == 0) Down = 1;
-				else if ((trcontroller->get_commands())[ouo].compare("L") == 0) Left = 1;
-				else if ((trcontroller->get_commands())[ouo].compare("E") == 0) Por = 1;
-				/*
-				if (strcmp("9", (trcontroller->get_commands())[ouo]) == 0) Por = 1;
-				else if (strcmp("D", (trcontroller->get_commands())[ouo]) == 0) Down = 1;
-				else if (strcmp("L", (trcontroller->get_commands())[ouo]) == 0) Left = 1;
-				else if (strcmp("R", (trcontroller->get_commands())[ouo]) == 0) Right = 1;
-				*/
-				std::cout << "right: " << Right << std::endl;
-				((trcontroller->get_commands())[ouo]) = "9";
+				if (com->second.compare("R") == 0) Right = 1;
+				else if (com->second.compare("U") == 0) Up = 1;
+				else if (com->second.compare("D") == 0) Down = 1;
+				else if (com->second.compare("L") == 0) Left = 1;
+				else if (com->second.compare("E") == 0) Por = 1;
+				trcontroller->get_commands()[com->first] = "9";
 
 				// mapa inicial
-				collisioncontroller->set_map(mapVec[players[ouo]->getCurrentMap()]);
-
-				// Event Polling
-				SDL_PumpEvents(); // Updates Keyboard State
+				collisioncontroller->set_map(mapVec[players[com->first]->getCurrentMap()]);
 
 				// Movement and Collision Control
-				collisioncontroller->move(*(players[ouo]), Up, Down, Left, Right);
+				collisioncontroller->move(*(players[com->first]), Up, Down, Left, Right);
 
 				// Door Control
 				// reset timer
 				if (Por){
 					for (int i = 0; i < portaVec.size(); i++){
-						portacontroller->abre_fecha(*(portaVec[i]), *(players[ouo]), *mapVec[players[ouo]->getCurrentMap()], state, collisioncontroller->getCollisionMap());
+						portacontroller->abre_fecha(*(portaVec[i]), *(players[com->first]), *mapVec[players[com->first]->getCurrentMap()], state, collisioncontroller->getCollisionMap());
 					}
 				}
 
 				// Camera Control
 				for (int i = 0; i < cameraVec.size(); i++){
-					cameracontroller->visao(*mapVec[players[ouo]->getCurrentMap()], (*cameraVec[i]), *(players[ouo]));
-					cameracontroller->deteccao(*mapVec[players[ouo]->getCurrentMap()], (*cameraVec[i]), *(players[ouo]));
+					cameracontroller->visao(*mapVec[players[com->first]->getCurrentMap()], (*cameraVec[i]), *(players[com->first]));
+					cameracontroller->deteccao(*mapVec[players[com->first]->getCurrentMap()], (*cameraVec[i]), *(players[com->first]));
 				}
 
 				// Events Control
-				flag = event->checagem(*(players[ouo]));
+				flag = event->checagem(*(players[com->first]));
 				// mudanca de mapa
 				if(flag>=0 && flag<=3) {
 				}
@@ -329,13 +316,13 @@ void Controller::gameLoop(){
 					//titleScreen();
 				}
 				for (int i = 0; i < cameraVec.size(); i++){
-					flag = event->checagem(*(players[ouo]), *(cameraVec[i]));
+					flag = event->checagem(*(players[com->first]), *(cameraVec[i]));
 					// avistado pela camera (spawn no mapa 0)
 					if(flag == 5) {
 						viewer->renderExclamation(*(cameraVec[i]));
 						for (int i = 0; i < portaVec.size(); i++){
 							portaVec[i]->set_flag(0);
-							portaVec[i]->atualiza_porta(collisioncontroller->getCollisionMap(), tileSize, *mapVec[players[ouo]->getCurrentMap()]);
+							portaVec[i]->atualiza_porta(collisioncontroller->getCollisionMap(), tileSize, *mapVec[players[com->first]->getCurrentMap()]);
 						}
 						break;
 					}
@@ -344,11 +331,11 @@ void Controller::gameLoop(){
 
 		}
 		// Save in file to transfer to viwer
-		//std::cout << "players vec size: " << players.size() << std::endl;
-		for (int i = 0; i < players.size(); i++){
+		std::map<int, std::shared_ptr<Player>>::iterator pl;
+		for (pl = players.begin(); pl != players.end(); ++pl){
 			str.push_back('y'); 
-			str+=std::to_string(i);
-			slcontroller->add(*(players[i]), str);
+			str+=std::to_string(pl->first);
+			slcontroller->add(*(pl->second), str);
 			str.pop_back(); str.pop_back();
 		}
 		for (int i = 0; i < portaVec.size(); i++){
