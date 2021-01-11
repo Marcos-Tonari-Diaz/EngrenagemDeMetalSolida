@@ -3,6 +3,10 @@
 ### METAL GEAR!? Ajude o Snake a escapar para o heliporto! 
 #### Abra portas e desvie dos guardas no caminho
 
+### Instruções Multiplayer
+1. Rodar em um terminal ./EngrenagemDeMetalSolida
+2. Rodar em um terminal ./EngrenagemDeMetalSolida monitor
+
 ### Instruções
 1. Clonar o repositório
 2. Criar a pasta build vazia (mkdir build)
