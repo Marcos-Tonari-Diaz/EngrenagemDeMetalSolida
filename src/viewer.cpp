@@ -1,6 +1,6 @@
 #include "viewer.h"
 
-Viewer::Viewer(): generator(5), corrDistr(1,0.25), wallDist(4,0.25) {
+Viewer::Viewer(int create_screen): generator(5), corrDistr(1,0.25), wallDist(4,0.25) {
   // Inicializando o subsistema de video do SDL
   try{
 	  if ( SDL_Init (SDL_INIT_VIDEO) < 0 ) {
@@ -32,6 +32,7 @@ Viewer::Viewer(): generator(5), corrDistr(1,0.25), wallDist(4,0.25) {
 	    SDL_Quit();
 	    throw 1;
 	  }
+  	  //if (!create_screen) SDL_DestroyWindow(window);
   }
   catch(int i){std::cout << "SDL ERROR" <<std::endl;}
 
@@ -161,6 +162,7 @@ Viewer::Viewer(): generator(5), corrDistr(1,0.25), wallDist(4,0.25) {
   topUL_Rect.y = 6*tileSize; 
 
   // Populate Player Frame Rectangles
+
   for (int i=0; i<12; i++){
   	playerSprites.push_back(new SDL_Rect);
 	playerSprites.back()->w = 24;
@@ -169,7 +171,7 @@ Viewer::Viewer(): generator(5), corrDistr(1,0.25), wallDist(4,0.25) {
 	playerSprites.back()->y = 5;
   }
 
-  // Set target rectanglge
+  // Set target rectangle
   tileRect.w = tileSize;
   tileRect.h = tileSize;
 
@@ -209,10 +211,33 @@ Viewer::Viewer(): generator(5), corrDistr(1,0.25), wallDist(4,0.25) {
 
   // Load Player Texture
   textDict.insert(std::make_pair("player", std::make_tuple(playerSheet, nullptr, 0)));
+
+  // 4 player colors
+  playerColorMap.insert({1, std::make_tuple(255, 255, 255 )});
+  playerColorMap.insert({2, std::make_tuple(255*201, 255*32, 255*77)});
+  playerColorMap.insert({3, std::make_tuple(255*32, 255*37, 255*189)});
+  playerColorMap.insert({4, std::make_tuple(255*126, 255*32, 255*198)});
+  playerColorMap.insert({5, std::make_tuple(255*90, 255*189, 255*32)});
+  playerColorMap.insert({6, std::make_tuple(255, 255, 255 )});
+  playerColorMap.insert({7, std::make_tuple(255*171, 255*132, 255*77)});
+  playerColorMap.insert({8, std::make_tuple(255*32, 255*37, 255*189)});
+  playerColorMap.insert({9, std::make_tuple(255*126, 255*32, 255*198)});
+  playerColorMap.insert({10, std::make_tuple(255*90, 255*189, 255*32)});
+  playerColorMap.insert({11, std::make_tuple(255, 255, 255 )});
+  playerColorMap.insert({12, std::make_tuple(255*171, 255*132, 255*77)});
+  playerColorMap.insert({13, std::make_tuple(255*32, 255*37, 255*189)});
+  playerColorMap.insert({14, std::make_tuple(255*126, 255*32, 255*198)});
+  playerColorMap.insert({15, std::make_tuple(255*90, 255*189, 255*32)});
+  playerColorMap.insert({16, std::make_tuple(255, 255, 255 )});
+  playerColorMap.insert({17, std::make_tuple(255*171, 255*132, 255*77)});
+  playerColorMap.insert({18, std::make_tuple(255*32, 255*37, 255*189)});
+  playerColorMap.insert({19, std::make_tuple(255*126, 255*32, 255*198)});
+  playerColorMap.insert({20, std::make_tuple(255*90, 255*189, 255*32)});
+  playerColorMap.insert({21, std::make_tuple(255, 255, 255 )});
 }
 
 /* Draws the scene */
-void Viewer::render(Player& player){
+void Viewer::render(std::map<int ,std::shared_ptr<Player>>& monitorPlayers, int currentMap){
 	SDL_RenderClear(renderer);
 	// Map Rendering
 	std::map<std::pair<int, int>, std::string>::iterator it;
@@ -267,7 +292,6 @@ void Viewer::render(Player& player){
 				  wallRects.insert(std::make_pair(it->first, 6));
 			  else
 				  wallRects.insert(std::make_pair(it->first, 4));
-		  //std::cout << corridorRects[it->first]<< std::endl; 
 		  }
 		  if (wallRects[it->first]==1)
 			SDL_RenderCopy(renderer, std::get<0>(textDict[it->second]), &wallRect, &tileRect);
@@ -287,13 +311,31 @@ void Viewer::render(Player& player){
 			SDL_RenderCopy(renderer, std::get<0>(textDict[it->second]), std::get<1>(textDict[it->second]), &tileRect);
 	}
 	// Player Rendering
-	// make sure the texture is rendered above the bounding box
-        SDL_Rect playerRect;
-	playerRect.x = player.getX();
-	playerRect.y = player.getY();
-	playerRect.w = player.getW();
-	playerRect.h = player.getH();
-	SDL_RenderCopy(renderer, std::get<0>(textDict["player"]), playerSprites[player.getFrame()], &playerRect);
+	// Color
+	std::map<int, std::shared_ptr<Player>>::iterator pl;
+	SDL_Rect playerRect;
+	for (pl = monitorPlayers.begin(); pl != monitorPlayers.end(); pl++){
+		// only render players in the client current map
+		if (pl->second->getCurrentMap() == currentMap){
+			playerRect.x = pl->second->getX();
+			playerRect.y = pl->second->getY();
+			playerRect.w = pl->second->getW();
+			playerRect.h = pl->second->getH();
+			SDL_SetTextureColorMod(std::get<0>(textDict["player"]), 
+					std::get<0>(playerColorMap[pl->first]), 
+					std::get<1>(playerColorMap[pl->first]), 
+					std::get<2>(playerColorMap[pl->first]));
+			SDL_RenderCopy(renderer, 
+					std::get<0>(textDict["player"]), 
+					playerSprites[pl->second->getFrame()], 
+					&playerRect);
+			// reset color filter
+			SDL_SetTextureColorMod(std::get<0>(textDict["player"]), 
+					std::get<0>(playerColorMap[0]), 
+					std::get<1>(playerColorMap[0]), 
+					std::get<2>(playerColorMap[0]));
+		}
+	}
 	SDL_RenderPresent(renderer);
 	return;
 }

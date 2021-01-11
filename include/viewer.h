@@ -44,6 +44,7 @@ class Viewer{
 
 		/*! Player Animation Sprites Rectangles */
 		std::vector<SDL_Rect*> playerSprites;
+
 		/*! Corridor Textures*/
 		std::map<std::pair<int, int>, int> corridorRects;
 		/*! Wall Textures*/
@@ -114,6 +115,9 @@ class Viewer{
 		/*! Referencia para Texture Map */
 		std::map<std::pair<int, int>, std::string> textMap;
 
+		/*! Player colors */
+		std::map<int, std::tuple<int, int, int>> playerColorMap;
+
 		// Size of tile sides (tiles are squares)
 		// OBS: tileRec.w is global tilesize
 		int tileSize = 72;
@@ -133,7 +137,7 @@ class Viewer{
         * Configura e inicializa o renderizador.
 		* Monta o dicionário de texturas.
      	* */
-		Viewer();
+		Viewer(int create_screen);
 		/*! \brief Destrutor do Viewer
         * Destroi texturas e o Renderizador.
      	* */
@@ -141,7 +145,7 @@ class Viewer{
 		/*! Renderiza a cena
 		* \param player Jogador a ser renderizado
 		*/
-		void render(Player& player);
+		void render(std::map<int ,std::shared_ptr<Player>>& monitorPlayers, int currentMap);
 		/*! Renderiza a tela principal
 		*/
 		void renderMain();
