@@ -3,6 +3,8 @@
 ### METAL GEAR!?
 #### Desvie das cameras no caminho
 
+![](metalgear.gif)
+
 ### Instruções
 1. Clonar o repositório
 2. Criar a pasta build vazia (mkdir build)
