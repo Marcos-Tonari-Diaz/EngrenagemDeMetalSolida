@@ -1,7 +1,7 @@
 #include "controller.h"
 #include <typeinfo>
 
-Controller::Controller(int create_screen) : viewer(new Viewer(create_screen)), 
+Controller::Controller() : viewer(new Viewer()), 
 	collisioncontroller(new collisionController()),
 	portacontroller(new Porta_controller()),
 	slcontroller(new SLcontroller()),
@@ -100,13 +100,13 @@ Controller::Controller(int create_screen) : viewer(new Viewer(create_screen)),
 }
 
 /* monitor loop*/
-void Controller::monitorLoop(){
+void Controller::monitorLoop(std::string ip_remoto){
 	std::cout << "Monitor mode" << std::endl;
 	//int transmission = 0;
 	std::string str;
 
 	// Configurar o Cliente
-	trcontroller->configClient();
+	trcontroller->configClient(ip_remoto);
 
 	int boundBoxH = (int) ((float) boxSize*((float) 41/24));
 	while(rodando){
@@ -168,8 +168,7 @@ void Controller::monitorLoop(){
 
 		// Send Player Input 
 		if(state[SDL_SCANCODE_UP]) {
-			str= "U";
-			trcontroller->sendString("U");
+			trcontroller->sendString("U", trcontroller->remote_endpoint);
 			if (state[SDL_SCANCODE_UP]){
 				buttonEventCounter++;
 				buttonReady = 0;
@@ -177,8 +176,7 @@ void Controller::monitorLoop(){
 		}
 
 		else if(state[SDL_SCANCODE_LEFT]) {
-			str ="L";
-			trcontroller->sendString(str);
+			trcontroller->sendString("L", trcontroller->remote_endpoint);
 			if (state[SDL_SCANCODE_LEFT]){
 				buttonEventCounter++;
 				buttonReady = 0;
@@ -186,8 +184,7 @@ void Controller::monitorLoop(){
 		}
 				
 		else if(state[SDL_SCANCODE_RIGHT]) {
-			str = "R";
-			trcontroller->sendString(str);
+			trcontroller->sendString("R", trcontroller->remote_endpoint);
 			if (state[SDL_SCANCODE_RIGHT]){
 				buttonEventCounter++;
 				buttonReady = 0;
@@ -195,8 +192,7 @@ void Controller::monitorLoop(){
 		}
 
 		else if(state[SDL_SCANCODE_DOWN]) {
-			str= "D";
-			trcontroller->sendString(str);
+			trcontroller->sendString("D", trcontroller->remote_endpoint);
 			if (state[SDL_SCANCODE_DOWN]){
 				buttonEventCounter++;
 				buttonReady = 0;
@@ -204,8 +200,7 @@ void Controller::monitorLoop(){
 		}
 		
 		else if(buttonReady && state[SDL_SCANCODE_E]) {
-			str= "E";
-			trcontroller->sendString(str);
+			trcontroller->sendString("E", trcontroller->remote_endpoint);
 			if (state[SDL_SCANCODE_E]){
 				buttonEventCounter++;
 				buttonReady = 0;
@@ -219,8 +214,7 @@ void Controller::monitorLoop(){
 		while (SDL_PollEvent(&evento)) {
 			if (evento.type == SDL_QUIT) {
 				rodando = false;
-				str = "Client: Adeus";
-				trcontroller->sendString(str);
+				trcontroller->sendString("Client: Adeus", trcontroller->remote_endpoint);
 			}
 		}
     		SDL_Delay(5);

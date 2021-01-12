@@ -137,7 +137,7 @@ class Viewer{
         * Configura e inicializa o renderizador.
 		* Monta o dicionário de texturas.
      	* */
-		Viewer(int create_screen);
+		Viewer();
 		/*! \brief Destrutor do Viewer
         * Destroi texturas e o Renderizador.
      	* */

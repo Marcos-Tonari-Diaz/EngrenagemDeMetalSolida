@@ -2,18 +2,14 @@
 #include <string>
 
 int main(int argc, char **argv){
-	int create_window=0;
+	Controller controller;
 	std::string arg1;
-	if (argc > 1) {
+	std::string arg2;
+	if (argc > 2) {
 		arg1 = argv[1];
-		if (arg1 == "monitor") create_window=1;
+		arg2 = argv[2];
+		if (arg1 == "monitor") controller.monitorLoop(arg2);
 	}
-	else create_window=0;
-	Controller controller(create_window);
-	if (argc > 1){
-		if (arg1 == "monitor") controller.monitorLoop();
-	}
-	else
-		controller.gameLoop();
+	else controller.gameLoop();
 	return 0;
 }

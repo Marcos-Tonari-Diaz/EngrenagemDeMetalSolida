@@ -36,8 +36,7 @@ class TRcontroller{
 		 *	
 		 * \param j Arquivo json com o estado atual do jogo.
 		 */
-		void sendJSON(nlohmann::json j);
-		void sendString(std::string msg); 
+		void sendString(std::string msg, boost::asio::ip::udp::endpoint arg_remote_endpoint); 
 		void sendJSON(nlohmann::json j, boost::asio::ip::udp::endpoint arg_remote_endpoint);
 		nlohmann::json receiveJSON();
 		/*! \brief Função que envia o estado atual do jogo para os clientes do servidor.
@@ -50,7 +49,7 @@ class TRcontroller{
 		void set_flag(int flag);
 		std::map<int, std::string>& get_commands();
 		void configServer();
-		void configClient();
+		void configClient(std::string ip_remoto);
 };
 
 #endif

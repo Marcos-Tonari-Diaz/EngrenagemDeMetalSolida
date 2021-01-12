@@ -67,14 +67,14 @@ class Controller {
 			* 
 		* \return Nada (este é um construtor!)
 		* */
-		Controller(int create_screen);
+		Controller();
 	    	/*! \brief Loop principal
 		* Loop principal do jogo.
 		* Roda os controllers secundáros.
 		*
 		* */
 		void gameLoop();
-		void monitorLoop();
+		void monitorLoop(std::string ip_remoto);
 		/*! \brief Tela Principal
      		*
 		* Renderiza a tela principal até que o jogador aperte espaço.

@@ -74,38 +74,12 @@ void TRcontroller::set_flag(int flag) {
 	this->flag = flag;
 }
 
-void TRcontroller::sendJSON(nlohmann::json j){
-	// Encontrando IP remoto
-	boost::asio::ip::address ip_remoto =
-	boost::asio::ip::address::from_string("127.0.0.1");
-	remote_endpoint.address(ip_remoto);
-
-	// transformar string cpp em array de chars 
-	std::string msg = j.dump();
-	char string[msg.size()+1];
-	strcpy(string, msg.c_str());
-	string[msg.size()]='\0';
-
-	my_socket.send_to(boost::asio::buffer(msg), this->remote_endpoint);
-}
-
-void TRcontroller::sendString(std::string msg){
-	// Encontrando IP remoto
-	boost::asio::ip::address ip_remoto =
-	boost::asio::ip::address::from_string("127.0.0.1");
-	remote_endpoint.address(ip_remoto);
-
-	my_socket.send_to(boost::asio::buffer(msg), this->remote_endpoint);
+void TRcontroller::sendString(std::string msg, boost::asio::ip::udp::endpoint arg_remote_endpoint){
+	my_socket.send_to(boost::asio::buffer(msg), arg_remote_endpoint);
 }
 
 void TRcontroller::sendJSON(nlohmann::json j, boost::asio::ip::udp::endpoint arg_remote_endpoint){
-	// Encontrando IP remoto
-	boost::asio::ip::address ip_remoto =
-	boost::asio::ip::address::from_string("127.0.0.1");
-	remote_endpoint.address(ip_remoto);
-
 	std::string msg = j.dump();
-
 	my_socket.send_to(boost::asio::buffer(msg), arg_remote_endpoint);
 }
 
@@ -124,17 +98,17 @@ void TRcontroller::configServer(){
 	my_socket.bind(local_endpoint);
 }
 
-void TRcontroller::configClient(){
+void TRcontroller::configClient(std::string ip_remoto){
 	std::cout << "Client" << std::endl;
 	local_endpoint.port(0);
 	my_socket.open(udp::v4());
 	my_socket.bind(local_endpoint);
 
 	// Encontrando IP remoto
-	boost::asio::ip::address ip_remoto =
+	boost::asio::ip::address remote_ip =
 	boost::asio::ip::address::from_string("127.0.0.1");
 
-	remote_endpoint.address(ip_remoto);
+	remote_endpoint.address(remote_ip);
 	remote_endpoint.port(9001);
 
 	std::string v("Client: Cheguei");
