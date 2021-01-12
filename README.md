@@ -1,7 +1,7 @@
-# Engrenagem de Metal Sólida: 
+# Engrenagem de Metal Sólida: Versao Multiplayer
 ## Ação de Espionagem Tática
-### METAL GEAR!? Ajude o Snake a escapar para o heliporto! 
-#### Abra portas e desvie dos guardas no caminho
+### METAL GEAR!?
+#### Desvie das cameras no caminho
 
 ### Instruções
 1. Clonar o repositório
@@ -10,11 +10,13 @@
 4. Criar o makefile (cmake ../) 
 5. Compilar (make)
 6. Criar a documentacao (make doc)
-7. Rodar o jogo (./EngrenagemDeMetalSolida)
-8. Aperte Espaço para jogar!
-9. Ler a documentacao (dentro de build: firefox html/index.html)
 
-OBS: tecla A abre portas
+##### Servidor
+Rodar o servidor: ./EngrenagemDeMetalSolida
+
+##### Cliente
+Rodar o cliente: ./EngrenagemDeMetalSolida monitor ip_remoto
+OBS: para testar localmente: ./EngrenagemDeMetalSolida monitor 127.0.0.1
 
 ### Gerador de Mapas
 Na pasta assets/maps podemos criar novos mapas em codigo.
