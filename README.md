@@ -16,6 +16,7 @@ Rodar o servidor: ./EngrenagemDeMetalSolida
 
 ##### Cliente
 Rodar o cliente: ./EngrenagemDeMetalSolida monitor ip_remoto
+
 OBS: para testar localmente: ./EngrenagemDeMetalSolida monitor 127.0.0.1
 
 ### Gerador de Mapas
